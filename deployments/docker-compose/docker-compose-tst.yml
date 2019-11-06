@@ -1,0 +1,8 @@
+# DO NOT USE THIS COMPOSE FILE, IT'S JUST EXAMPLE
+version: '3.7'
+services:
+  crm-dashboard:
+    image: p1hub/qilin-crm-dashboard:${TAG}
+    environment:
+      - REACT_APP_API_URL=http://hasura:8080
+      - REACT_APP_AUTH_URL=http://crm-daemon:8080/v1/auth
