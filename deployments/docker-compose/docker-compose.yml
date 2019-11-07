@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  crm-dashboard:
+    container_name: qilin-crm-dashboard
+    image: p1hub/qilin-crm-dashboard:${TAG}
+    restart: on-failure
+    networks:
+      - default
+networks:
+  default:
+    name: ${DOCKER_NETWORK}
+    external: true

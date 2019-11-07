@@ -1,0 +1,4 @@
+*
+!/deployments/build/docker
+!/build
+!.env
