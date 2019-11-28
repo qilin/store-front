@@ -1,5 +1,5 @@
 import React from 'react';
-
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { isEnvDefined, env } from 'helpers';
 
 const App: React.FC = () => {
@@ -8,10 +8,11 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="App">
+    <>
+      <CssBaseline />
       <p>BASE_URL: {env('AUTH_URL')}</p>
       <p>API_URL: {env('API_URL')}</p>
-    </div>
+    </>
   );
 };
 
