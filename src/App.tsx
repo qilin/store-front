@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { init, openAuth } from 'ramblerAuth';
-import { isEnvDefined, env } from 'helpers';
+import { isEnvDefined, env, ramblerAuth } from 'helpers';
+import { User } from 'types';
 
-const App: React.FC = () => {
+const App = () => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState('');
+  const [user, setUser] = useState<User | null>(null);
 
-  const onInit = (userData: any) => {
-    setUser(userData);
+  const onInit = (user: User) => {
+    setUser(user);
     setLoading(false);
   };
 
-  useEffect(() => {
-    console.log('did mount', (window as any).ramblerIdHelper);
-    init((userData: any) => {
-      onInit(userData);
-    });
-  });
-
-  const openAuth = () => {
-    openAuth();
+  const onLogout = () => {
+    ramblerAuth.logout();
+    setUser(null);
   };
+
+  const onLogin = () => {
+    ramblerAuth.openAuth();
+  };
+
+  useEffect(() => {
+    ramblerAuth.init(onInit);
+  }, []);
 
   if (!isEnvDefined()) {
     return <div>Environment variables is not defined</div>;
@@ -32,8 +33,8 @@ const App: React.FC = () => {
       <p>BASE_URL: {env('AUTH_URL')}</p>
       <p>API_URL: {env('API_URL')}</p>
       {loading && <div>loading...</div>}
-      {!loading && user && <div>User Name</div>}
-      {!loading && !user && <button onClick={openAuth}>Войти</button>}
+      {!loading && user && <div>{user.display.display_name}<button onClick={onLogout}>Выход</button></div>}
+      {!loading && !user && <button onClick={onLogin}>Войти</button>}
     </div>
   );
 };
