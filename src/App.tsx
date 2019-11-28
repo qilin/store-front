@@ -6,6 +6,7 @@ import {
   Route,
 } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
+import GamePage from 'pages/GamePage';
 import { isEnvDefined, env, ramblerAuth } from 'helpers';
 import { User } from 'types';
 
@@ -46,6 +47,7 @@ const App = () => {
         {!loading && !user && <button onClick={onLogin}>Войти</button>}
       </div>
       <Switch>
+        <Route key="/game" path="/game" component={GamePage} />
         <Route key="/" path="/" component={MainPage} />
       </Switch>
     </Router>
