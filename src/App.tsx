@@ -48,7 +48,7 @@ const App = () => {
       <Switch>
         <Route key="/" path="/" component={MainPage} />
       </Switch>
-    </Router >
+    </Router>
   );
 };
 
