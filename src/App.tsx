@@ -3,9 +3,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   BrowserRouter as Router,
   Switch,
+  Route,
 } from 'react-router-dom';
+import MainPage from 'pages/MainPage';
 import { isEnvDefined, env } from 'helpers';
-import routes from 'routes';
 
 const App: React.FC = () => {
   if (!isEnvDefined()) {
@@ -18,7 +19,7 @@ const App: React.FC = () => {
       <p>BASE_URL: {env('AUTH_URL')}</p>
       <p>API_URL: {env('API_URL')}</p>
       <Switch>
-        {routes}
+        <Route key="/" path="/" component={MainPage} />
       </Switch>
     </Router>
   );
