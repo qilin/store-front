@@ -42,7 +42,7 @@ const App = () => {
       <p>API_URL: {env('API_URL')}</p>
       <div>
         {loading && <div>loading...</div>}
-        {!loading && user && <div>{user.display.display_name}<button onClick={onLogout}>Выход</button></div>}
+        {!loading && user && <div>{user.display.display_name} <button onClick={onLogout}>Выход</button></div>}
         {!loading && !user && <button onClick={onLogin}>Войти</button>}
       </div>
       <Switch>
