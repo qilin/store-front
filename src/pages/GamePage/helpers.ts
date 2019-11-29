@@ -32,4 +32,5 @@ export const getOrder = async (gameId: string, itemId: string) => {
 
   const responce = await fetch(ORDER_URL, request);
   const order = await responce.json();
+  return order;
 };

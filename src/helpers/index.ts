@@ -15,3 +15,9 @@ export const env = (name: string) => {
 
   return isDevMod ? process.env[key] : envs[key];
 };
+
+export const getUrlParameter = (name: string, search: string) => {
+  const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
+  const results = regex.exec(search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};

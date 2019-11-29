@@ -8949,7 +8949,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var isDevMod = "development" === 'development';
 Sentry.init({
-  dsn: "https://5ba129dc6f8442b8a5517d2379fbc17f@sentry.tst.protocol.one/13"
+  dsn: "https://5ba129dc6f8442b8a5517d2379fbc17f@sentry.tst.protocol.one/13",
+  integrations: [new Sentry.Integrations.GlobalHandlers({
+    onerror: !isDevMod,
+    onunhandledrejection: !isDevMod
+  })]
 });
 
 var _default = function _default(error) {

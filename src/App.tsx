@@ -41,6 +41,7 @@ const App = () => {
       <CssBaseline />
       <p>BASE_URL: {env('AUTH_URL')}</p>
       <p>API_URL: {env('API_URL')}</p>
+      <p>QILIN_SDK_INIT_URL: {env('QILIN_SDK_INIT_URL')}</p>
       <div>
         {loading && <div>loading...</div>}
         {!loading && user && <div>{user.display.display_name} <button onClick={onLogout}>Выход</button></div>}
