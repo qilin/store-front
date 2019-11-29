@@ -1,3 +1,5 @@
+export { default as ramblerAuth } from './ramblerAuth';
+
 const envs: { [key: string]: string } = (window as any)._env_;
 
 export const isDevMod = process.env.NODE_ENV === 'development';
