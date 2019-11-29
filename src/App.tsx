@@ -6,6 +6,7 @@ import {
   Route,
 } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
+import GamePage from 'pages/GamePage';
 import { isEnvDefined, env, ramblerAuth } from 'helpers';
 import { User } from 'types';
 
@@ -40,12 +41,14 @@ const App = () => {
       <CssBaseline />
       <p>BASE_URL: {env('AUTH_URL')}</p>
       <p>API_URL: {env('API_URL')}</p>
+      <p>QILIN_SDK_INIT_URL: {env('QILIN_SDK_INIT_URL')}</p>
       <div>
         {loading && <div>loading...</div>}
         {!loading && user && <div>{user.display.display_name} <button onClick={onLogout}>Выход</button></div>}
         {!loading && !user && <button onClick={onLogin}>Войти</button>}
       </div>
       <Switch>
+        <Route key="/game" path="/game" component={GamePage} />
         <Route key="/" path="/" component={MainPage} />
       </Switch>
     </Router>
