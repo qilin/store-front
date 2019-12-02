@@ -1,82 +1,25 @@
 import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import { Container } from '@material-ui/core';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Game } from 'types';
 
 import mockedGame from './mockedGame';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Carousel } from 'react-responsive-carousel';
-const image = mockedGame.screenshots[0].url;
+import FeaturedCard from './components/FeaturedCard';
 
-export default class DemoCarousel extends React.Component {
-    render() {
-        return (
-            <Carousel autoPlay showStatus={false} showThumbs={false} infiniteLoop>
-
-                <div>
-                    <img src={image} />
-                    <p className="legend">Legend 1</p>
-                </div>
-                <div>
-                    <img src={image} />
-                    <p className="legend">Legend 2</p>
-                </div>
-                <div>
-                    <img src={image} />
-                    <p className="legend">Legend 3</p>
-                </div>
-            </Carousel>
-        );
-    }
+interface Props {
+  games?: Game[];
 }
 
-// export default class FeaturedBlock extends React.Component {
-//   render() {
-//     return (
-//       <Carousel autoplay autoplayReverse>
-//         <img src={image} />
-//         <img src={image} />
-//         <img src={image} />
-//         <img src={image} />
-//       </Carousel>
-//     );
-//   }
-// }
-
-// import React from 'react';
-// import Carousel from 'nuka-carousel';
-// import mockedGame from './mockedGame';
-// const image = mockedGame.screenshots[0].url;
-
-// export default class FeaturedBlock extends React.Component {
-//   render() {
-//     return (
-//       <Carousel autoplay autoplayReverse>
-//         <img src={image} />
-//         <img src={image} />
-//         <img src={image} />
-//         <img src={image} />
-//       </Carousel>
-//     );
-//   }
-// }
-
-// import React from 'react';
-// import mockedGame from './mockedGame';
-
-// import AliceCarousel from 'react-alice-carousel';
-// import 'react-alice-carousel/lib/alice-carousel.css';
-
-// const image = mockedGame.screenshots[0].url;
-
-// const Gallery = () => {
-//   const handleOnDragStart = (e: any) => e.preventDefault();
-//   return (
-//     <AliceCarousel mouseTrackingEnabled>
-//       <img src={image} onDragStart={handleOnDragStart} className="yours-custom-class" />
-//       <img src={image} onDragStart={handleOnDragStart} className="yours-custom-class" />
-//       <img src={image} onDragStart={handleOnDragStart} className="yours-custom-class" />
-//       <img src={image} onDragStart={handleOnDragStart} className="yours-custom-class" />
-      
-//     </AliceCarousel>
-//   );
-// };
-
-// export default Gallery;
+export default function FeaturedBlock(props: Props) {
+  const { games = [mockedGame, mockedGame, mockedGame, mockedGame] } = props;
+  return (
+    <Container maxWidth="lg">
+      <Carousel autoPlay showStatus={false} showThumbs={false} infiniteLoop>
+        {games.map((game, index) => (
+          <FeaturedCard key={game.id + index} game={game} />
+        ))}
+      </Carousel>
+    </Container>
+  );
+}
