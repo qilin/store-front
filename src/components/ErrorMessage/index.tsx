@@ -16,7 +16,7 @@ interface Props {
   message: string;
 }
 
-export default function ErrorMessage(props: Props) {
+const ErrorMessage = (props: Props) => {
   const classes = useStyles();
   const { open, handleClose, message } = props;
 
@@ -45,4 +45,6 @@ export default function ErrorMessage(props: Props) {
       />
     </Snackbar>
   );
-}
+};
+
+export default ErrorMessage;

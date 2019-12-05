@@ -11,7 +11,7 @@ const onLogin = (onLoginCallback: Callback) => {
 
 const getToken = (onGetTokenCallback: Callback) => {
   ramblerIdHelper.getSessionToken((data: any) => {
-    const token = data && data.token || null;
+    const token = (data && data.token) || null;
 
     onGetTokenCallback(token);
   });
