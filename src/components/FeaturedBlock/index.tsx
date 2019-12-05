@@ -11,7 +11,7 @@ interface Props {
   games?: Game[];
 }
 
-export default function FeaturedBlock(props: Props) {
+const FeaturedBlock = (props: Props) => {
   const { games = [mockedGame, mockedGame, mockedGame, mockedGame] } = props;
   return (
     <Container maxWidth="lg">
@@ -22,4 +22,6 @@ export default function FeaturedBlock(props: Props) {
       </Carousel>
     </Container>
   );
-}
+};
+
+export default FeaturedBlock;

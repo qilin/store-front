@@ -9,8 +9,9 @@ interface Props {
   game: Game;
 }
 
-export default function FeaturedCard(props: Props) {
-  const { game: { id, screenshots, title, summary, tags } } = props;
+const FeaturedCard = (props: Props) => {
+  const { game } = props;
+  const { id, screenshots, title, summary, tags } = game;
   const genre = tags[0].name;
   const classes = useStyles();
 
@@ -47,4 +48,6 @@ export default function FeaturedCard(props: Props) {
       <div className={`${classes.cover} ${classes.overlay}`}></div>
     </Card>
   );
-}
+};
+
+export default FeaturedCard;
