@@ -6,7 +6,7 @@ interface Props {
   handleClose: () => void;
 }
 
-export default function FlashPopup(props: Props) {
+const FlashPopup = (props: Props) => {
   const { open, handleClose } = props;
 
   return (
@@ -38,4 +38,6 @@ export default function FlashPopup(props: Props) {
       </Dialog>
     </div>
   );
-}
+};
+
+export default FlashPopup;

@@ -26,7 +26,7 @@ export interface Props {
   onClose?: () => void;
 }
 
-export default function ContentWrapper(props: Props) {
+const ContentWrapper = (props: Props) => {
   const classes = useStyles();
   const { className, message, onClose, ...other } = props;
 
@@ -47,4 +47,6 @@ export default function ContentWrapper(props: Props) {
       {...other}
     />
   );
-}
+};
+
+export default ContentWrapper;

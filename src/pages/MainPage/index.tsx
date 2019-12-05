@@ -1,7 +1,7 @@
 import React from 'react';
 import FeaturedBlock from 'components/FeaturedBlock';
 
-export default function MainPage() {
+const MainPage = () => {
   return (
     <>
       <h1>
@@ -10,4 +10,6 @@ export default function MainPage() {
       <FeaturedBlock />
     </>
   );
-}
+};
+
+export default MainPage;
