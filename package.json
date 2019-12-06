@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "homepage": "./",
+  "main": "public/electron.js",
   "author": {
     "name": "Qilin Team",
     "email": "your.email@domain.com",
@@ -49,6 +50,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint './**/*.{ts,tsx}'",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
     "electron-pack": "electron-builder -mw"
