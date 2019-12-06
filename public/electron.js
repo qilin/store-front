@@ -26,7 +26,6 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
 }
 
-<<<<<<< HEAD
 app.on('ready', () => {
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
     //console.log(details);
@@ -36,9 +35,6 @@ app.on('ready', () => {
   });
   createWindow()
 });
-=======
-app.on('ready', createWindow);
->>>>>>> add electron
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
