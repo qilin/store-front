@@ -8,17 +8,13 @@ interface Props {
   children: ReactNode;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
   },
-  main: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-  },
-}));
+});
 
 const Layout = (props: Props) => {
   const classes = useStyles();
@@ -26,7 +22,7 @@ const Layout = (props: Props) => {
   return (
     <div className={classes.root}>
       <Header />
-      <main className={classes.main}>
+      <main>
         {props.children}
       </main>
       <Footer />

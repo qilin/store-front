@@ -53,3 +53,51 @@ export interface Game {
     items: Game[];
   };
 }
+
+export interface WithTitleAndId {
+  title: string;
+  id: string;
+}
+
+export interface Requirements {
+  cpu: string;
+  diskSpace: string;
+  gpu: string;
+  os: string;
+  ram: string;
+}
+
+export interface RequirementsOS {
+  minimal: Requirements;
+  recommended: Requirements;
+}
+
+export interface CordGame {
+  description: string;
+  developer: WithTitleAndId;
+  genres: WithTitleAndId[];
+  media: {
+    screenshots: string[];
+    trailers: string[];
+  };
+  name: string;
+  platforms: string[];
+  preview: string;
+  price: number;
+  publisher: WithTitleAndId;
+  rating: number;
+  releaseDate: string;
+  requirements: {
+    languages: {
+      audio: string[];
+      text: string[];
+    };
+    systems: {
+      linux: RequirementsOS;
+      macos: RequirementsOS;
+      windows: RequirementsOS;
+    };
+  };
+  tags: WithTitleAndId[];
+  title: string;
+}
