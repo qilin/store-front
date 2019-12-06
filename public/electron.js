@@ -1,5 +1,6 @@
 const electron = require('electron');
 const app = electron.app;
+const session = electron.session;
 const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
@@ -25,7 +26,15 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+    //console.log(details);
+    //details.requestHeaders['User-Agent'] = 'MyAgent';
+    details.requestHeaders['Origin'] = 'http://localhost:3000';
+    callback({ cancel: false, requestHeaders: details.requestHeaders });
+  });
+  createWindow()
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
