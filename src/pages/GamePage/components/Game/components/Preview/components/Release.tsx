@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   root: {
@@ -18,12 +19,15 @@ interface Props {
   realeaseDate: string;
 }
 
-const Realease = (props: Props) => {
+const Release = (props: Props) => {
   const { title, realeaseDate } = props;
+  const { t } = useTranslation();
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      {t('labels.released_on')}
+      {' '}
       {realeaseDate}
       <div className={classes.divider} />
       {title}
@@ -31,4 +35,4 @@ const Realease = (props: Props) => {
   );
 };
 
-export default Realease;
+export default Release;

@@ -2,12 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CordGame } from 'types';
 import colors from 'styles/colors';
 
-import Rating from './Rating';
-import Genres from './Genres';
-import Realease from './Realese';
+import { Rating, Genres, Release } from './index';
 
 const useStyles = makeStyles({
   root: {
@@ -59,6 +58,7 @@ interface Props {
 const GameToolbar = (props: Props) => {
   const { game } = props;
   const { title, genres, releaseDate, developer, publisher, rating } = game;
+  const { t } = useTranslation();
   const classes = useStyles();
   const publisherDeveloperTitle = (publisher.title === developer.title)
     ? publisher.title
@@ -69,7 +69,7 @@ const GameToolbar = (props: Props) => {
       <div className={classes.left}>
         <Link className={classes.link} to="/shop">
           <Button className={classes.back}>
-            Назад
+            {t('labels.back')}
           </Button>
         </Link>
         <div className={classes.title}>
@@ -78,7 +78,7 @@ const GameToolbar = (props: Props) => {
         </div>
         <Genres genres={genres} />
       </div>
-      <Realease title={publisherDeveloperTitle} realeaseDate={releaseDate} />
+      <Release title={publisherDeveloperTitle} realeaseDate={releaseDate} />
     </Toolbar>
   );
 };

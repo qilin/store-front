@@ -1,21 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
-import colors from 'styles/colors';
 
-const useStyles = makeStyles({
-  root: {
-    padding: '35px 45px',
-    backgroundColor: colors.BACKGROUND_LIGHT,
-  },
-  cardContent: {
-    width: '100%',
-    height: '150px',
-    borderRadius: '4px',
-    backgroundColor: 'black',
-    overflow: 'hidden',
-  },
-});
+import useStyles from './useStyles';
 
 interface Props {
   screenshots: string[];
@@ -39,7 +25,7 @@ const Media = (props: Props) => {
         {screenshots.map(screenshot => (
           <Grid item xs={12} sm={6} md={3} key={screenshot}>
             <Paper className={classes.cardContent}>
-              <img width="100%" height="100%" src={screenshot} />
+              <img width="100%" height="100%" src={screenshot} alt="game-screenshot" />
             </Paper>
           </Grid>
         ))}

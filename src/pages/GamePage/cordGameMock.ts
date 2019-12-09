@@ -42,7 +42,7 @@ export default {
           diskSpace: '10240 ',
           gpu: 'nVidia GeForce 8600/9600GT, ATI/AMD Radeon HD2600/3600',
           os: 'Ubuntu 16.10',
-          ram: '1024 ',
+          ram: '1024',
         },
         recommended: {
           cpu: 'Intel / AMD 2x at 2.8 ГГц',

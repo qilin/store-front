@@ -1,25 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Table, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { Requirements } from 'types';
-import colors from 'styles/colors';
+import { megabytesToSize } from 'helpers';
 
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: 'transparent',
-    color: 'white',
-  },
-  table: {
-    color: 'white',
-  },
-  cell: {
-    color: 'white',
-  },
-  head: {
-    color: colors.TITLE_GREY,
-    textTransform: 'uppercase',
-  },
-});
+import useStyles from './useStyles';
 
 interface Props {
   title: string;
@@ -28,7 +12,12 @@ interface Props {
 
 const System = (props: Props) => {
   const { title, requirements } = props;
-  const rows = Object.entries(requirements);
+  const renderedRequirements = {
+    ...requirements,
+    diskSpace: megabytesToSize(parseInt(requirements.diskSpace)),
+    ram: megabytesToSize(parseInt(requirements.ram)),
+  };
+  const rows = Object.entries(renderedRequirements);
   const classes = useStyles();
 
   return (

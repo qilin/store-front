@@ -1,11 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { SystemsRequirements } from 'types';
-import colors from 'styles/colors';
 
-import Systems from '../Systems';
-import Languages from '../Languages';
+import { Systems, Languages } from '../index';
+import useStyles from './useStyles';
 
 interface Props {
   systems: SystemsRequirements;
@@ -15,23 +14,9 @@ interface Props {
   };
 }
 
-const useStyles = makeStyles({
-  root: {
-    padding: '35px 45px',
-    backgroundColor: colors.BACKGROUND_LIGHT,
-  },
-  icon: {
-    fontSize: '1.718em',
-    fill: 'white',
-  },
-  title: {
-    color: colors.TITLE_GREY,
-    padding: '1rem',
-  },
-});
-
 const Requirements = (props: Props) => {
   const { systems, languages } = props;
+  const { t } = useTranslation();
   const classes = useStyles();
 
   return (
@@ -39,13 +24,13 @@ const Requirements = (props: Props) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={8}>
           <Typography variant="h3" className={classes.title}>
-            System requirements
+            {t('titles.system_requirements')}
           </Typography>
           <Systems systems={systems} />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <Typography variant="h3" className={classes.title}>
-            Language support
+            {t('titles.language_support')}
           </Typography>
           <Languages languages={languages} />
         </Grid>
