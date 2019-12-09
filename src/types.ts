@@ -72,7 +72,14 @@ export interface RequirementsOS {
   recommended: Requirements;
 }
 
+export interface SystemsRequirements {
+  linux: RequirementsOS;
+  macos: RequirementsOS;
+  windows: RequirementsOS;
+}
+
 export interface CordGame {
+  id: string;
   description: string;
   developer: WithTitleAndId;
   genres: WithTitleAndId[];
@@ -92,11 +99,7 @@ export interface CordGame {
       audio: string[];
       text: string[];
     };
-    systems: {
-      linux: RequirementsOS;
-      macos: RequirementsOS;
-      windows: RequirementsOS;
-    };
+    systems: SystemsRequirements;
   };
   tags: WithTitleAndId[];
   title: string;

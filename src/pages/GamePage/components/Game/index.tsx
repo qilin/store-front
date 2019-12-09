@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Preview from './components/Preview';
-import cordGameMock from 'pages/GamePage/cordGameMock';
-import GameInfo from './components/GameInfo';
 import { CordGame } from 'types';
+
+import { Preview, GameInfo, Media, Requirements } from './components';
+import cordGameMock from '../../cordGameMock';
 
 const useStyles = makeStyles({
   root: {
@@ -18,12 +18,15 @@ interface Props {
 
 const Game = (props: Props) => {
   const { game = cordGameMock } = props;
-  const { platforms, price } = game;
+  const { platforms, price, media, requirements } = game;
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <Preview game={game} />
       <GameInfo platforms={platforms} price={price} />
+      <Media {...media} />
+      <Requirements {...requirements} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ export default makeStyles({
     backgroundColor: '#203859',
   },
   button: {
-    color: '#fff',
+    color: 'white',
     backgroundColor: '#28bc00',
     '&:hover': {
       backgroundColor: '#24a900',
@@ -21,7 +21,7 @@ export default makeStyles({
     top: '50%',
     left: '50%',
     backgroundColor: '#343b4c',
-    color: '#fff',
+    color: 'white',
     transform: 'translate(-50%, -50%)',
     padding: 0,
     margin: 0,

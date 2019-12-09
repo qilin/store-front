@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CordGame } from 'types';
+
 import GameToolbar from './GameToolbar';
 import BackgroundImage from './BackgroundImage';
 
@@ -17,9 +18,9 @@ interface Props {
 }
 
 const Preview = (props: Props) => {
-  const classes = useStyles();
   const { game } = props;
   const { screenshots } = game.media;
+  const classes = useStyles();
 
   return (
     <section className={classes.root}>

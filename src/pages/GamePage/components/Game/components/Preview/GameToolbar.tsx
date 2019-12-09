@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { CordGame } from 'types';
+import colors from 'styles/colors';
 
 import Rating from './Rating';
 import Genres from './Genres';
@@ -12,42 +13,42 @@ const useStyles = makeStyles({
   root: {
     position: 'relative',
     zIndex: 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
     width: '100%',
     minHeight: '120px',
-    background: 'rgba(38,38,38,0.6)',
     padding: '35px 45px',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'nowrap',
-    display: 'flex',
-    color: '#fff',
+    background: 'rgba(38,38,38,0.6)',
+    color: 'white',
   },
   left: {
     display: 'flex',
     alignItems: 'center',
   },
   back: {
-    outline: 0,
     display: 'inline-flex',
+    color: colors.LINKS,
     boxShadow: 'none',
-    color: 'rgba(255,255,255,0.75)',
+    outline: 0,
     textTransform: 'capitalize',
     textDecoration: 'underline',
     cursor: 'pointer',
   },
   link: {
-    color: 'rgba(255,255,255,0.75)',
+    color: colors.LINKS,
   },
   title: {
-    fontSize: '21px',
-    marginFight: '24px',
-    flexDirection: 'column',
     display: 'flex',
+    flexDirection: 'column',
     flexWrap: 'wrap',
+    marginRight: '24px',
+    padding: '0 12px',
+    fontSize: '21px',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    padding: '0 12px',
   },
 });
 

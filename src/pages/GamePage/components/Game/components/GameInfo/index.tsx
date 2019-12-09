@@ -5,12 +5,12 @@ import { WindowsIcon, AppleIcon, LinuxIcon, HeartIcon } from 'assets/icons';
 
 const useStyles = makeStyles({
   root: {
-    flexWrap: 'nowrap',
     display: 'flex',
-    color: '#fff',
-    backgroundColor: '#262626',
-    padding: '35px 45px',
+    flexWrap: 'nowrap',
     justifyContent: 'space-between',
+    padding: '35px 45px',
+    color: 'white',
+    backgroundColor: '#262626',
   },
   flex: {
     display: 'flex',
@@ -22,12 +22,12 @@ const useStyles = makeStyles({
     padding: '16px',
     marginRight: '8px',
     fontSize: '1.718em',
-    fill: '#fff',
-    color: '#fff',
+    fill: 'white',
+    color: 'white',
   },
   icon: {
     fontSize: '1.718em',
-    color: '#fff',
+    color: 'white',
   },
 });
 
@@ -53,7 +53,7 @@ const GameInfo = (props: Props) => {
   const { platforms, price } = props;
   const classes = useStyles();
   const platformIcons = getPlatformIcons(platforms);
-  console.log(platformIcons);
+
   return (
     <Toolbar className={classes.root}>
       <div className={classes.flex}>

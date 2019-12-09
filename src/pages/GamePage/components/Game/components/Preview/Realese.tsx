@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   },
   divider: {
     width: '1px',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     margin: '0 8px',
   },
 });
@@ -21,6 +21,7 @@ interface Props {
 const Realease = (props: Props) => {
   const { title, realeaseDate } = props;
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       {realeaseDate}
