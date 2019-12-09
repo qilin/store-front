@@ -49,7 +49,7 @@ export default makeStyles({
     },
   },
   button: {
-    color: '#fff',
+    color: 'white',
     fontSize: '12px',
     marginTop: '20px',
     backgroundColor: '#28bc00',

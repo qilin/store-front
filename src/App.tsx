@@ -5,8 +5,10 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import 'i18n';
 import MainPage from 'pages/MainPage';
-import GamePage from 'pages/GamePage';
+import GamePage from 'pages/GamePage/components/Game';
+// import GamePage from 'pages/GamePage';
 import { isEnvDefined } from 'helpers';
 import Layout from 'components/Layout';
 
