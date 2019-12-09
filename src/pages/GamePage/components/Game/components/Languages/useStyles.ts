@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import colors from 'styles/colors';
+import { TITLE_GREY } from 'styles/colors';
 
 export default makeStyles({
   root: {
@@ -10,6 +10,6 @@ export default makeStyles({
     color: 'white',
   },
   head: {
-    color: colors.TITLE_GREY,
+    color: TITLE_GREY,
   },
 });

@@ -17,7 +17,7 @@ const Languages = (props: Props) => {
   const { audio, text } = languages;
   const { t } = useTranslation();
   const classes = useStyles();
-  const allLaguages = Array.from(new Set([...audio, ...text]));
+  const allLanguages = Array.from(new Set([...audio, ...text]));
 
   return (
     <Table className={classes.root}>
@@ -29,7 +29,7 @@ const Languages = (props: Props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {allLaguages.map(lang => (
+        {allLanguages.map(lang => (
           <TableRow key={lang}>
             <TableCell className={classes.cell}>{t(`locales.${lang}`)}</TableCell>
             <TableCell>{text.includes(lang) ? <CheckIcon className={classes.cell} /> : null}</TableCell>

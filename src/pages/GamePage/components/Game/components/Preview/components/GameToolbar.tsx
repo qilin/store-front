@@ -4,7 +4,7 @@ import { Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CordGame } from 'types';
-import colors from 'styles/colors';
+import { LINKS } from 'styles/colors';
 
 import { Rating, Genres, Release } from './index';
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   back: {
     display: 'inline-flex',
-    color: colors.LINKS,
+    color: LINKS,
     boxShadow: 'none',
     outline: 0,
     textTransform: 'capitalize',
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     cursor: 'pointer',
   },
   link: {
-    color: colors.LINKS,
+    color: LINKS,
   },
   title: {
     display: 'flex',
