@@ -6,6 +6,7 @@ import {
   Route,
 } from 'react-router-dom';
 import 'i18n';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from 'pages/MainPage';
 import GamePage from 'pages/GamePage/components/Game';
 // import GamePage from 'pages/GamePage';
