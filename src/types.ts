@@ -91,6 +91,7 @@ export interface CordGame {
   platforms: string[];
   preview: string;
   price: number;
+  discount?: number;
   publisher: WithTitleAndId;
   rating: number;
   releaseDate: string;

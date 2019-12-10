@@ -13,8 +13,8 @@ export default {
       auth: 'Authorization',
       system_requirements: 'System requirements',
       language_support: 'Language support',
+      popular_recomended: 'Popular & Recomended',
     },
-
     labels: {
       back: 'Back',
       released_on: 'Released on',
@@ -57,7 +57,6 @@ export default {
       additional_language: 'Additional language',
       len_char_over: 'Number of characters over',
     },
-
     paragraphs: {
       accounts_data_successfully_updated: 'Account details successfully updated',
     },

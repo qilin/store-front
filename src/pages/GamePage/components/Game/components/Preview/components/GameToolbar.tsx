@@ -3,10 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Rating } from 'components';
 import { CordGame } from 'types';
 import { LINKS } from 'styles/colors';
 
-import { Rating, Genres, Release } from './index';
+import { Release, Genres } from './index';
 
 const useStyles = makeStyles({
   root: {

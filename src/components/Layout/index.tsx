@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { BACKGROUND_LIGHT } from 'styles/colors';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -14,6 +15,10 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     minHeight: '100vh',
   },
+  main: {
+    flexGrow: 1,
+    backgroundColor: BACKGROUND_LIGHT,
+  },
 });
 
 const Layout = (props: Props) => {
@@ -22,7 +27,7 @@ const Layout = (props: Props) => {
   return (
     <div className={classes.root}>
       <Header />
-      <main>
+      <main className={classes.main}>
         {props.children}
       </main>
       <Footer />

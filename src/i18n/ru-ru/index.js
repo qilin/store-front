@@ -13,6 +13,7 @@ export default {
       auth: 'Авторизация',
       system_requirements: 'Системные требования',
       language_support: 'Поддержка языков',
+      popular_recomended: 'Популярное и рекомендованное',
     },
     labels: {
       back: 'Вернуться',
