@@ -2,7 +2,7 @@ const gameId = 'cb6711fb-40dd-47d0-8f90-40e84256a63a';
 
 export default {
   id: gameId,
-  description: '',
+  description: 'Place for additional text for terms, Additional text might be even here.',
   developer: { title: 'CD PROJECT RED', id: '' },
   genres: [
     { title: 'RPG', id: '' },
@@ -29,7 +29,7 @@ export default {
   price: 200,
   discount: 50,
   publisher: { title: 'CD PROJECT RED', id: '' },
-  rating: 0,
+  rating: 4,
   releaseDate: '2016-09-13T11:16:03Z',
   requirements: {
     languages: {

@@ -12,7 +12,7 @@ export default makeStyles({
   imageWrapper: {
     position: 'relative',
     width: '100%',
-    height: 'calc(100% - 80px)',
+    height: 'calc(100% - 224px)',
     overflow: 'hidden',
     '&::after': {
       content: '""',
@@ -39,10 +39,20 @@ export default makeStyles({
   content: {
     background: BACKGROUND_DARK,
     color: 'white',
-    height: '80px',
-    padding: '0 24px',
+    height: '224px',
+    padding: '24px',
     display: 'flex',
-    alignItems: 'center',
+    textAlign: 'start',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  subtitle: {
+    opacity: '0.5',
+  },
+  iconWrapper: {
+    marginRight: '12px',
+    fill: 'white',
+    color: 'white',
   },
   priceSmall: {
     fontSize: '12px',

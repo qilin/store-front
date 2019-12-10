@@ -7,7 +7,7 @@ import cordGameMock from 'pages/GamePage/cordGameMock';
 
 import BigGameCard from './components/BigGameCard';
 import useStyles from './useStyles';
-// import './index.css';
+import SmallGameCard from './components/SmallGameCard';
 
 interface Props {
   popular?: CordGame[];
@@ -29,7 +29,7 @@ const PopularRecomendedBlock = (props: Props) => {
         </Typography>
         <Grid container spacing={3}>
           <Grid item sm={8}>
-            <Carousel showArrows={false} showStatus={false} showThumbs={false} infiniteLoop>
+            <Carousel showArrows={false} showStatus={false} showThumbs={false} autoPlay infiniteLoop>
               {popular.map((game, index) => (
                 <div key={index} className={classes.cardWrapper}>
                   <BigGameCard game={game} />
@@ -38,9 +38,11 @@ const PopularRecomendedBlock = (props: Props) => {
             </Carousel>
           </Grid>
           <Grid item sm={4}>
-            <Carousel showArrows={false} showStatus={false} showThumbs={false} infiniteLoop>
-              {recomended.map((_, index) => (
-                <div key={index} className={classes.cardWrapper}><div className={classes.green} /></div>
+            <Carousel showArrows={false} showStatus={false} showThumbs={false} autoPlay infiniteLoop>
+              {recomended.map((game, index) => (
+                <div key={index} className={classes.cardWrapper}>
+                  <SmallGameCard game={game} />
+                </div>
               ))}
             </Carousel>
           </Grid>
