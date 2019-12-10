@@ -20,6 +20,7 @@ export default {
       released_on: 'Released on',
       profile: 'Profile',
       logout: 'Logout',
+      login: 'Login',
       minimal: 'Minimal',
       recommended: 'Recommended',
       cpu: 'CPU',

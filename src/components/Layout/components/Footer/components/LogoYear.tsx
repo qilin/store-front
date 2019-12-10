@@ -6,7 +6,7 @@ const useStyle = makeStyles({
     padding: 15,
     borderRadius: 4,
     display: 'inline-block',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(8, 8, 8, 0.35)',
   },
   logoText: {
     color: 'white',

@@ -20,6 +20,7 @@ export default {
       released_on: 'Выпущена',
       profile: 'Профиль',
       logout: 'Выйти',
+      login: 'Войти',
       minimal: 'Минимальные',
       recommended: 'Рекомендуемые',
       cpu: 'CPU',
