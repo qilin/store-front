@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const gameId = 'cb6711fb-40dd-47d0-8f90-40e84256a63a';
 
 export default {
