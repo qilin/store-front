@@ -1,12 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { BACKGORUND_LOGO } from 'styles/colors';
 
 const useStyle = makeStyles({
   logoContainer: {
     padding: 15,
     borderRadius: 4,
     display: 'inline-block',
-    backgroundColor: 'rgba(8, 8, 8, 0.35)',
+    backgroundColor: BACKGORUND_LOGO,
   },
   logoText: {
     color: 'white',
