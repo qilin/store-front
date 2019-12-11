@@ -1,11 +1,11 @@
 import React from 'react';
-import { CordGame } from 'types';
+import { Game } from 'types';
 
 import { GameToolbar, BackgroundImage } from './components';
 import useStyles from './useStyles';
 
 interface Props {
-  game: CordGame;
+  game: Game;
 }
 
 const GamePreview = (props: Props) => {

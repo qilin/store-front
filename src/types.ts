@@ -28,7 +28,7 @@ export interface Screenshot {
   url: string;
 }
 
-export interface Game {
+export interface RamblerGame {
   id: number;
   title: string;
   slug: string;
@@ -78,7 +78,7 @@ export interface SystemsRequirements {
   windows?: RequirementsOS;
 }
 
-export interface CordGame {
+export interface Game {
   id: string;
   description: string;
   developer: WithTitleAndId;
@@ -87,6 +87,7 @@ export interface CordGame {
     screenshots: string[];
     trailers: string[];
   };
+  summary: string;
   name: string;
   platforms: string[];
   preview: string;
@@ -95,7 +96,7 @@ export interface CordGame {
   publisher: WithTitleAndId;
   rating: number;
   releaseDate: string;
-  requirements: {
+  requirements?: {
     languages: {
       audio: string[];
       text: string[];

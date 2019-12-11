@@ -4,7 +4,7 @@ import { Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Rating } from 'components';
-import { CordGame } from 'types';
+import { Game } from 'types';
 import { LINKS } from 'styles/colors';
 
 import { Release, Genres } from './index';
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  game: CordGame;
+  game: Game;
 }
 
 const GameToolbar = (props: Props) => {

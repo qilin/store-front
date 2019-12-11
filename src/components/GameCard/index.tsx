@@ -1,12 +1,12 @@
 import React, { ReactNode, SyntheticEvent } from 'react';
 import { Card, Typography, Box, Button, IconButton } from '@material-ui/core';
-import { CordGame } from 'types';
+import { Game } from 'types';
 import { HeartIcon, AddToCartIcon } from 'assets/icons';
 
 import useStyles from './useStyles';
 
 interface Props {
-  game: CordGame;
+  game: Game;
   footerContent: ReactNode;
   cardContent: ReactNode;
   likeGame?: (id: string) => void;

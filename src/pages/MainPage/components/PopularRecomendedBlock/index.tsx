@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
-import { CordGame } from 'types';
+import { Game } from 'types';
 
 import { BigGameCard, SmallGameCard } from './components';
 import useStyles from './useStyles';
@@ -12,8 +12,8 @@ interface Props {
     first: number;
     second: number;
   };
-  popular: CordGame[];
-  recomended: CordGame[];
+  popular: Game[];
+  recomended: Game[];
   openGame: (id: string) => void;
 }
 

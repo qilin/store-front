@@ -24,6 +24,7 @@ export default {
       'https://static.protocol.one/qilin/videos/y2mate.com - the_witcher_3_wild_hunt_killing_monsters_cinematic_trailer_c0i88t0Kacs_1080p-EGtiDd.mp4',
     ],
   },
+  summary: '',
   name: 'The Witcher III',
   platforms: ['linux', 'windows', 'mac_os'],
   preview: '',

@@ -1,12 +1,12 @@
 import React from 'react';
-import { CordGame } from 'types';
+import { Game } from 'types';
 import { Typography, Box } from '@material-ui/core';
 import { Rating, PlatformIcons, GameCard } from 'components';
 
 import useStyles from './useStyles';
 
 interface Props {
-  game: CordGame;
+  game: Game;
   openGame: (id: string) => void;
 }
 

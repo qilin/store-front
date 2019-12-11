@@ -1,12 +1,14 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { Button, IconButton } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { HighlightOff, Fullscreen } from '@material-ui/icons';
-import { ErrorMessage } from 'components';
+import { ErrorMessage, GameInfo, GamePreview } from 'components';
 import { env } from 'helpers';
 
+import webGameMock from './webGameMock';
 import { FlashPopup } from './components';
 import useStyles from './useStyles';
 import { buildWidget, getOrder } from './helpers';
+import { Game } from 'types';
 
 const qilinStore = (window as any).qilinStore;
 const USER_CLICKED_PLAY = 'USER_CLICKED_PLAY';
@@ -15,10 +17,11 @@ const isFlashEnabled = qilinStore.checkFlashEnabled();
 
 interface Props {
   uuid: string;
+  game?: Game;
 }
 
 const WebGame = (props: Props) => {
-  const { uuid } = props;
+  const { uuid, game = webGameMock } = props;
   const [widget, setWidget] = useState(null);
   const [error, setError] = useState('');
   const handleErrorClose = () => setError('');
@@ -29,6 +32,11 @@ const WebGame = (props: Props) => {
   const handleGameClose = () => setGameFrameOpen(false);
   const [fullscreenEnabled, setFullscreenEnabled] = useState(false);
   const classes = useStyles();
+
+  const initGame = () => {
+    // check rsid
+    // openIframe or openAuth with openIframe callback
+  };
 
   const initWidget = async () => {
     const buildedWidget = await buildWidget();
@@ -121,7 +129,8 @@ const WebGame = (props: Props) => {
 
   return (
     <div className={classes.root}>
-      <Button onClick={openIframe} className={classes.button}>Играть бесплатно</Button>
+      <GamePreview game={game} />
+      <GameInfo platforms={game.platforms} price={0} onPlay={initGame} />
       <FlashPopup open={flashPopupOpen} handleClose={handleFlashClose} />
       <ErrorMessage open={!!error} message={error || ''} handleClose={handleErrorClose} />
       {gameFrameOpen && (
