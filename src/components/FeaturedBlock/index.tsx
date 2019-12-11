@@ -1,7 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { Container } from '@material-ui/core';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Game } from 'types';
 
 import mockedGame from './mockedGame';

@@ -73,9 +73,9 @@ export interface RequirementsOS {
 }
 
 export interface SystemsRequirements {
-  linux: RequirementsOS;
-  macos: RequirementsOS;
-  windows: RequirementsOS;
+  linux?: RequirementsOS;
+  macos?: RequirementsOS;
+  windows?: RequirementsOS;
 }
 
 export interface CordGame {
@@ -91,6 +91,7 @@ export interface CordGame {
   platforms: string[];
   preview: string;
   price: number;
+  discount?: number;
   publisher: WithTitleAndId;
   rating: number;
   releaseDate: string;

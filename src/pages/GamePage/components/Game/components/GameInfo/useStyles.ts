@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { BACKGROUND_DARK, BLACK } from 'styles/colors';
 
 export default makeStyles({
   root: {
@@ -7,13 +8,13 @@ export default makeStyles({
     justifyContent: 'space-between',
     padding: '35px 45px',
     color: 'white',
-    backgroundColor: '#262626',
+    backgroundColor: BACKGROUND_DARK,
   },
   flex: {
     display: 'flex',
   },
   dark: {
-    backgroundColor: '#121212',
+    backgroundColor: BLACK,
   },
   iconWrapper: {
     padding: '16px',

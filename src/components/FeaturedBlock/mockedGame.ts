@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export default {
   'id': 1130,
   'title': 'Dragon Knight 2',
