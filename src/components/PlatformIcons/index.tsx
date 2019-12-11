@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { WindowsIcon, AppleIcon, LinuxIcon } from 'assets/icons';
 import { Box } from '@material-ui/core';
+import getPlatformIcons from 'helpers/getPlatformIcons';
 
 const useStyles = makeStyles({
   iconWrapper: {
@@ -12,21 +12,6 @@ const useStyles = makeStyles({
     color: 'white',
   },
 });
-
-const getPlatformIcons = (platforms: string[]) => {
-  return platforms.map(platform => {
-    switch (platform) {
-      case 'windows':
-        return <WindowsIcon />;
-      case 'mac_os':
-        return <AppleIcon />;
-      case 'linux':
-        return <LinuxIcon />;
-      default:
-        return null;
-    }
-  });
-};
 
 interface Props {
   platforms: string[];
@@ -40,9 +25,9 @@ const PlatformIcons = (props: Props) => {
 
   return (
     <Box display="flex">
-      {platformIcons.map((icon, index) => (
+      {platformIcons.map((Icon, index) => (
         <div key={index} className={wrapperClass}>
-          {icon}
+          <Icon />
         </div>
       ))}
     </Box>

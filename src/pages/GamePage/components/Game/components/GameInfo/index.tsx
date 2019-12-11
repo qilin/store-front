@@ -1,9 +1,9 @@
 import React from 'react';
 import { Toolbar, Button } from '@material-ui/core';
+import { PlatformIcons } from 'components';
 import { HeartIcon } from 'assets/icons';
 
 import useStyles from './useStyles';
-import PlatformIcons from 'components/PlatformIcons';
 
 interface Props {
   platforms: string[];

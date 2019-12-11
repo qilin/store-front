@@ -2,7 +2,7 @@ import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Button, IconButton } from '@material-ui/core';
 import { HighlightOff, Fullscreen } from '@material-ui/icons';
-import ErrorMessage from 'components/ErrorMessage';
+import { ErrorMessage } from 'components';
 import { env, getUrlParameter } from 'helpers';
 
 import FlashPopup from './components/FlashPopup';

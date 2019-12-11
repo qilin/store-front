@@ -26,7 +26,7 @@ const Game = (props: Props) => {
       <Preview game={game} />
       <GameInfo platforms={platforms} price={price} />
       <Media {...media} />
-      <Requirements {...requirements} />
+      <Requirements platforms={platforms} {...requirements} />
     </div>
   );
 };

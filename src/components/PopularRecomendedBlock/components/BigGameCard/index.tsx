@@ -1,47 +1,38 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
+import { Rating, GameCard } from 'components';
 import { CordGame } from 'types';
-import { Card, Typography, Box, Button } from '@material-ui/core';
-import { Rating } from 'components';
 
 import useStyles from './useStyles';
 
 interface Props {
   game: CordGame;
+  openGame: (id: string) => void;
 }
 
 const BigGameCard = (props: Props) => {
-  const { game } = props;
-  const { title, price, discount = 0, rating } = game;
-  const imageSrc = game.media.screenshots[0];
-  const isGameDiscounted = discount > 0 && discount < 100;
+  const { title, rating, media } = props.game;
+  const imageSrc = media.screenshots[0];
   const classes = useStyles();
-  return (
-    <Card className={classes.root}>
+
+  const cardContent = (
+    <>
       <div className={classes.rating}>
         <Rating rating={rating} />
       </div>
       <div className={classes.imageWrapper}>
         <img className={classes.image} alt={title} title={title} src={imageSrc} />
       </div>
-      <div className={classes.content}>
-        <Box flexGrow={1} display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6">{title}</Typography>
-          <Box display="flex">
-            {isGameDiscounted && (
-              <Button variant="contained" color="primary">
-                {`- ${discount}%`}
-              </Button>
-            )}
-            <Box textAlign="end" className={classes.prices}>
-              {isGameDiscounted && <Typography className={classes.priceSmall}>$ {price}</Typography>}
-              <Typography className={classes.priceBig}>
-                $ {isGameDiscounted ? (price * discount / 100).toFixed(0) : price}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </div>
-    </Card>
+    </>
+  );
+  const footerContent = <Typography variant="h6">{title}</Typography>;
+
+  return (
+    <GameCard
+      footerContent={footerContent}
+      cardContent={cardContent}
+      {...props}
+    />
   );
 };
 

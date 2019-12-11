@@ -5,19 +5,26 @@ import { Carousel } from 'react-responsive-carousel';
 import { CordGame } from 'types';
 import cordGameMock from 'pages/GamePage/cordGameMock';
 
-import BigGameCard from './components/BigGameCard';
+import { BigGameCard, SmallGameCard } from './components';
 import useStyles from './useStyles';
-import SmallGameCard from './components/SmallGameCard';
 
 interface Props {
+  autoPlayIntervals?: {
+    first: number;
+    second: number;
+  };
   popular?: CordGame[];
   recomended?: CordGame[];
+  openGame: (id: string) => void;
 }
+
+const defaultIntervals = { first: 3000, second: 3000 };
 
 const mockGames = [cordGameMock, cordGameMock, cordGameMock];
 
 const PopularRecomendedBlock = (props: Props) => {
-  const { popular = mockGames, recomended = mockGames } = props;
+  const { openGame, popular = mockGames, recomended = mockGames, autoPlayIntervals = defaultIntervals } = props;
+  const { first, second } = autoPlayIntervals;
   const { t } = useTranslation();
   const classes = useStyles();
 
@@ -29,19 +36,35 @@ const PopularRecomendedBlock = (props: Props) => {
         </Typography>
         <Grid container spacing={3}>
           <Grid item sm={8}>
-            <Carousel showArrows={false} showStatus={false} showThumbs={false} autoPlay infiniteLoop>
+            <Carousel
+              showArrows={false}
+              showStatus={false}
+              showThumbs={false}
+              interval={first}
+              autoPlay
+              infiniteLoop
+            >
               {popular.map((game, index) => (
+                // TODO replace index by game.id on real data 
                 <div key={index} className={classes.cardWrapper}>
-                  <BigGameCard game={game} />
+                  <BigGameCard key={index} game={game} openGame={openGame} />
                 </div>
               ))}
             </Carousel>
           </Grid>
           <Grid item sm={4}>
-            <Carousel showArrows={false} showStatus={false} showThumbs={false} autoPlay infiniteLoop>
+            <Carousel
+              showArrows={false}
+              showStatus={false}
+              showThumbs={false}
+              interval={second}
+              autoPlay
+              infiniteLoop
+            >
               {recomended.map((game, index) => (
+                // TODO replace index by game.id on real data 
                 <div key={index} className={classes.cardWrapper}>
-                  <SmallGameCard game={game} />
+                  <SmallGameCard game={game} openGame={openGame} />
                 </div>
               ))}
             </Carousel>

@@ -11,7 +11,7 @@ import MainPage from 'pages/MainPage';
 import GamePage from 'pages/GamePage/components/Game';
 // import GamePage from 'pages/GamePage';
 import { isEnvDefined } from 'helpers';
-import Layout from 'components/Layout';
+import { Layout } from 'components';
 
 const App = () => {
   if (!isEnvDefined()) {

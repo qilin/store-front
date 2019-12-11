@@ -73,9 +73,9 @@ export interface RequirementsOS {
 }
 
 export interface SystemsRequirements {
-  linux: RequirementsOS;
-  macos: RequirementsOS;
-  windows: RequirementsOS;
+  linux?: RequirementsOS;
+  macos?: RequirementsOS;
+  windows?: RequirementsOS;
 }
 
 export interface CordGame {

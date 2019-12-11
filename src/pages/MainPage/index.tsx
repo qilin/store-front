@@ -1,15 +1,22 @@
 import React from 'react';
-import FeaturedBlock from 'components/FeaturedBlock';
-import PopularRecomendedBlock from 'components/PopularRecomendedBlock';
+import { RouteComponentProps } from 'react-router';
+import { PopularRecomendedBlock } from 'components';
 
 import useStyles from './useStyles';
 
-const MainPage = () => {
+const MainPage = (props: RouteComponentProps) => {
   const classes = useStyles();
+  const openGame = (id: string) => props.history.push(`game?uuid=${id}`);
+
   return (
     <div className={classes.root}>
-      <PopularRecomendedBlock />
-      {/* <FeaturedBlock /> */}
+      <PopularRecomendedBlock
+        openGame={openGame}
+        autoPlayIntervals={{
+          first: 3000,
+          second: 5000,
+        }}
+      />
     </div>
   );
 };
