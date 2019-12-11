@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { YouTubeIcon, FacebookIcon, TwitterIcon } from 'assets/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { TITLE_GREY } from 'styles/colors';
+import { TITLE_GREY, BLACK } from 'styles/colors';
 
 const useStyles = makeStyles({
   descriptionText: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     width: 84,
     height: 84,
     marginRight: 25,
-    backgroundColor: '#121212',
+    backgroundColor: BLACK,
     padding: 16,
   },
 });

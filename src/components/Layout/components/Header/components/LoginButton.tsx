@@ -4,6 +4,7 @@ import { ramblerAuth } from 'helpers';
 import { User } from 'types';
 import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
+import { BLACK } from 'styles/colors';
 
 const useStyles = makeStyles({
   root: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles({
   },
   button: {
     marginLeft: 15,
-    backgroundColor: '#121212',
+    backgroundColor: BLACK,
     color: 'white',
   },
   userName: {
