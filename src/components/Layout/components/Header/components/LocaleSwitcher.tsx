@@ -2,7 +2,7 @@ import React from 'react';
 import { Select, MenuItem, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-const useStyle = makeStyles({
+const useStyles = makeStyles({
   root: {
     marginLeft: 15,
     color: 'white',
@@ -22,7 +22,7 @@ export const languages = [
 
 const LocaleSwitcher = () => {
   const { i18n } = useTranslation();
-  const classes = useStyle();
+  const classes = useStyles();
 
   const handleChangeLocale = (event: any) => i18n.changeLanguage(event.target.value);
 

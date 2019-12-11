@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyle = makeStyles({
+const useStyles = makeStyles({
   linkContainer: {
     margin: '5px 10px 20px',
     color: 'white',
@@ -12,7 +12,7 @@ const useStyle = makeStyles({
 const links = ['Super.com', 'Vacancies', 'Company', 'Terms & Conditions', 'Legal Agreement'];
 
 const LinkList = () => {
-  const classes = useStyle();
+  const classes = useStyles();
 
   return (
     <>

@@ -4,7 +4,7 @@ import { YouTubeIcon, FacebookIcon, TwitterIcon } from 'assets/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { TITLE_GREY } from 'styles/colors';
 
-const useStyle = makeStyles({
+const useStyles = makeStyles({
   descriptionText: {
     padding: 10,
     color: TITLE_GREY,
@@ -24,7 +24,7 @@ const useStyle = makeStyles({
 });
 
 const SocialDescription = () => {
-  const classes = useStyle();
+  const classes = useStyles();
 
   return (
     <>

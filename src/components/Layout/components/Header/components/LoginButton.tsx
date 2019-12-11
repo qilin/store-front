@@ -5,7 +5,7 @@ import { User } from 'types';
 import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
 
-const useStyle = makeStyles({
+const useStyles = makeStyles({
   root: {
     marginLeft: 'auto',
   },
@@ -20,7 +20,7 @@ const useStyle = makeStyles({
 });
 
 const LoginButton = () => {
-  const classes = useStyle();
+  const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const { t } = useTranslation();

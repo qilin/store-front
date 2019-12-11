@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { BACKGORUND_LOGO } from 'styles/colors';
 
-const useStyle = makeStyles({
+const useStyles = makeStyles({
   logoContainer: {
     padding: 15,
     borderRadius: 4,
@@ -19,7 +19,7 @@ const useStyle = makeStyles({
 });
 
 const LogoContainer = () => {
-  const classes = useStyle();
+  const classes = useStyles();
 
   return (
     <>
