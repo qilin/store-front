@@ -8,7 +8,7 @@ interface Props {
   game: CordGame;
 }
 
-const Preview = (props: Props) => {
+const GamePreview = (props: Props) => {
   const { game } = props;
   const { screenshots } = game.media;
   const classes = useStyles();
@@ -21,4 +21,4 @@ const Preview = (props: Props) => {
   );
 };
 
-export default Preview;
+export default GamePreview;

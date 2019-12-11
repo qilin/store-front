@@ -8,8 +8,7 @@ import {
 import 'i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from 'pages/MainPage';
-import GamePage from 'pages/GamePage/components/Game';
-// import GamePage from 'pages/GamePage';
+import GamePage from 'pages/GamePage';
 import { isEnvDefined, env } from 'helpers';
 import { Layout } from 'components';
 import ApolloClient from 'apollo-boost';

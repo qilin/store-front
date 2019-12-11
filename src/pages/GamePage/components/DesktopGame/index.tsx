@@ -4,6 +4,9 @@ import { CordGame } from 'types';
 import { mockGame } from 'mocks';
 
 import { Preview, GameInfo, Media, Requirements } from './components';
+import { GamePreview, GameInfo } from 'components';
+
+import { Media, Requirements } from './components';
 
 const useStyles = makeStyles({
   root: {
@@ -16,14 +19,14 @@ interface Props {
   game?: CordGame;
 }
 
-const Game = (props: Props) => {
+const DesktopGame = (props: Props) => {
   const { game = mockGame } = props;
   const { platforms, price, media, requirements } = game;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Preview game={game} />
+      <GamePreview game={game} />
       <GameInfo platforms={platforms} price={price} />
       <Media {...media} />
       <Requirements platforms={platforms} {...requirements} />
@@ -31,4 +34,4 @@ const Game = (props: Props) => {
   );
 };
 
-export default Game;
+export default DesktopGame;
