@@ -16,7 +16,7 @@ const GamePreview = (props: Props) => {
   return (
     <section className={classes.root}>
       <GameToolbar game={game} />
-      <BackgroundImage src={screenshots[0]} />
+      <BackgroundImage src={screenshots[0].url} />
     </section>
   );
 };

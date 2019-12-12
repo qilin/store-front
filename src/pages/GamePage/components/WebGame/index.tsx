@@ -4,7 +4,6 @@ import { HighlightOff, Fullscreen } from '@material-ui/icons';
 import { ErrorMessage, GameInfo, GamePreview } from 'components';
 import { env } from 'helpers';
 
-import webGameMock from './webGameMock';
 import { FlashPopup } from './components';
 import useStyles from './useStyles';
 import { buildWidget, getOrder } from './helpers';
@@ -16,12 +15,12 @@ const isUserClickPlay = localStorage.getItem(USER_CLICKED_PLAY);
 const isFlashEnabled = qilinStore.checkFlashEnabled();
 
 interface Props {
-  uuid: string;
-  game?: Game;
+  game: Game;
 }
 
 const WebGame = (props: Props) => {
-  const { uuid, game = webGameMock } = props;
+  const { game } = props;
+  const { id } = game;
   const [widget, setWidget] = useState(null);
   const [error, setError] = useState('');
   const handleErrorClose = () => setError('');
@@ -68,7 +67,7 @@ const WebGame = (props: Props) => {
   const showPayWidget = async (args: any) => {
     try {
       const { itemId } = args;
-      const data: any = await getOrder(uuid, itemId);
+      const data: any = await getOrder(id, itemId);
       const { order, products } = data;
 
       let payWidget: any;
@@ -100,7 +99,7 @@ const WebGame = (props: Props) => {
   const initQilinSDK = async () => {
     try {
       const meta = await qilinStore.init({
-        qilinProductUUID: uuid,
+        qilinProductUUID: id,
         apiURL: env('QILIN_SDK_INIT_URL'),
       });
 

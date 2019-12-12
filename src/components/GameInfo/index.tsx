@@ -12,7 +12,7 @@ interface Props {
 }
 
 const GameInfo = (props: Props) => {
-  const { platforms, onPlay, price } = props;
+  const { platforms = [], onPlay, price } = props;
   const classes = useStyles();
 
   return (

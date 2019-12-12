@@ -19,7 +19,7 @@ const FeaturedCard = (props: Props) => {
     <Card key={id} className={classes.card}>
       <CardMedia
         className={classes.cover}
-        image={media.screenshots[0]}
+        image={media.screenshots[0].url}
         title={title}
       />
       <CardContent className={classes.content}>

@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  game?: Game;
+  game: Game;
 }
 
 const DesktopGame = (props: Props) => {

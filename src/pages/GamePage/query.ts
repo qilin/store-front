@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
 export const GET_GAME = gql`
-query {
+query Game($id: ID!) {
   store {
-    game(id:"ec215564-58a4-4375-bcc6-d88178d17424") {
+    game(id: $id) {
       id
       title
       genres

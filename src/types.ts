@@ -78,13 +78,20 @@ export interface SystemsRequirements {
   windows?: RequirementsOS;
 }
 
+export type Image = {
+  url: string;
+}
+
+type Genre = 'Board' | 'Cards' | 'Casino' | 'Farm' | 'Racing' | 'Shooter'
+  | 'FindItems' | 'Puzzle' | 'RPG' | 'Simulator' | 'Strategy';
+
 export interface Game {
   id: string;
   description: string;
   developer: WithTitleAndId;
-  genres: WithTitleAndId[];
+  genres: string[];
   media: {
-    screenshots: string[];
+    screenshots: Image[];
     trailers: string[];
   };
   summary: string;

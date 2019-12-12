@@ -9,14 +9,11 @@ import 'i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from 'pages/MainPage';
 import GamePage from 'pages/GamePage';
-import { isEnvDefined, env } from 'helpers';
+import { isEnvDefined } from 'helpers';
 import { Layout } from 'components';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-const client = new ApolloClient({
-  uri: `${env('API_URL')}/v1/graphql`,
-});
+import client from './apolloClient';
 
 const App = () => {
   if (!isEnvDefined()) {
@@ -29,8 +26,8 @@ const App = () => {
         <CssBaseline />
         <Layout>
           <Switch>
-            <Route key="/game" path="/game" component={GamePage} />
-            <Route key="/" path="/" component={MainPage} />
+            <Route path="/game" component={GamePage} />
+            <Route path="/" component={MainPage} />
           </Switch>
         </Layout>
       </Router>

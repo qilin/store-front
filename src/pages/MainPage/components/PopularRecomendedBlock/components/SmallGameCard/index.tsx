@@ -13,7 +13,7 @@ interface Props {
 const SmallGameCard = (props: Props) => {
   const { game } = props;
   const { title, rating, description, platforms } = game;
-  const imageSrc = game.media.screenshots[0];
+  const imageSrc = game.media.screenshots[0].url;
   const classes = useStyles();
 
   const cardContent = (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Chip } from '@material-ui/core';
-import { WithTitleAndId } from 'types';
 
 const useStyles = makeStyles({
   genre: {
@@ -13,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  genres: WithTitleAndId[];
+  genres: string[];
 }
 
 const Genres = (props: Props) => {
@@ -22,8 +21,13 @@ const Genres = (props: Props) => {
 
   return (
     <div>
-      {genres.map(({ id, title }) => (
-        <Chip className={classes.genre} key={id} label={title} variant="outlined" />
+      {genres.map(genre => (
+        <Chip
+          key={genre}
+          className={classes.genre}
+          label={genre}
+          variant="outlined"
+        />
       ))}
     </div>
   );

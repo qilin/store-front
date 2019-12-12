@@ -12,7 +12,7 @@ interface Props {
 
 const BigGameCard = (props: Props) => {
   const { title, rating, media } = props.game;
-  const imageSrc = media.screenshots[0];
+  const imageSrc = media.screenshots[0].url;
   const classes = useStyles();
 
   const cardContent = (

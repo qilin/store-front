@@ -24,7 +24,7 @@ const UpdatesExpansions = (props: Props) => {
       <Box display="flex" flexWrap="wrap" justifyContent="space-between">
         {games.slice(0, 4).map(game => {
           const { title, media, id } = game;
-          const imageSrc = media.screenshots[0];
+          const imageSrc = media.screenshots[0].url;
           const cardContent = (
             <div className={classes.imageWrapper}>
               <img className={classes.image} alt={title} title={title} src={imageSrc} />
