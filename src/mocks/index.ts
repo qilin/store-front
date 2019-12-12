@@ -45,6 +45,7 @@ export const mockGame = {
     ],
   },
   name: 'The Witcher III',
+  summary: 'summary',
   platforms: ['linux', 'windows', 'mac_os'],
   preview: '',
   price: 200,

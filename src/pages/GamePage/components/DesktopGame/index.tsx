@@ -2,8 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Game } from 'types';
 import { mockGame } from 'mocks';
-
-import { Preview, GameInfo, Media, Requirements } from './components';
 import { GamePreview, GameInfo } from 'components';
 
 import { Media, Requirements } from './components';

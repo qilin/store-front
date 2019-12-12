@@ -108,7 +108,7 @@ export interface Game {
 }
 
 export interface FriendGame {
-  game: CordGame;
+  game: Game;
   friend: User;
   likes: number;
 }

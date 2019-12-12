@@ -2,13 +2,13 @@ import React from 'react';
 import { Typography, Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { GameCard } from 'components';
-import { CordGame } from 'types';
+import { Game } from 'types';
 
 import useStyles from './useStyles';
 import { HeaderWithMoreBtn } from '../index';
 
 interface Props {
-  games: CordGame[];
+  games: Game[];
   openGame: (id: string) => void;
   handleMore: () => void;
 }
