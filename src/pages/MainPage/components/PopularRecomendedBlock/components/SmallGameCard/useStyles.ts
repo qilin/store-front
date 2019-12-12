@@ -1,10 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { BACKGROUND_DARK } from 'styles/colors';
 
 export default makeStyles({
+  root: {
+    height: 432,
+  },
   imageWrapper: {
     position: 'relative',
     width: '100%',
-    height: 'calc(100% - 80px)',
+    height: 'calc(100% - 224px)',
     overflow: 'hidden',
     '&::after': {
       content: '""',
@@ -26,6 +30,21 @@ export default makeStyles({
     top: '24px',
     right: '24px',
     zIndex: 1,
+    color: 'white',
+  },
+  content: {
+    flexGrow: 1,
+    padding: '24px',
+    background: BACKGROUND_DARK,
+    color: 'white',
+    textAlign: 'start',
+  },
+  subtitle: {
+    opacity: '0.5',
+  },
+  iconWrapper: {
+    marginRight: '12px',
+    fill: 'white',
     color: 'white',
   },
 });

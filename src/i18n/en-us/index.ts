@@ -14,9 +14,12 @@ export default {
       system_requirements: 'System requirements',
       language_support: 'Language support',
       popular_recomended: 'Popular & Recomended',
+      updates_expansions: 'Updates & Expansions',
+      friends_games: 'Friends games',
     },
     labels: {
       back: 'Back',
+      more_btn: 'More',
       released_on: 'Released on',
       profile: 'Profile',
       logout: 'Logout',
