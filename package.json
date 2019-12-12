@@ -46,13 +46,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "chmod +x ./env.sh && ./env.sh && react-scripts build && cp ./env-config.js ./build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint './**/*.{ts,tsx}'",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
-    "preelectron-pack": "yarn build",
+    "preelectron-pack": "chmod +x ./env.sh && ./env.sh && react-scripts build && cp ./env-config.js ./build",
     "electron-pack": "electron-builder -mw"
   },
   "husky": {
