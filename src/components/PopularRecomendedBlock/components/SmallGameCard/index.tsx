@@ -32,13 +32,18 @@ const SmallGameCard = (props: Props) => {
   );
 
   const footerContent = <PlatformIcons platforms={platforms} wrapperClass={classes.iconWrapper} />;
+  const mockLikeAndAddToCart = (id: string) => console.log(id);
 
   return (
-    <GameCard
-      footerContent={footerContent}
-      cardContent={cardContent}
-      {...props}
-    />
+    <div className={classes.root}>
+      <GameCard
+        footerContent={footerContent}
+        cardContent={cardContent}
+        likeGame={mockLikeAndAddToCart}
+        addGameToCart={mockLikeAndAddToCart}
+        {...props}
+      />
+    </div>
   );
 };
 

@@ -14,9 +14,12 @@ export default {
       system_requirements: 'Системные требования',
       language_support: 'Поддержка языков',
       popular_recomended: 'Популярное и рекомендованное',
+      updates_expansions: 'Обновления и Расширения',
+      friends_games: 'Игры друзей',
     },
     labels: {
       back: 'Вернуться',
+      more_btn: 'Ещё',
       released_on: 'Выпущена',
       profile: 'Профиль',
       logout: 'Выйти',

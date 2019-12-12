@@ -26,13 +26,18 @@ const BigGameCard = (props: Props) => {
     </>
   );
   const footerContent = <Typography variant="h6">{title}</Typography>;
+  const mockLikeAndAddToCart = (id: string) => console.log(id);
 
   return (
-    <GameCard
-      footerContent={footerContent}
-      cardContent={cardContent}
-      {...props}
-    />
+    <div className={classes.root}>
+      <GameCard
+        footerContent={footerContent}
+        cardContent={cardContent}
+        likeGame={mockLikeAndAddToCart}
+        addGameToCart={mockLikeAndAddToCart}
+        {...props}
+      />
+    </div>
   );
 };
 

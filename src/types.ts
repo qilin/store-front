@@ -105,3 +105,9 @@ export interface CordGame {
   tags: WithTitleAndId[];
   title: string;
 }
+
+export interface FriendGame {
+  game: CordGame;
+  friend: User;
+  likes: number;
+}

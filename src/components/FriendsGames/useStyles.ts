@@ -1,14 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { BACKGROUND_DARK } from 'styles/colors';
 
 export default makeStyles({
-  root: {
-    height: 432,
-  },
+  root: {},
   imageWrapper: {
     position: 'relative',
     width: '100%',
-    height: 'calc(100% - 224px)',
+    height: 'calc(100% - 80px)',
     overflow: 'hidden',
     '&::after': {
       content: '""',
@@ -25,26 +22,35 @@ export default makeStyles({
     height: '100%',
     transition: 'transform 200ms',
   },
-  rating: {
+  cardHeader: {
     position: 'absolute',
-    top: '24px',
-    right: '24px',
+    top: 0,
+    left: 0,
+    right: 0,
     zIndex: 1,
+    padding: '8px 24px',
     color: 'white',
   },
-  content: {
-    flexGrow: 1,
-    padding: '24px',
-    background: BACKGROUND_DARK,
+  friendName: {
+    margin: '0 8px',
+  },
+  likes: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     color: 'white',
-    textAlign: 'start',
   },
-  subtitle: {
-    opacity: '0.5',
+  cardWrapper: {
+    width: '100%',
+    maxHeight: 280,
+    minHeight: 280,
+    marginBottom: 24,
   },
-  iconWrapper: {
-    marginRight: '12px',
+  platformIcon: {
+    marginRight: 8,
     fill: 'white',
     color: 'white',
+    '& svg': {
+      width: 16,
+      height: 16,
+    },
   },
 });
