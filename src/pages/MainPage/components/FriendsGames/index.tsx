@@ -1,10 +1,11 @@
 import React from 'react';
 import { Typography, Box, Avatar, Fab } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { GameCard, PlatformIcons, HeaderWithMoreBtn } from 'components';
+import { GameCard, PlatformIcons } from 'components';
 import { FriendGame } from 'types';
 
 import useStyles from './useStyles';
+import { HeaderWithMoreBtn } from '../index';
 
 interface Props {
   games: FriendGame[];
@@ -18,7 +19,7 @@ const FriendsGames = (props: Props) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <HeaderWithMoreBtn title={t('titles.friends_games')} handleMore={handleMore} />
       <Box display="flex" flexWrap="wrap">
         {games.slice(0, 2).map(friendGame => {

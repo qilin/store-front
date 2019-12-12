@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Grid } from '@material-ui/core';
 import { RouteComponentProps } from 'react-router';
-import { PopularRecomendedBlock, UpdatesExpansions, FriendsGames } from 'components';
-
-import useStyles from './useStyles';
 import { mockGames, mockFriendGames } from 'mocks';
+
+import { PopularRecomendedBlock, UpdatesExpansions, FriendsGames } from './components';
+import useStyles from './useStyles';
 
 const MainPage = (props: RouteComponentProps) => {
   const classes = useStyles();
