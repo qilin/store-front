@@ -6,3 +6,4 @@ export { ReactComponent as YouTubeIcon } from './youtube.svg';
 export { ReactComponent as TwitterIcon } from './twitter.svg';
 export { ReactComponent as FacebookIcon } from './facebook.svg';
 export { ReactComponent as AddToCartIcon } from './add-to-cart.svg';
+export { ReactComponent as WebIcon } from './web.svg';

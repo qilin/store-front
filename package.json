@@ -4,7 +4,6 @@
   "private": false,
   "homepage": "./",
   "main": "public/electron.js",
-  "proxy": "https://store.tst.qilin.super.com",
   "author": {
     "name": "Qilin Team",
     "email": "your.email@domain.com",

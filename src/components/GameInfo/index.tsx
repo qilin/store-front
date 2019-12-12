@@ -22,10 +22,13 @@ const GameInfo = (props: Props) => {
         <Button className={`${classes.iconWrapper} ${classes.dark}`}>
           <HeartIcon />
         </Button>
-        <Button className={`${classes.iconWrapper} ${classes.dark}`}>
-          $ {price}
-        </Button>
-        <Button onClick={onPlay}>Играть бесплатно</Button>
+        {price ? (
+          <Button className={`${classes.iconWrapper} ${classes.dark}`}>
+            $ {price}
+          </Button>
+        ) : (
+            <Button className={`${classes.iconWrapper} ${classes.dark}`} onClick={onPlay}>Играть бесплатно</Button>
+          )}
       </div>
     </Toolbar >
   );

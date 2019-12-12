@@ -5,7 +5,6 @@ export default {
   id: gameId,
   description: 'Place for additional text for terms, Additional text might be even here.',
   developer: { title: 'CD PROJECT RED WEB DEVELOPERS', id: '' },
-  type: 'WebGame',
   genres: [
     { title: 'RPG', id: '' },
     { title: 'FIGHT', id: '' },
@@ -29,13 +28,13 @@ export default {
   name: 'The Witcher III Flash Game',
   platforms: ['web'],
   preview: '',
-  price: 200,
-  discount: 50,
+  price: 0,
+  discount: 0,
   publisher: { title: 'CD PROJECT RED', id: '' },
   rating: 4,
   releaseDate: '2016-09-13T11:16:03Z',
   tags: [
     { id: '', title: 'tag' },
   ],
-  title: 'The Witcher III',
+  title: 'The Witcher III Flash Game',
 };

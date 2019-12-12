@@ -1,5 +1,5 @@
 import { FunctionComponent, SVGProps } from 'react';
-import { WindowsIcon, AppleIcon, LinuxIcon } from 'assets/icons';
+import { WindowsIcon, AppleIcon, LinuxIcon, WebIcon } from 'assets/icons';
 
 export default (platforms: string[]) => {
   const result: FunctionComponent<SVGProps<SVGSVGElement>>[] = [];
@@ -15,6 +15,9 @@ export default (platforms: string[]) => {
           break;
         case 'linux':
           result.push(LinuxIcon);
+          break;
+        case 'web':
+          result.push(WebIcon);
           break;
       }
     });
