@@ -11,15 +11,15 @@ interface Props {
 
 const FeaturedCard = (props: Props) => {
   const { game } = props;
-  const { id, screenshots, title, summary, tags } = game;
-  const genre = tags[0].name;
+  const { id, media, title, summary, tags } = game;
+  const genre = tags[0].title;
   const classes = useStyles();
 
   return (
     <Card key={id} className={classes.card}>
       <CardMedia
         className={classes.cover}
-        image={screenshots[0].url}
+        image={media.screenshots[0].url}
         title={title}
       />
       <CardContent className={classes.content}>
@@ -33,13 +33,13 @@ const FeaturedCard = (props: Props) => {
           {summary}
         </Typography>
         <div className={classes.tags}>
-          {tags.map(({ id, name, slug }) => (
+          {tags.map(({ id, title }) => (
             <Link
               key={id}
-              to={slug}
+              to={id}
               className={classes.link}
             >
-              {name}
+              {title}
             </Link>
           ))}
         </div>

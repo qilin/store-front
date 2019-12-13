@@ -1,3 +1,5 @@
+import { Genre } from 'types';
+
 /* eslint-disable max-len */
 
 const MOCK_GAMES_COUNT = 6;
@@ -25,19 +27,18 @@ export const mockGame = {
   id: getRandomId(),
   description: 'Place for additional text for terms, Additional text might be even here.',
   developer: { title: 'CD PROJECT RED', id: getRandomId() },
-  genres: [
-    { title: 'RPG', id: getRandomId() },
-    { title: 'FIGHT', id: getRandomId() },
-    { title: 'action', id: getRandomId() },
-  ],
+  genres: [Genre.RPG, Genre.FindItems, Genre.Farm],
   media: {
     screenshots: [
-      'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
-      'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
-      'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
-      'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
-      'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
-      'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
+      {
+        url: 'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
+      },
+      {
+        url: 'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
+      },
+      {
+        url: 'https://static.protocol.one/qilin/images/ss_849ec8dcc6f8df1c0b2c509584c9fc9e51f88cfa.1920x1080-d2650.jpg',
+      },
     ],
     trailers: [
       'https://static.protocol.one/qilin/videos/y2mate.com - a_night_to_remember_launch_cinematic_the_witcher_iii_wild_hunt_ehjJ614QfeM_1080p-hQEREg.mp4',
@@ -45,6 +46,7 @@ export const mockGame = {
     ],
   },
   name: 'The Witcher III',
+  summary: 'summary',
   platforms: ['linux', 'windows', 'mac_os'],
   preview: '',
   price: 200,

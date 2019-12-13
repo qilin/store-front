@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { CordGame } from 'types';
+import { Game } from 'types';
 import { mockGame } from 'mocks';
+import { GamePreview, GameInfo } from 'components';
 
-import { Preview, GameInfo, Media, Requirements } from './components';
+import { Media, Requirements } from './components';
 
 const useStyles = makeStyles({
   root: {
@@ -13,22 +14,22 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  game?: CordGame;
+  game: Game;
 }
 
-const Game = (props: Props) => {
+const DesktopGame = (props: Props) => {
   const { game = mockGame } = props;
   const { platforms, price, media, requirements } = game;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Preview game={game} />
+      <GamePreview game={game} />
       <GameInfo platforms={platforms} price={price} />
       <Media {...media} />
-      <Requirements platforms={platforms} {...requirements} />
+      {requirements && <Requirements platforms={platforms} {...requirements} />}
     </div>
   );
 };
 
-export default Game;
+export default DesktopGame;

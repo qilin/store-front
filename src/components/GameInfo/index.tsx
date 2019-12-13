@@ -8,10 +8,11 @@ import useStyles from './useStyles';
 interface Props {
   platforms: string[];
   price: number;
+  onPlay?: () => void;
 }
 
 const GameInfo = (props: Props) => {
-  const { platforms, price } = props;
+  const { platforms = [], onPlay, price } = props;
   const classes = useStyles();
 
   return (
@@ -21,9 +22,13 @@ const GameInfo = (props: Props) => {
         <Button className={`${classes.iconWrapper} ${classes.dark}`}>
           <HeartIcon />
         </Button>
-        <Button className={`${classes.iconWrapper} ${classes.dark}`}>
-          $ {price}
-        </Button>
+        {price ? (
+          <Button className={`${classes.iconWrapper} ${classes.dark}`}>
+            $ {price}
+          </Button>
+        ) : (
+            <Button className={`${classes.iconWrapper} ${classes.dark}`} onClick={onPlay}>Играть бесплатно</Button>
+          )}
       </div>
     </Toolbar >
   );

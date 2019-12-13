@@ -28,7 +28,7 @@ export interface Screenshot {
   url: string;
 }
 
-export interface Game {
+export interface RamblerGame {
   id: number;
   title: string;
   slug: string;
@@ -78,15 +78,34 @@ export interface SystemsRequirements {
   windows?: RequirementsOS;
 }
 
-export interface CordGame {
+export type Image = {
+  url: string;
+}
+
+export enum Genre {
+  Board,
+  Cards,
+  Casino,
+  Farm,
+  Racing,
+  Shooter,
+  FindItems,
+  Puzzle,
+  RPG,
+  Simulator,
+  Strategy
+}
+
+export interface Game {
   id: string;
   description: string;
   developer: WithTitleAndId;
-  genres: WithTitleAndId[];
+  genres: Genre[];
   media: {
-    screenshots: string[];
+    screenshots: Image[];
     trailers: string[];
   };
+  summary: string;
   name: string;
   platforms: string[];
   preview: string;
@@ -95,7 +114,7 @@ export interface CordGame {
   publisher: WithTitleAndId;
   rating: number;
   releaseDate: string;
-  requirements: {
+  requirements?: {
     languages: {
       audio: string[];
       text: string[];
@@ -107,7 +126,7 @@ export interface CordGame {
 }
 
 export interface FriendGame {
-  game: CordGame;
+  game: Game;
   friend: User;
   likes: number;
 }

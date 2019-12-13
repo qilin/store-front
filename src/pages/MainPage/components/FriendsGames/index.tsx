@@ -27,7 +27,7 @@ const FriendsGames = (props: Props) => {
           const friendName = friend.display.display_name;
           const friendImageSrc = friend.display.avatar.url;
           const { title, media, platforms, id } = game;
-          const imageSrc = media.screenshots[0];
+          const imageSrc = media.screenshots[0].url;
           const cardContent = (
             <>
               <div className={classes.imageWrapper}>

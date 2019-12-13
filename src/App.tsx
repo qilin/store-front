@@ -8,10 +8,12 @@ import {
 import 'i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from 'pages/MainPage';
-import GamePage from 'pages/GamePage/components/Game';
-// import GamePage from 'pages/GamePage';
+import GamePage from 'pages/GamePage';
 import { isEnvDefined } from 'helpers';
 import { Layout } from 'components';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+import client from './apolloClient';
 
 const App = () => {
   if (!isEnvDefined()) {
@@ -19,15 +21,17 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <CssBaseline />
-      <Layout>
-        <Switch>
-          <Route key="/game" path="/game" component={GamePage} />
-          <Route key="/" path="/" component={MainPage} />
-        </Switch>
-      </Layout>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <CssBaseline />
+        <Layout>
+          <Switch>
+            <Route path="/game" component={GamePage} />
+            <Route path="/" component={MainPage} />
+          </Switch>
+        </Layout>
+      </Router>
+    </ApolloProvider>
   );
 };
 

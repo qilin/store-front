@@ -1,12 +1,12 @@
 import React, { ReactNode, SyntheticEvent } from 'react';
 import { Card, Typography, Box, Button, IconButton } from '@material-ui/core';
-import { CordGame } from 'types';
+import { Game } from 'types';
 import { HeartIcon, AddToCartIcon } from 'assets/icons';
 
 import useStyles from './useStyles';
 
 interface Props {
-  game: CordGame;
+  game: Game;
   footerContent: ReactNode;
   cardContent: ReactNode;
   likeGame?: (id: string) => void;
@@ -36,19 +36,26 @@ const GameCard = (props: Props) => {
       <div className={classes.footer}>
         <Box flexGrow={1} display="flex" justifyContent="space-between" alignItems="center">
           {footerContent}
-          <Box display="flex" className={classes.footerLeft}>
-            {isGameDiscounted && (
-              <Button variant="contained" color="primary">
-                {`-\u00A0${discount}%`}
-              </Button>
-            )}
-            <Box textAlign="end" className={classes.prices}>
-              {isGameDiscounted && <Typography className={classes.priceSmall}>{'$\u00A0'}{price}</Typography>}
-              <Typography className={classes.priceBig}>
-                {'$\u00A0'}{isGameDiscounted ? (price * discount / 100).toFixed(0) : price}
-              </Typography>
-            </Box>
-          </Box>
+          {
+            price
+              ? (
+                <Box display="flex" className={classes.footerLeft}>
+                  {isGameDiscounted && (
+                    <Button variant="contained" color="primary">
+                      {`-\u00A0${discount}%`}
+                    </Button>
+                  )}
+                  <Box textAlign="end" className={classes.prices}>
+                    {isGameDiscounted && <Typography className={classes.priceSmall}>{'$\u00A0'}{price}</Typography>}
+                    <Typography className={classes.priceBig}>
+                      {'$\u00A0'}{isGameDiscounted ? (price * discount / 100).toFixed(0) : price}
+                    </Typography>
+                  </Box>
+                </Box>
+              ) : (
+                <Button onClick={handleOpen} variant="contained" color="primary">Играть</Button>
+              )
+          }
         </Box>
       </div>
       <div className={classes.hoverContent}>

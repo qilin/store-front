@@ -1,14 +1,14 @@
 import React from 'react';
-import { CordGame } from 'types';
+import { Game } from 'types';
 
 import { GameToolbar, BackgroundImage } from './components';
 import useStyles from './useStyles';
 
 interface Props {
-  game: CordGame;
+  game: Game;
 }
 
-const Preview = (props: Props) => {
+const GamePreview = (props: Props) => {
   const { game } = props;
   const { screenshots } = game.media;
   const classes = useStyles();
@@ -16,9 +16,9 @@ const Preview = (props: Props) => {
   return (
     <section className={classes.root}>
       <GameToolbar game={game} />
-      <BackgroundImage src={screenshots[0]} />
+      <BackgroundImage src={screenshots[0].url} />
     </section>
   );
 };
 
-export default Preview;
+export default GamePreview;

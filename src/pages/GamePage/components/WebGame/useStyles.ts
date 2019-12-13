@@ -2,11 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100%',
-    backgroundColor: '#203859',
+    minHeight: '592px',
+    position: 'relative',
   },
   button: {
     color: 'white',

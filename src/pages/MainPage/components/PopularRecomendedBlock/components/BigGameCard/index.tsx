@@ -1,18 +1,18 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Rating, GameCard } from 'components';
-import { CordGame } from 'types';
+import { Game } from 'types';
 
 import useStyles from './useStyles';
 
 interface Props {
-  game: CordGame;
+  game: Game;
   openGame: (id: string) => void;
 }
 
 const BigGameCard = (props: Props) => {
   const { title, rating, media } = props.game;
-  const imageSrc = media.screenshots[0];
+  const imageSrc = media.screenshots[0].url;
   const classes = useStyles();
 
   const cardContent = (
