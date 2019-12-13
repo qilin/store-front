@@ -2,10 +2,10 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { getUrlParameter } from 'helpers';
 import { useQuery } from '@apollo/react-hooks';
+import { CircularProgress, makeStyles } from '@material-ui/core';
 
 import { WebGame, DesktopGame } from './components';
 import { GET_GAME } from './query';
-import { CircularProgress, makeStyles } from '@material-ui/core';
 
 const useStyle = makeStyles({
   loaderWrapper: {
