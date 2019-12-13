@@ -1,3 +1,5 @@
+import { Genre } from 'types';
+
 /* eslint-disable max-len */
 
 const MOCK_GAMES_COUNT = 6;
@@ -25,7 +27,7 @@ export const mockGame = {
   id: getRandomId(),
   description: 'Place for additional text for terms, Additional text might be even here.',
   developer: { title: 'CD PROJECT RED', id: getRandomId() },
-  genres: ['RPG', 'FindItems', 'Farm'],
+  genres: [Genre.RPG, Genre.FindItems, Genre.Farm],
   media: {
     screenshots: [
       {
