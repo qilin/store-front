@@ -36,8 +36,10 @@ const GamePage = (props: RouteComponentProps) => {
 
   return (
     <>
-      {type === 'DesktopGame' && <DesktopGame game={game} />}
-      {type === 'WebGame' && <WebGame game={game} />}
+      {type === 'DesktopGame'
+        ? <DesktopGame game={game} />
+        : <WebGame game={game} />
+      }
     </>
   );
 };
