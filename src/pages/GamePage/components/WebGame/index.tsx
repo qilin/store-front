@@ -3,11 +3,11 @@ import { IconButton } from '@material-ui/core';
 import { HighlightOff, Fullscreen } from '@material-ui/icons';
 import { ErrorMessage, GameInfo, GamePreview } from 'components';
 import { env } from 'helpers';
+import { Game } from 'types';
 
 import { FlashPopup } from './components';
 import useStyles from './useStyles';
 import { buildWidget, getOrder } from './helpers';
-import { Game } from 'types';
 
 const qilinStore = (window as any).qilinStore;
 const USER_CLICKED_PLAY = 'USER_CLICKED_PLAY';

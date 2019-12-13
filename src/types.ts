@@ -82,14 +82,25 @@ export type Image = {
   url: string;
 }
 
-type Genre = 'Board' | 'Cards' | 'Casino' | 'Farm' | 'Racing' | 'Shooter'
-  | 'FindItems' | 'Puzzle' | 'RPG' | 'Simulator' | 'Strategy';
+export enum Genre {
+  Board,
+  Cards,
+  Casino,
+  Farm,
+  Racing,
+  Shooter,
+  FindItems,
+  Puzzle,
+  RPG,
+  Simulator,
+  Strategy
+}
 
 export interface Game {
   id: string;
   description: string;
   developer: WithTitleAndId;
-  genres: string[];
+  genres: Genre[];
   media: {
     screenshots: Image[];
     trailers: string[];

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Chip } from '@material-ui/core';
+import { Genre } from 'types';
 
 const useStyles = makeStyles({
   genre: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  genres: string[];
+  genres: Genre[];
 }
 
 const Genres = (props: Props) => {
