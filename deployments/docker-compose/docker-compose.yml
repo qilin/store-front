@@ -1,8 +1,8 @@
 version: '3.7'
 services:
   crm-dashboard:
-    container_name: qilin-crm-dashboard
-    image: p1hub/qilin-crm-dashboard:${TAG}
+    container_name: qilin-store-ui
+    image: p1hub/qilin-store-ui:${TAG}
     restart: on-failure
     networks:
       - default

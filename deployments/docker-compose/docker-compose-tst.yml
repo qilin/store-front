@@ -2,8 +2,8 @@
 version: '3.7'
 services:
   crm-dashboard:
-    image: p1hub/qilin-crm-dashboard:${TAG}
+    image: p1hub/qilin-store-ui:${TAG}
     environment:
-      - REACT_APP_API_URL=http://hasura:8080
+      - REACT_APP_API_URL=https://store.tst.qilin.super.com/api
       - REACT_APP_AUTH_URL=http://crm-daemon:8080/v1/auth
       - REACT_APP_QILIN_SDK_INIT_URL=sdk/v1

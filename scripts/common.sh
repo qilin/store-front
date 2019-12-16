@@ -11,5 +11,5 @@ NODE_IMAGE_TAG=latest
 DIND_IMAGE=p1hub/dind
 DIND_IMAGE_TAG=latest
 DOCKER_NETWORK="p1devnet"
-DOCKER_IMAGE=p1hub/qilin-crm-dashboard
-PROJECT_NAME="qilin-crm-dashboard"
+DOCKER_IMAGE=p1hub/qilin-store-ui
+PROJECT_NAME="qilin-store-ui"
