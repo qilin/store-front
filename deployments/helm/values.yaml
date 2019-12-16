@@ -21,7 +21,7 @@ backend:
     protocol: TCP
   service:
     type: ClusterIP
-    name: qilin-crm-dashboard
+    name: qilin-store-ui
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
