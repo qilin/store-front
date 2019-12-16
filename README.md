@@ -39,3 +39,13 @@ RUN chmod +x env.sh
 # Start Nginx server
 CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
 ```
+
+# Typescript types generation
+
+After updates `schema.graphql` or updates some query/mutation run
+
+```
+yarn codegen:typescript
+```
+
+For authomatic generation typesript types for application in folder `src/generated`.
