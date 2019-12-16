@@ -1,3 +1,7 @@
+directive @goField(
+  forceResolver: Boolean
+  name: String
+) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 directive @isAuthenticated on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 directive @hasRole(
   role: [RoleEnum]
@@ -6,10 +10,6 @@ directive @goModel(
   model: String
   models: [String!]
 ) on OBJECT | INPUT_OBJECT | SCALAR | ENUM | INTERFACE | UNION
-directive @goField(
-  forceResolver: Boolean
-  name: String
-) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 enum AuthenticatedRequestStatus {
   OK
   FORBIDDEN
@@ -53,6 +53,8 @@ type CursorOut {
 
 type DesktopGame implements Game {
   id: ID!
+  type: GameType!
+  slug: String!
   title: String!
   summary: String!
   description: String!
@@ -64,6 +66,11 @@ type DesktopGame implements Game {
   tags: [Tag!]!
   requirements: [SystemRequirements!]!
   languages: Languages
+  rating: Int!
+  price: Float
+  currency: String
+  discount: Int
+  platforms: [Platform]!
 }
 
 type FreeGameOffer {
@@ -84,6 +91,8 @@ type FriendGame {
 
 interface Game {
   id: ID!
+  type: GameType!
+  slug: String!
   title: String!
   summary: String!
   description: String!
@@ -95,6 +104,15 @@ interface Game {
   tags: [Tag!]!
   requirements: [SystemRequirements!]!
   languages: Languages
+  rating: Int!
+  price: Float
+  currency: String
+  discount: Int
+}
+
+enum GameType {
+  Web
+  Desktop
 }
 
 enum Genre {
@@ -144,6 +162,12 @@ type Mutation {
 enum OrderIn {
   ASC
   DESC
+}
+
+enum Platform {
+  Linux
+  MacOS
+  Windows
 }
 
 type Query {
@@ -234,6 +258,8 @@ type ViewerQuery {
 
 type WebGame implements Game {
   id: ID!
+  type: GameType!
+  slug: String!
   title: String!
   summary: String!
   description: String!
@@ -245,5 +271,8 @@ type WebGame implements Game {
   tags: [Tag!]!
   requirements: [SystemRequirements!]!
   languages: Languages
+  rating: Int!
+  price: Float
+  currency: String
+  discount: Int
 }
-

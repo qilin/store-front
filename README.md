@@ -48,4 +48,4 @@ After updates `schema.graphql` or updates some query/mutation run
 yarn codegen:typescript
 ```
 
-For authomatic generation typesript types for application.
+For authomatic generation typesript types for application in folder `src/generated`.
