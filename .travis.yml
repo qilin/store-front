@@ -5,10 +5,6 @@ sudo: required
 go:
 - 1.12.x
 dist: trusty
-#addons:
-#  sonarcloud:
-#    organization: paysuper
-
 stages:
 - test
 - name: deploy
@@ -18,12 +14,10 @@ jobs:
   - stage: test
     cache:
       directories:
-      - $HOME/gopath/pkg/mod
+      - "$HOME/gopath/pkg/mod"
     install: true
     script:
-    #- make github-test
     - echo "tests here"
-    #- sonar-scanner
     after_success:
     - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
@@ -36,4 +30,4 @@ jobs:
 notifications:
   email: false
   slack:
-    secure: TNjvJwLocb9aJHFv+KECW/09dTTqRl4jE2p+MKDnr2uf+CqfDAjsanx2eEPjw9rUeSPfJUQ1ZUVTyv+nQKslMippgCpz9Wo9+PPw/gaNoY5niVpNPRE2TmjKyZoDx8xYYfXi+gwUWWOz6hHCv6Vb1edBmDvsoXXSuNuUxYLsUjN9mDFDutrFNC29K9iDfTHr9yBgVmjffOdph0dtybpr6aunBXnvVhBIX/XNNf697Yu6DkJAOfSPcCbREXmR/J5BGwNAgEA/jBH5XjLdYFyuJGHuDAAgOv0OPPC6Laly4cb+6yb7cqjD8iN1RnQm5k1hFBFYZA7lWjy9bHcf24pzGg2dHSvSEuFGpvV6EKx2wv7rWSPpQM5tug0nDTGJJAU23iKWsXK7cmjb11m3acrKyUj84ckmmBrRD9urUGOISphOYynclg2em7jRh64lf4aLoO8ErFm2VlD+KCN1qTBblIHPm6h2aUaT0WPlekYXssh177xfroLuO6QZIwj+4ipP9/but2vqA0jXyzk2jAl4fUrowDH0+VbWxpaYE0YYbt8VgyZpn/TbJv3C0Ni58/txOeKcUmoYOiZuJqOPWiIWpjixCrtru8lvck28EyIH3IQCqN5WZ8beBkC2HQKsZu+ktTATRYrghprqGmaAqbWr17JZ6mob/rXvNE4+PtPNow4=
+    secure: bQy4pPIsKlcmG9OzT/SJeSBKtebrkNcg7zk5mkSo7CoxyzH+G1rq8gYwFM2papOY9FpSMuDToQW9wfJur8wXtomaTbpgOTfjQkMDEFTsWPx/QRZAP9FKDt9/wBWZvwMi+CmEv8ksj4c90c7TDwFIAe+SC0LCLsz/iQ9UTxh7Q1nleCwwKteuT5lTJOz7ov/IoFnM7m7yPjKHlSHal1By/aZYD0Jtd244L1TuomNB2Ccj1QeBzlSUI+fpCe3UL9uRV/OE1fUNGi4g+ZnwBVd3zxv8kwPcdYCJbUzYqEVDFNJOzscJgkU5cx4/qleSo0PYQbPVjo6byEMC9wR+Rcxv/H1zASKWk8HAYKb6bq7nufOP0kI5hxt6tEu5Rbusz7RQXr3/QIbT+bMcIKp2ARbGoClzVkO4n3/8it/cum4fVB6nrqjEpJANwo6buaW0W2jVbXxcAiYESBxpQasSCr/z2+U0Hxga2+cwolP0Dl3xyOfGpQrZcB/5whhhsiW2gGnVPhzvGfhG6K176qeliHQ0iN+8kL1NkbJiw9wRpuPC+AVc1IoFBhRUTfH7bCXUPfu7WVXrROPtIFdg6ASLt1wiiIZvggBUM+HkW643aPXbdEhCjLH7F5nnd0IfQM2Mymdc+hTf/ZlgJQ3qZxEL3ynjzWkUZ7yyVELP7IaxH5luCkQ=
