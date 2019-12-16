@@ -1,25 +1,27 @@
 os:
 - linux
-language: go
+#language: go
 sudo: required
-go:
-- 1.12.x
+#go:
+#- 1.12.x
+
 dist: trusty
+
 stages:
-- test
+#- test
 - name: deploy
   if: branch IN (master, demo-sdk)
 jobs:
   include:
-  - stage: test
-    cache:
-      directories:
-      - "$HOME/gopath/pkg/mod"
-    install: true
-    script:
-    - echo "tests here"
-    after_success:
-    - bash <(curl -s https://codecov.io/bash)
+#  - stage: test
+#    cache:
+#      directories:
+#      - "$HOME/gopath/pkg/mod"
+#    install: true
+#    script:
+#    - echo "tests here"
+#    after_success:
+#    - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
     services: docker
     install: true
