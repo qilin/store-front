@@ -50,8 +50,6 @@ spec:
               value: "https://store.tst.qilin.super.com/api"
             - name: REACT_APP_QILIN_SDK_INIT_URL
               value: "sdk/v1"
-            - name: REACT_APP_QILIN_SDK_INIT_URL
-              value: "sdk/v1"
           #livenessProbe:
           #  httpGet:
           #    path: /health
