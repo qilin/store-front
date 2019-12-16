@@ -45,6 +45,11 @@ spec:
             {{- range $port := $deployment.ports }}
             - containerPort: {{ $port.port }}
             {{- end }}
+          env:
+            - name: REACT_APP_API_URL
+              value: "https://store.tst.qilin.super.com/api"
+            - name: REACT_APP_QILIN_SDK_INIT_URL
+              value: "sdk/v1"           
           #livenessProbe:
           #  httpGet:
           #    path: /health
