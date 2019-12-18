@@ -9,7 +9,7 @@ import useStyles from '../useStyles';
 interface Props {
   game: Game;
   friends?: User[];
-  openGame: (id: string) => void;
+  openGame: (slug: string) => void;
 }
 
 const FriendCard = (props: Props) => {

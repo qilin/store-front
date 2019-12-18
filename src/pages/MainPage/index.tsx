@@ -9,10 +9,10 @@ import { MAIN_PAGE } from './query';
 
 const MainPage = (props: RouteComponentProps) => {
   const classes = useStyles();
-  const openGame = (id: string) => props.history.push(`game?uuid=${id}`);
+  const openGame = (slug: string) => props.history.push(`game/${slug}`);
   const { loading, error, data } = useQuery(MAIN_PAGE);
 
-  if (loading || !data) {
+  if (loading) {
     return (
       <div className={classes.loaderWrapper}>
         <CircularProgress />

@@ -15,7 +15,7 @@ interface Props {
   };
   popular: GameObject[];
   recomended: GameObject[];
-  openGame: (id: string) => void;
+  openGame: (slug: string) => void;
 }
 
 const defaultIntervals = { first: 3000, second: 3000 };

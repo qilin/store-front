@@ -1,13 +1,13 @@
 import React from 'react';
 import { Typography, Box } from '@material-ui/core';
 import { Rating, PlatformIcons, GameCard } from 'components';
-import { Game } from 'generated/types';
+import { Game } from 'types';
 
 import useStyles from './useStyles';
 
 interface Props {
   game: Game;
-  openGame: (id: string) => void;
+  openGame: (slug: string) => void;
 }
 
 const RecomendedCard = (props: Props) => {

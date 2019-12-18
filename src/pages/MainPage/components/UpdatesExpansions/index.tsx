@@ -10,7 +10,7 @@ import EmptyBlock from '../EmptyBlock';
 
 interface Props {
   games: GameObject[];
-  openGame: (id: string) => void;
+  openGame: (slug: string) => void;
   handleMore: () => void;
 }
 

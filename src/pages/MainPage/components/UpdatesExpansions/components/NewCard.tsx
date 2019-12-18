@@ -7,13 +7,13 @@ import useStyles from '../useStyles';
 
 interface Props {
   game: Game;
-  openGame: (id: string) => void;
+  openGame: (slug: string) => void;
 }
 
 const NewCard = (props: Props) => {
   const { game, openGame } = props;
-  const classes = useStyles();
   const { title, media, id } = game;
+  const classes = useStyles();
   const imageSrc = media.screenshots[0].url;
   const cardContent = (
     <div className={classes.imageWrapper}>
@@ -22,6 +22,7 @@ const NewCard = (props: Props) => {
   );
   const footerContent = <Typography variant="subtitle1">{title}</Typography>;
   const mockLikeAndAddToCart = (id: string) => console.log(id);
+
   return (
     <Box key={id} className={classes.cardWrapper}>
       <GameCard

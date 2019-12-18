@@ -22,7 +22,7 @@ const BlockCard = (props: Props & any) => {
   const classes = useStyle();
   const { loading, error, data } = useQuery(CARD_GAME, { variables: { id } });
 
-  if (loading || !data) {
+  if (loading) {
     return (
       <div className={classes.loaderWrapper}>
         <CircularProgress />

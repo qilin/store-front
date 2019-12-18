@@ -57,6 +57,7 @@ query CardGame($id: ID!) {
       title
       description
       rating
+      slug
       media {
         screenshots {
           url
