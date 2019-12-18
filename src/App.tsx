@@ -26,7 +26,7 @@ const App = () => {
         <CssBaseline />
         <Layout>
           <Switch>
-            <Route path="/game" component={GamePage} />
+            <Route path="/game/:slug" component={GamePage} />
             <Route path="/" component={MainPage} />
           </Switch>
         </Layout>

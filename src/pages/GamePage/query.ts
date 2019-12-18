@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
 export const GET_GAME = gql`
-query Game($id: ID!) {
+query Game($slug: String!) {
   store {
-    game(id: $id) {
+    gameBySlug(slug: $slug) {
       id
       title
       genres

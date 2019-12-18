@@ -1,6 +1,5 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { getUrlParameter } from 'helpers';
+import { useParams } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import { CircularProgress, makeStyles } from '@material-ui/core';
 
@@ -16,10 +15,10 @@ const useStyle = makeStyles({
   },
 });
 
-const GamePage = (props: RouteComponentProps) => {
+const GamePage = () => {
   const classes = useStyle();
-  const uuid = getUrlParameter('uuid', props.location.search);
-  const { loading, error, data } = useQuery(GET_GAME, { variables: { id: uuid } });
+  const { slug } = useParams();
+  const { loading, error, data } = useQuery(GET_GAME, { variables: { slug } });
 
   if (loading) {
     return (
@@ -31,7 +30,7 @@ const GamePage = (props: RouteComponentProps) => {
 
   if (error) return <div>Error ${error.message}</div>;
 
-  const { game } = data.store;
+  const game = data && data.store && data.store.gameBySlug;
   const { __typename: type } = game;
 
   return (
