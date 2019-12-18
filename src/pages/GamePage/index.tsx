@@ -30,7 +30,7 @@ const GamePage = () => {
 
   if (error) return <div>Error ${error.message}</div>;
 
-  const { gameBySlug: game } = data.store;
+  const game = data && data.store && data.store.gameBySlug;
   const { __typename: type } = game;
 
   return (
