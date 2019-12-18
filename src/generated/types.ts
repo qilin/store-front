@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -386,9 +386,9 @@ export type GameQuery = (
   }
 );
 
-export type MainPageQueryQueryVariables = {};
+export type MainPageQueryVariables = {};
 
-export type MainPageQueryQuery = (
+export type MainPageQuery = (
   { __typename?: 'Query' }
   & {
     store: Maybe<(
@@ -402,43 +402,10 @@ export type MainPageQueryQuery = (
               & {
                 game: (
                   { __typename: 'DesktopGame' }
-                  & Pick<DesktopGame, 'id' | 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
-                  & {
-                    requirements: Array<(
-                      { __typename?: 'SystemRequirements' }
-                      & {
-                        minimal: Maybe<(
-                          { __typename?: 'RequirementsSet' }
-                          & Pick<RequirementsSet, 'cpu' | 'diskSpace' | 'gpu' | 'os' | 'ram'>
-                        )>; recommended: Maybe<(
-                          { __typename?: 'RequirementsSet' }
-                          & Pick<RequirementsSet, 'cpu' | 'diskSpace' | 'gpu' | 'os' | 'ram'>
-                        )>;
-                      }
-                    )>; media: (
-                      { __typename?: 'Media' }
-                      & {
-                        screenshots: Array<(
-                          { __typename?: 'Image' }
-                          & Pick<Image, 'url'>
-                        )>;
-                      }
-                    );
-                  }
+                  & Pick<DesktopGame, 'id'>
                 ) | (
                   { __typename: 'WebGame' }
-                  & Pick<WebGame, 'id' | 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
-                  & {
-                    media: (
-                      { __typename?: 'Media' }
-                      & {
-                        screenshots: Array<(
-                          { __typename?: 'Image' }
-                          & Pick<Image, 'url'>
-                        )>;
-                      }
-                    );
-                  }
+                  & Pick<WebGame, 'id'>
                 );
               }
             )>;
@@ -451,43 +418,26 @@ export type MainPageQueryQuery = (
               & {
                 game: (
                   { __typename: 'DesktopGame' }
-                  & Pick<DesktopGame, 'id' | 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
-                  & {
-                    requirements: Array<(
-                      { __typename?: 'SystemRequirements' }
-                      & {
-                        minimal: Maybe<(
-                          { __typename?: 'RequirementsSet' }
-                          & Pick<RequirementsSet, 'cpu' | 'diskSpace' | 'gpu' | 'os' | 'ram'>
-                        )>; recommended: Maybe<(
-                          { __typename?: 'RequirementsSet' }
-                          & Pick<RequirementsSet, 'cpu' | 'diskSpace' | 'gpu' | 'os' | 'ram'>
-                        )>;
-                      }
-                    )>; media: (
-                      { __typename?: 'Media' }
-                      & {
-                        screenshots: Array<(
-                          { __typename?: 'Image' }
-                          & Pick<Image, 'url'>
-                        )>;
-                      }
-                    );
-                  }
+                  & Pick<DesktopGame, 'id'>
                 ) | (
                   { __typename: 'WebGame' }
-                  & Pick<WebGame, 'id' | 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
-                  & {
-                    media: (
-                      { __typename?: 'Media' }
-                      & {
-                        screenshots: Array<(
-                          { __typename?: 'Image' }
-                          & Pick<Image, 'url'>
-                        )>;
-                      }
-                    );
-                  }
+                  & Pick<WebGame, 'id'>
+                );
+              }
+            )>;
+          }
+        )>; new: Maybe<{ __typename?: 'Breaker' } | (
+          { __typename?: 'FreeGamesGroup' }
+          & {
+            games: Array<(
+              { __typename?: 'FreeGameOffer' }
+              & {
+                game: (
+                  { __typename: 'DesktopGame' }
+                  & Pick<DesktopGame, 'id'>
+                ) | (
+                  { __typename: 'WebGame' }
+                  & Pick<WebGame, 'id'>
                 );
               }
             )>;
@@ -502,49 +452,60 @@ export type MainPageQueryQuery = (
           & {
             game: (
               { __typename: 'DesktopGame' }
-              & Pick<DesktopGame, 'id' | 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
-              & {
-                requirements: Array<(
-                  { __typename?: 'SystemRequirements' }
-                  & {
-                    minimal: Maybe<(
-                      { __typename?: 'RequirementsSet' }
-                      & Pick<RequirementsSet, 'cpu' | 'diskSpace' | 'gpu' | 'os' | 'ram'>
-                    )>; recommended: Maybe<(
-                      { __typename?: 'RequirementsSet' }
-                      & Pick<RequirementsSet, 'cpu' | 'diskSpace' | 'gpu' | 'os' | 'ram'>
-                    )>;
-                  }
-                )>; media: (
-                  { __typename?: 'Media' }
-                  & {
-                    screenshots: Array<(
-                      { __typename?: 'Image' }
-                      & Pick<Image, 'url'>
-                    )>;
-                  }
-                );
-              }
+              & Pick<DesktopGame, 'id'>
             ) | (
               { __typename: 'WebGame' }
-              & Pick<WebGame, 'id' | 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
-              & {
-                media: (
-                  { __typename?: 'Media' }
-                  & {
-                    screenshots: Array<(
-                      { __typename?: 'Image' }
-                      & Pick<Image, 'url'>
-                    )>;
-                  }
-                );
-              }
+              & Pick<WebGame, 'id'>
             ); friends: Array<(
               { __typename?: 'User' }
               & Pick<User, 'id'>
             )>;
           }
         )>;
+      }
+    )>;
+  }
+);
+
+export type CardGameQueryVariables = {
+  id: Scalars['ID'];
+};
+
+export type CardGameQuery = (
+  { __typename?: 'Query' }
+  & {
+    store: Maybe<(
+      { __typename?: 'StoreQuery' }
+      & {
+        game: Maybe<(
+          { __typename: 'DesktopGame' }
+          & Pick<DesktopGame, 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
+          & {
+            media: (
+              { __typename?: 'Media' }
+              & {
+                screenshots: Array<(
+                  { __typename?: 'Image' }
+                  & Pick<Image, 'url'>
+                )>;
+              }
+            );
+          }
+        ) | (
+            { __typename: 'WebGame' }
+            & Pick<WebGame, 'title' | 'description' | 'rating' | 'price' | 'discount' | 'currency' | 'platforms'>
+            & {
+              media: (
+                { __typename?: 'Media' }
+                & {
+                  screenshots: Array<(
+                    { __typename?: 'Image' }
+                    & Pick<Image, 'url'>
+                  )>;
+                }
+              );
+            }
+          )>;
       }
     )>;
   }

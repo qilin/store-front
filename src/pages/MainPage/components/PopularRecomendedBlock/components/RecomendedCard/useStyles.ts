@@ -41,6 +41,8 @@ export default makeStyles({
   },
   subtitle: {
     opacity: '0.5',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   iconWrapper: {
     marginRight: '12px',

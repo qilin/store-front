@@ -61,9 +61,9 @@ const GameToolbar = (props: Props) => {
   const { title, genres, releaseDate, developer, publisher, rating } = game;
   const { t } = useTranslation();
   const classes = useStyles();
-  const publisherDeveloperTitle = (publisher.title === developer.title)
-    ? publisher.title
-    : `${publisher.title} / ${developer.title}`;
+  const publisherDeveloperTitle = (publisher === developer)
+    ? publisher
+    : `${publisher} / ${developer}`;
 
   return (
     <Toolbar className={classes.root}>

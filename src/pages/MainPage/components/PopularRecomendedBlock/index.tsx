@@ -2,18 +2,19 @@ import React from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
-import { Game } from 'types';
+import { GameObject } from 'types';
 
-import { BigGameCard, SmallGameCard } from './components';
 import useStyles from './useStyles';
+import { PopularCard, RecomendedCard } from './components';
+import BlockCard from '../BlockCard';
 
 interface Props {
   autoPlayIntervals?: {
     first: number;
     second: number;
   };
-  popular: Game[];
-  recomended: Game[];
+  popular: GameObject[];
+  recomended: GameObject[];
   openGame: (id: string) => void;
 }
 
@@ -41,9 +42,9 @@ const PopularRecomendedBlock = (props: Props) => {
               autoPlay
               infiniteLoop
             >
-              {popular.map(game => (
+              {popular.map(({ game }) => (
                 <div key={game.id} className={classes.cardWrapper}>
-                  <BigGameCard game={game} openGame={openGame} />
+                  <BlockCard Component={PopularCard} id={game.id} openGame={openGame} />
                 </div>
               ))}
             </Carousel>
@@ -57,9 +58,9 @@ const PopularRecomendedBlock = (props: Props) => {
               autoPlay
               infiniteLoop
             >
-              {recomended.map(game => (
+              {recomended.map(({ game }) => (
                 <div key={game.id} className={classes.cardWrapper}>
-                  <SmallGameCard game={game} openGame={openGame} />
+                  <BlockCard Component={RecomendedCard} id={game.id} openGame={openGame} />
                 </div>
               ))}
             </Carousel>

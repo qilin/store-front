@@ -5,4 +5,10 @@ export default makeStyles({
   root: {
     backgroundColor: BACKGROUND_LIGHT,
   },
+  loaderWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 500,
+  },
 });

@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 interface Props {
   title: string;
-  realeaseDate: string;
+  realeaseDate?: string | null;
 }
 
 const Release = (props: Props) => {

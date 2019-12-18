@@ -16,7 +16,8 @@ interface Props {
 
 const GameCard = (props: Props) => {
   const { game, openGame, footerContent, cardContent, likeGame, addGameToCart } = props;
-  const { price, discount = 0, id } = game;
+  const { price, id } = game;
+  const discount = game.discount || 0;
   const isGameDiscounted = discount > 0 && discount < 100;
   const handleOpen = () => openGame(id);
   const handleLike = (event: SyntheticEvent) => {

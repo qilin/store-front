@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import getPlatformIcons from 'helpers/getPlatformIcons';
+import { Platform, Maybe } from 'generated/types';
 
 const useStyles = makeStyles({
   iconWrapper: {
@@ -14,13 +15,14 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  platforms: string[];
+  platforms: Maybe<Platform>[];
   wrapperClass?: string;
 }
 
 const PlatformIcons = (props: Props) => {
   const classes = useStyles();
   const { platforms, wrapperClass = classes.iconWrapper } = props;
+
   const platformIcons = getPlatformIcons(platforms);
 
   return (

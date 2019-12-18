@@ -1,7 +1,7 @@
 import React from 'react';
-import { Game } from 'types';
-import { Typography, Box } from '@material-ui/core';
-import { Rating, PlatformIcons, GameCard } from 'components';
+import { Typography } from '@material-ui/core';
+import { Rating, GameCard } from 'components';
+import { Game } from 'generated/types';
 
 import useStyles from './useStyles';
 
@@ -10,10 +10,9 @@ interface Props {
   openGame: (id: string) => void;
 }
 
-const SmallGameCard = (props: Props) => {
-  const { game } = props;
-  const { title, rating, description, platforms } = game;
-  const imageSrc = game.media.screenshots[0].url;
+const PopularCard = (props: Props) => {
+  const { title, rating, media } = props.game;
+  const imageSrc = media.screenshots[0].url;
   const classes = useStyles();
 
   const cardContent = (
@@ -24,14 +23,9 @@ const SmallGameCard = (props: Props) => {
       <div className={classes.imageWrapper}>
         <img className={classes.image} alt={title} title={title} src={imageSrc} />
       </div>
-      <Box className={classes.content}>
-        <Typography variant="h6">{title}</Typography>
-        <Typography className={classes.subtitle} variant="subtitle2">{description}</Typography>
-      </Box>
     </>
   );
-
-  const footerContent = <PlatformIcons platforms={platforms} wrapperClass={classes.iconWrapper} />;
+  const footerContent = <Typography variant="h6">{title}</Typography>;
   const mockLikeAndAddToCart = (id: string) => console.log(id);
 
   return (
@@ -47,4 +41,4 @@ const SmallGameCard = (props: Props) => {
   );
 };
 
-export default SmallGameCard;
+export default PopularCard;

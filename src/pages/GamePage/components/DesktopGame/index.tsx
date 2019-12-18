@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Game } from 'types';
-import { mockGame } from 'mocks';
 import { GamePreview, GameInfo } from 'components';
+import { DesktopGame as Game } from 'generated/types';
 
 import { Media, Requirements } from './components';
 
@@ -18,16 +17,16 @@ interface Props {
 }
 
 const DesktopGame = (props: Props) => {
-  const { game = mockGame } = props;
-  const { platforms, price, media, requirements } = game;
+  const { game } = props;
+  const { platforms, price, media, requirements, languages } = game;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <GamePreview game={game} />
-      <GameInfo platforms={platforms} price={price} />
+      <GameInfo platforms={platforms} price={price || 0} />
       <Media {...media} />
-      {requirements && <Requirements platforms={platforms} {...requirements} />}
+      {requirements && <Requirements platforms={platforms} requirements={requirements} languages={languages} />}
     </div>
   );
 };

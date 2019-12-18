@@ -16,6 +16,7 @@ export default {
       popular_recomended: 'Popular & Recomended',
       updates_expansions: 'Updates & Expansions',
       friends_games: 'Friends games',
+      empty_block: 'No games here yet',
     },
     labels: {
       back: 'Back',

@@ -1,3 +1,5 @@
+import { DesktopGame, WebGame } from 'generated/types';
+
 export type Callback = (args?: any) => void;
 
 export interface User {
@@ -17,116 +19,8 @@ export interface User {
   };
 }
 
-export interface GameTag {
-  id: number;
-  name: string;
-  slug: string;
-  type: string;
-}
+export type Game = DesktopGame | WebGame;
 
-export interface Screenshot {
-  url: string;
-}
-
-export interface RamblerGame {
-  id: number;
-  title: string;
-  slug: string;
-  summary: string;
-  rating: number;
-  has_promo: boolean;
-  supports_mobile: boolean;
-  description: string;
-  type: string;
-  engine: string;
-  frame_width: number;
-  frame_height: number;
-  user_warning_message: string | null;
-  promo: string;
-  publisher: string;
-  tags: GameTag[];
-  badge: any;
-  screenshots: Screenshot[];
-  covers: any;
-  metadata: any;
-  related: {
-    items: Game[];
-  };
-}
-
-export interface WithTitleAndId {
-  title: string;
-  id: string;
-}
-
-export interface Requirements {
-  cpu: string;
-  diskSpace: string;
-  gpu: string;
-  os: string;
-  ram: string;
-}
-
-export interface RequirementsOS {
-  minimal: Requirements;
-  recommended: Requirements;
-}
-
-export interface SystemsRequirements {
-  linux?: RequirementsOS;
-  macos?: RequirementsOS;
-  windows?: RequirementsOS;
-}
-
-export type Image = {
-  url: string;
-}
-
-export enum Genre {
-  Board,
-  Cards,
-  Casino,
-  Farm,
-  Racing,
-  Shooter,
-  FindItems,
-  Puzzle,
-  RPG,
-  Simulator,
-  Strategy
-}
-
-export interface Game {
-  id: string;
-  description: string;
-  developer: WithTitleAndId;
-  genres: Genre[];
-  media: {
-    screenshots: Image[];
-    trailers: string[];
-  };
-  summary: string;
-  name: string;
-  platforms: string[];
-  preview: string;
-  price: number;
-  discount?: number;
-  publisher: WithTitleAndId;
-  rating: number;
-  releaseDate: string;
-  requirements?: {
-    languages: {
-      audio: string[];
-      text: string[];
-    };
-    systems: SystemsRequirements;
-  };
-  tags: WithTitleAndId[];
-  title: string;
-}
-
-export interface FriendGame {
+export interface GameObject {
   game: Game;
-  friend: User;
-  likes: number;
 }
