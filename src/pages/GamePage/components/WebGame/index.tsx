@@ -92,7 +92,8 @@ const WebGame = (props: Props) => {
       payWidget.on('success', (payment: any) => console.log('success', payment));
       payWidget.on('pay', (payment: any) => console.log('pay', payment));
     } catch (error) {
-      setError(error.message);
+      const message = `Pay widget error: ${error.message}`;
+      setError(message);
     }
   };
 
@@ -117,7 +118,8 @@ const WebGame = (props: Props) => {
         openIframe();
       }
     } catch (error) {
-      setError(error.message);
+      const message = `Init SDK Error: ${error.message}`;
+      setError(message);
     }
   };
 

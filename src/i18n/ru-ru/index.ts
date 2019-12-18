@@ -16,6 +16,7 @@ export default {
       popular_recomended: 'Популярное и рекомендованное',
       updates_expansions: 'Обновления и Расширения',
       friends_games: 'Игры друзей',
+      empty_block: 'Пока здесь нет игр',
     },
     labels: {
       back: 'Вернуться',

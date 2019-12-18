@@ -2,22 +2,23 @@ import React from 'react';
 import { Toolbar, Button } from '@material-ui/core';
 import { PlatformIcons } from 'components';
 import { HeartIcon } from 'assets/icons';
+import { Platform, Maybe } from 'generated/types';
 
 import useStyles from './useStyles';
 
 interface Props {
-  platforms: string[];
+  platforms?: Maybe<Platform>[];
   price: number;
   onPlay?: () => void;
 }
 
 const GameInfo = (props: Props) => {
-  const { platforms = [], onPlay, price } = props;
+  const { platforms, onPlay, price } = props;
   const classes = useStyles();
 
   return (
     <Toolbar className={classes.root}>
-      <PlatformIcons platforms={platforms} />
+      {platforms && <PlatformIcons platforms={platforms} />}
       <div className={classes.flex}>
         <Button className={`${classes.iconWrapper} ${classes.dark}`}>
           <HeartIcon />

@@ -7,10 +7,10 @@ import useStyles from './useStyles';
 
 interface Props {
   game: Game;
-  openGame: (id: string) => void;
+  openGame: (slug: string) => void;
 }
 
-const BigGameCard = (props: Props) => {
+const PopularCard = (props: Props) => {
   const { title, rating, media } = props.game;
   const imageSrc = media.screenshots[0].url;
   const classes = useStyles();
@@ -41,4 +41,4 @@ const BigGameCard = (props: Props) => {
   );
 };
 
-export default BigGameCard;
+export default PopularCard;

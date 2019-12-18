@@ -1,4 +1,4 @@
-import { Genre } from 'types';
+import { Genre } from 'generated/types';
 
 /* eslint-disable max-len */
 
@@ -27,7 +27,7 @@ export const mockGame = {
   id: getRandomId(),
   description: 'Place for additional text for terms, Additional text might be even here.',
   developer: { title: 'CD PROJECT RED', id: getRandomId() },
-  genres: [Genre.RPG, Genre.FindItems, Genre.Farm],
+  genres: [Genre.Rpg, Genre.FindItems, Genre.Farm],
   media: {
     screenshots: [
       {

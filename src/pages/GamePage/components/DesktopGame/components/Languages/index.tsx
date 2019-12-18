@@ -4,19 +4,20 @@ import { Check as CheckIcon } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 
 import useStyles from './useStyles';
+import { Maybe, Languages as LanguagesType } from 'generated/types';
 
 interface Props {
-  languages: {
-    audio: string[];
-    text: string[];
-  };
+  languages?: Maybe<LanguagesType>;
 }
 
 const Languages = (props: Props) => {
   const { languages } = props;
-  const { audio, text } = languages;
   const { t } = useTranslation();
   const classes = useStyles();
+
+  if (!languages) return null;
+
+  const { audio, text } = languages;
   const allLanguages = Array.from(new Set([...audio, ...text]));
 
   return (

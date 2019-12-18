@@ -2,15 +2,15 @@ import React from 'react';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { TabPanel } from 'components';
-import { SystemsRequirements } from 'types';
+import { SystemRequirements, Platform, Maybe } from 'generated/types';
+import getPlatformIcons from 'helpers/getPlatformIcons';
 
 import System from '../System';
 import useStyles from './useStyles';
-import getPlatformIcons from 'helpers/getPlatformIcons';
 
 interface Props {
-  systems: SystemsRequirements;
-  platforms: string[];
+  systems: SystemRequirements[];
+  platforms: Maybe<Platform>[];
 }
 
 const Systems = (props: Props) => {
@@ -38,7 +38,7 @@ const Systems = (props: Props) => {
           <Tab key={index} icon={<Icon className={classes.icon} />} />
         ))}
       </Tabs>
-      {osSystems.map((os, index) => (
+      {osSystems.map((os: any, index) => (
         <TabPanel key={index} value={tab} index={index}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>

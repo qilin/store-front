@@ -1,8 +1,3 @@
-directive @goField(
-  forceResolver: Boolean
-  name: String
-) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
-directive @isAuthenticated on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 directive @hasRole(
   role: [RoleEnum]
 ) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
@@ -10,6 +5,11 @@ directive @goModel(
   model: String
   models: [String!]
 ) on OBJECT | INPUT_OBJECT | SCALAR | ENUM | INTERFACE | UNION
+directive @goField(
+  forceResolver: Boolean
+  name: String
+) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+directive @isAuthenticated on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 enum AuthenticatedRequestStatus {
   OK
   FORBIDDEN
@@ -66,11 +66,11 @@ type DesktopGame implements Game {
   tags: [Tag!]!
   requirements: [SystemRequirements!]!
   languages: Languages
+  platforms: [Platform]!
   rating: Int!
   price: Float
   currency: String
   discount: Int
-  platforms: [Platform]!
 }
 
 type FreeGameOffer {
@@ -104,6 +104,7 @@ interface Game {
   tags: [Tag!]!
   requirements: [SystemRequirements!]!
   languages: Languages
+  platforms: [Platform]!
   rating: Int!
   price: Float
   currency: String
@@ -168,6 +169,7 @@ enum Platform {
   Linux
   MacOS
   Windows
+  Web
 }
 
 type Query {
@@ -271,6 +273,7 @@ type WebGame implements Game {
   tags: [Tag!]!
   requirements: [SystemRequirements!]!
   languages: Languages
+  platforms: [Platform]!
   rating: Int!
   price: Float
   currency: String

@@ -1,2 +1,2 @@
-export { default as BigGameCard } from './BigGameCard';
-export { default as SmallGameCard } from './SmallGameCard';
+export { default as PopularCard } from './PopularCard';
+export { default as RecomendedCard } from './RecomendedCard';
