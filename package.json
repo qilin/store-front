@@ -2,7 +2,7 @@
   "name": "store-front",
   "version": "0.1.0",
   "private": false,
-  "homepage": "./",
+  "homepage": "",
   "main": "public/electron.js",
   "author": {
     "name": "Qilin Team",
