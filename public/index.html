@@ -15,6 +15,22 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Store UI" />
   <link rel="apple-touch-icon" href="logo192.png" />
+
+  <script type="text/javascript">
+    if (!window.qu) {
+      window.qu = function () { qu.q.push(arguments) }; qu.q = qu.q || [];
+      script = document.createElement('script'); script.async = 1;
+      script.src = 'https://uttu.tst.qilin.super.com/qilin-uttu.js';
+      firstScript = document.scripts[0]; firstScript.parentNode.insertBefore(script, firstScript);
+    }
+
+    qu('init', {
+      collectorUrl: 'https://uttu.tst.qilin.super.com/track',
+      siteId: 'QilinStore',
+    });
+
+    qu('trackPageView');
+  </script>
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
