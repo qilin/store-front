@@ -19,7 +19,7 @@ import client from './apolloClient';
 const history = createBrowserHistory();
 
 history.listen(() => {
-  qu('trackPageView');
+  qu('pageview');
 });
 
 const App = () => {
