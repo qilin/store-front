@@ -2,7 +2,7 @@
   "name": "store-front",
   "version": "0.1.0",
   "private": false,
-  "homepage": "",
+  "homepage": "./",
   "main": "public/electron.js",
   "author": {
     "name": "Qilin Team",
@@ -56,8 +56,8 @@
     "lint": "eslint './**/*.{ts,tsx}'",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
-    "preelectron-pack": "chmod +x ./env.sh && ./env.sh && react-scripts build && cp ./env-config.js ./build",
-    "electron-pack": "electron-builder -mw"
+    "preelectron-pack": "react-scripts build",
+    "electron-pack": "electron-builder -m"
   },
   "husky": {
     "hooks": {
