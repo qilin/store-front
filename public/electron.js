@@ -1,7 +1,8 @@
-const electron = require('electron');
+const { app, session, BrowserWindow } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
-const { app, session, BrowserWindow } = electron;
+const autoUpdater = require('./auto-updater')
+const { GET_APP_VERSION } = require('./ipc.constants');
 
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 680;
@@ -17,18 +18,17 @@ function createWindow() {
       // devTools: isDev
     }
   });
+
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..', 'build', 'index.html')}`);
+
   if (isDev) {
     mainWindow.webContents.openDevTools();
   }
+
   mainWindow.on('closed', () => mainWindow = null);
 }
 
 app.on('ready', () => {
-  session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-    details.requestHeaders['Origin'] = 'http://localhost:3000';
-    callback({ cancel: false, requestHeaders: details.requestHeaders });
-  });
   createWindow()
 });
 
@@ -43,3 +43,7 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+ipcMain.on(GET_APP_VERSION, (event) => {
+  event.sender.send(GET_APP_VERSION, { version: app.getVersion() })
+})
