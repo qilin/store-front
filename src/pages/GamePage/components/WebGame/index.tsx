@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react';
+import React, { useState, useEffect, SyntheticEvent, useCallback } from 'react';
 import { IconButton } from '@material-ui/core';
 import { HighlightOff, Fullscreen } from '@material-ui/icons';
 import { ErrorMessage, GameInfo, GamePreview } from 'components';
@@ -64,7 +64,7 @@ const WebGame = (props: Props) => {
     }
   };
 
-  const showPayWidget = async (args: any) => {
+  const showPayWidget = useCallback(async (args: any) => {
     try {
       const { itemId } = args;
       const data: any = await getOrder(id, itemId);
@@ -95,9 +95,9 @@ const WebGame = (props: Props) => {
       const message = `Pay widget error: ${error.message}`;
       setError(message);
     }
-  };
+  }, [id, widget]);
 
-  const initQilinSDK = async () => {
+  const initQilinSDK = useCallback(async () => {
     try {
       const meta = await qilinStore.init({
         qilinProductUUID: id,
@@ -121,12 +121,12 @@ const WebGame = (props: Props) => {
       const message = `Init SDK Error: ${error.message}`;
       setError(message);
     }
-  };
+  }, [id, showPayWidget]);
 
   useEffect(() => {
     initWidget();
     initQilinSDK();
-  }, []);
+  }, [initQilinSDK]);
 
   return (
     <div className={classes.root}>
