@@ -152,7 +152,7 @@ publish: ## publich launcher
 # 	echo $$AWS_ACCESS_KEY_ID $$AWS_SECRET_ACCESS_KEY $$AWS_S3_BUCKET $$AWS_S3_ENDPOINT $${FORSE_CODE_SIGNING:-true}
 	yarn
 	yarn preelectron-pack
-	npx electron-builder build -w --config.publish.provider=s3 --config.publish.endpoint=${AWS_S3_ENDPOINT} --config.publish.bucket=${AWS_S3_BUCKET} --config.forceCodeSigning=$${FORSE_CODE_SIGNING:-true} --publish always
+	npx electron-builder build -w --config.publish.provider=s3 --config.publish.endpoint=${AWS_S3_ENDPOINT} --config.publish.bucket=${AWS_S3_BUCKET} --config.publish.region=${AWS_S3_REGION} --config.forceCodeSigning=$${FORSE_CODE_SIGNING:-true} --publish always
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
