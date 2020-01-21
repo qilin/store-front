@@ -39,6 +39,7 @@ jobs:
           export PATH=/C/tools/msys64/mingw64/bin:$PATH
           export MAKE=mingw32-make  # so that Autotools can find it
           ;;
+          choco install make
       esac
     before_cache:
     - |-
