@@ -7,7 +7,7 @@ node_js:
 
 sudo: required
 
-dist: trusty
+dist: bionic
 
 stages:
 - name: build_app
@@ -17,6 +17,10 @@ stages:
 jobs:
   include:
   - stage: build_app
+    addons:
+      apt:
+        packages: 
+          - wine
     install: true
     script:
     - make publish
