@@ -17,10 +17,9 @@ stages:
 jobs:
   include:
   - stage: build_app
-    addons:
-      apt:
-        packages: 
-          - wine-stable
+    before_install:
+      - sudo dpkg --add-architecture i386
+      - sudo apt-get install wine32
     install: true
     script:
     - make publish
