@@ -19,7 +19,7 @@
     "win": {
       "target": [
         {
-          "target": "nsis",
+          "target": "nsis-web",
           "arch": [
             "x64"
           ]
