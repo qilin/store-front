@@ -1,27 +1,25 @@
 os:
 - linux
-#language: go
+language: node_js
 sudo: required
 #go:
 #- 1.12.x
 
-dist: trusty
+dist: bionic
 
 stages:
-#- test
+- name: build_app
+  if: branch = build
 - name: deploy
   if: branch IN (master, demo-sdk)
 jobs:
   include:
-#  - stage: test
-#    cache:
-#      directories:
-#      - "$HOME/gopath/pkg/mod"
-#    install: true
-#    script:
-#    - echo "tests here"
-#    after_success:
-#    - bash <(curl -s https://codecov.io/bash)
+  - stage: build_app
+    #install: true
+    script:
+    - make publish
+    #after_success:
+    #- bash <(curl -s https://codecov.io/bash)
   - stage: deploy
     services: docker
     install: true
