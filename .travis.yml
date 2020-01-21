@@ -20,7 +20,7 @@ jobs:
     addons:
       apt:
         packages: 
-          - wine
+          - wine-stable
     install: true
     script:
     - make publish
