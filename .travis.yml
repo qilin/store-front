@@ -25,6 +25,7 @@ jobs:
     - |-
       case $TRAVIS_OS_NAME in
         windows)
+          choco install make
           [[ ! -f C:/tools/msys64/msys2_shell.cmd ]] && rm -rf C:/tools/msys64
           choco uninstall -y mingw
           choco upgrade --no-progress -y msys2
@@ -39,7 +40,6 @@ jobs:
           export PATH=/C/tools/msys64/mingw64/bin:$PATH
           export MAKE=mingw32-make  # so that Autotools can find it
           ;;
-          choco install make
       esac
     before_cache:
     - |-
