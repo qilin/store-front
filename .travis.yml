@@ -11,8 +11,8 @@ sudo: required
 
 stages:
 - name: build_app
-  if: tag IS test_build
-  - name: deploy
+  if:  branch = test_build
+- name: deploy
   if: branch IN (master, develop)
 jobs:
   include:
