@@ -141,6 +141,25 @@ test: ## test application with race
     fi;
 .PHONY: test
 
+# AWS_ACCESS_KEY_ID=minioadmin
+# AWS_SECRET_ACCESS_KEY=minioadmin
+# AWS_S3_ENDPOINT=http://localgost:9000
+# AWS_S3_BUCKET=test-update
+# FORSE_CODE_SIGNING = false
+# Codesign on CI https://www.electron.build/code-signing#travis-appveyor-and-other-ci-servers
+# CSC_LINK  - The HTTPS link (or base64-encoded data, or file:// link, or local path) to certificate (*.p12 or *.pfx file). Shorthand ~/ is supported (home directory).
+# CSC_KEY_PASSWORD - The password to decrypt the certificate given in CSC_LINK.
+.PHONY: publish
+publish: ## publish launcher
+	yarn
+	yarn preelectron-pack
+	yarn electron-builder build -w --config.publish.provider=s3 \
+	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
+	  --config.publish.bucket=${AWS_S3_BUCKET} \
+	  --config.publish.region=${AWS_S3_REGION} \
+	  --config.forceCodeSigning=$${FORSE_CODE_SIGNING:-true} \
+	  --publish always
+
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 .PHONY: help
