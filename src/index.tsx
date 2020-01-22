@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'typeface-roboto';
 
-import App from './App';
+import SplashScreen from './SplashScreen';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<SplashScreen />, document.getElementById('root'));
