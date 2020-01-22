@@ -153,7 +153,7 @@ test: ## test application with race
 publish: ## publish launcher
 	yarn
 	yarn preelectron-pack
-	npx electron-builder build -w --config.publish.provider=s3 \
+	yarn electron-builder build -w --config.publish.provider=s3 \
 	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
 	  --config.publish.bucket=${AWS_S3_BUCKET} \
 	  --config.publish.region=${AWS_S3_REGION} \
