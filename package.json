@@ -9,6 +9,10 @@
     "email": "your.email@domain.com",
     "url": "https://your-website.com"
   },
+  "scripts": {
+    "start:electron": "yarn workspace qilin-web-store electron-dev",
+    "start:web": "yarn workspace qilin-web-store start"
+  },
   "license": "MIT",
   "workspaces": [
     "packages/*"
