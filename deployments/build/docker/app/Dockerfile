@@ -10,7 +10,6 @@ RUN rm -rf /etc/nginx/conf.d
 
 COPY ./deployments/build/docker/app/files /
 COPY ./build .
-COPY .env .
 
 
 RUN chmod +x /docker/bin/*

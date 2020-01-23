@@ -1,7 +1,6 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { env } from 'helpers';
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: {
@@ -13,7 +12,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 
 const cache = new InMemoryCache({ fragmentMatcher });
 const link = new HttpLink({
-  uri: `${env('API_URL')}/v1/graphql`,
+  uri: `${process.env.REACT_APP_API_URL}/v1/graphql`,
 });
 
 const client = new ApolloClient({
