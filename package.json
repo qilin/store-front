@@ -1,0 +1,16 @@
+{
+  "name": "qilin-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Qilin Web Store & Launcher & Shared Components",
+  "repository": "https://github.com/qilin/store-ui.git",
+  "author": {
+    "name": "Qilin Team",
+    "email": "your.email@domain.com",
+    "url": "https://your-website.com"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}
