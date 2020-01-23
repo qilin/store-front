@@ -2,7 +2,6 @@ import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { IconButton } from '@material-ui/core';
 import { HighlightOff, Fullscreen } from '@material-ui/icons';
 import { ErrorMessage, GameInfo, GamePreview } from 'components';
-import { env } from 'helpers';
 import { Game } from 'types';
 
 import { FlashPopup } from './components';
@@ -101,7 +100,7 @@ const WebGame = (props: Props) => {
     try {
       const meta = await qilinStore.init({
         qilinProductUUID: id,
-        apiURL: env('QILIN_SDK_INIT_URL'),
+        apiURL: process.env.REACT_APP_QILIN_SDK_INIT_URL,
       });
 
       const { url } = meta;
