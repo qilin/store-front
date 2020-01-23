@@ -11,7 +11,7 @@ sudo: required
 
 stages:
 - name: build_app
-  if:  branch = test_build OR type = cron
+  if:  tag IS present OR type = cron
 - name: deploy
   if: branch IN (master, develop)
 jobs:
