@@ -10,7 +10,7 @@ import {
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from './pages/MainPage';
 import GamePage from './pages/GamePage';
-import { qu } from './helpers';
+import { qu } from '@qilin/shared';
 import { Layout } from './components';
 import { ApolloProvider } from '@apollo/react-hooks';
 
@@ -28,12 +28,12 @@ const App = () => {
       <Router history={history}>
         <CssBaseline />
         App
-        {/* <Layout>
+        <Layout>
           <Switch>
             <Route path="/game/:slug" component={GamePage} />
             <Route path="/" component={MainPage} />
           </Switch>
-        </Layout> */}
+        </Layout>
       </Router>
     </ApolloProvider>
   );

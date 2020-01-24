@@ -1,8 +1,9 @@
 {
-  "name": "@qilin/shared-components",
+  "name": "@qilin/shared",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
+  "main:src": "src/index.tsx",
   "author": {
     "name": "Qilin Team",
     "email": "your.email@domain.com",
@@ -10,9 +11,11 @@
   },
   "description": "Qilin Shared Components",
   "dependencies": {
+    "@react-workspaces/react-scripts": "3.3.0-alpha-08",
     "@apollo/react-hooks": "^3.1.3",
     "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
+    "history": "^4.10.1",
     "@material-ui/styles": "^4.6.0",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
@@ -27,7 +30,6 @@
     "react-i18next": "^11.2.5",
     "react-responsive-carousel": "^3.1.51",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.1.2",
     "typeface-roboto": "^0.0.75",
     "typescript": "3.6.3"
   },
@@ -62,13 +64,6 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^1.9.1",
     "@graphql-codegen/typescript": "^1.9.1",
-    "@graphql-codegen/typescript-operations": "^1.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.3.1",
-    "@typescript-eslint/parser": "^2.3.1",
-    "eslint": "^6.4.0",
-    "eslint-plugin-react": "^7.14.3",
-    "history": "^4.10.1",
-    "husky": "^3.0.5",
-    "lint-staged": "^9.3.0"
+    "@graphql-codegen/typescript-operations": "^1.9.1"
   }
 }

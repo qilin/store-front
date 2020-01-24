@@ -44,6 +44,7 @@ const MainPage = (props: RouteComponentProps) => {
             <FriendsGames
               games={friendGames}
               openGame={openGame}
+              // eslint-disable-next-line @typescript-eslint/no-empty-function
               handleMore={() => { }}
             />
           </Grid>
@@ -51,6 +52,7 @@ const MainPage = (props: RouteComponentProps) => {
             <UpdatesExpansions
               games={newGames}
               openGame={openGame}
+              // eslint-disable-next-line @typescript-eslint/no-empty-function
               handleMore={() => { }}
             />
           </Grid>
