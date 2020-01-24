@@ -1,4 +1,4 @@
-import { Callback } from 'types';
+import { Callback } from '@qilin/shared/src/types';
 
 import './ramblerIdHelper';
 

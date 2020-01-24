@@ -1,6 +1,6 @@
 import React, { ReactNode, SyntheticEvent } from 'react';
 import { Card, Typography, Box, Button, IconButton } from '@material-ui/core';
-import { Game } from 'types';
+import { Game } from '@qilin/shared/src/types';
 import { HeartIcon, AddToCartIcon } from '@qilin/shared/src/assets/icons';
 
 import useStyles from './useStyles';

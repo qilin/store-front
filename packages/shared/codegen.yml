@@ -2,7 +2,7 @@ overwrite: true
 schema: "src/schema.graphql"
 documents: "src/**/*.ts"
 generates:
-  src/'@qilin/shared/src/generated/types'.ts:
+  src/generated/types.ts:
     plugins:
       - "typescript"
       - "typescript-operations"

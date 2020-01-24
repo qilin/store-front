@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { Carousel } from 'react-responsive-carousel';
-import { GameObject } from 'types';
+import { GameObject } from '@qilin/shared/src/types';
 
 import useStyles from './useStyles';
 import { PopularCard, RecomendedCard } from './components';

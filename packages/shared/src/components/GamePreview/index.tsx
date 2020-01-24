@@ -1,5 +1,5 @@
 import React from 'react';
-import { Game } from 'types';
+import { Game } from '@qilin/shared/src/types';
 
 import { GameToolbar, BackgroundImage } from './components';
 import useStyles from './useStyles';

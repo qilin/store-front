@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { GameObject } from 'types';
+import { GameObject } from '@qilin/shared/src/types';
 
 import { HeaderWithMoreBtn } from '../index';
 import BlockCard from '../BlockCard';

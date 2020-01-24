@@ -4,7 +4,7 @@ import { Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Rating } from '@qilin/shared/src/components';
-import { Game } from 'types';
+import { Game } from '@qilin/shared/src/types';
 import { LINKS } from '@qilin/shared/src/styles/colors';
 
 import { Release, Genres } from './index';
