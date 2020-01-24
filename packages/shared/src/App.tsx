@@ -6,12 +6,12 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import 'i18n';
+// import 'i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import MainPage from 'pages/MainPage';
-import GamePage from 'pages/GamePage';
-import { qu } from 'helpers';
-import { Layout } from 'components';
+import MainPage from './pages/MainPage';
+import GamePage from './pages/GamePage';
+import { qu } from './helpers';
+import { Layout } from './components';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import client from './apolloClient';
@@ -27,12 +27,13 @@ const App = () => {
     <ApolloProvider client={client}>
       <Router history={history}>
         <CssBaseline />
-        <Layout>
+        App
+        {/* <Layout>
           <Switch>
             <Route path="/game/:slug" component={GamePage} />
             <Route path="/" component={MainPage} />
           </Switch>
-        </Layout>
+        </Layout> */}
       </Router>
     </ApolloProvider>
   );

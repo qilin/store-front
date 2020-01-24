@@ -10,8 +10,9 @@
     "url": "https://your-website.com"
   },
   "scripts": {
-    "start:electron": "yarn workspace qilin-web-store electron-dev",
-    "start:web": "yarn workspace qilin-web-store start"
+    "start:web": "yarn workspace qilin-web-store start",
+    "start:electron": "yarn workspace qilin-launcher electron-dev",
+    "build:web": "yarn workspace qilin-web-store build"
   },
   "license": "MIT",
   "workspaces": [
