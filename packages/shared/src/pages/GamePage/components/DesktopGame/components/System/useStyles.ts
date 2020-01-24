@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { TITLE_GREY } from 'styles/colors';
+import { TITLE_GREY } from '@qilin/shared/src/styles/colors';
 
 export default makeStyles({
   root: {

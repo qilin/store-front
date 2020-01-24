@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { BACKGORUND_LOGO } from 'styles/colors';
+import { BACKGORUND_LOGO } from '@qilin/shared/src/styles/colors';
 
 const useStyles = makeStyles({
   logoContainer: {

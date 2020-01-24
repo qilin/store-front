@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Chip } from '@material-ui/core';
-import { Genre } from 'generated/types';
+import { Genre } from '@qilin/shared/src/generated/types';
 
 const useStyles = makeStyles({
   genre: {

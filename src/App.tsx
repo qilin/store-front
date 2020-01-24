@@ -10,8 +10,8 @@ import 'i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from 'pages/MainPage';
 import GamePage from 'pages/GamePage';
-import { qu } from 'helpers';
-import { Layout } from 'components';
+import { qu } from '@qilin/shared/src/helpers';
+import { Layout } from '@qilin/shared/src/components';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import client from './apolloClient';

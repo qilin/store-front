@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Paper } from '@material-ui/core';
-import { Image, Video } from 'generated/types';
+import { Image, Video } from '@qilin/shared/src/generated/types';
 
 import useStyles from './useStyles';
 

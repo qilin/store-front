@@ -4,7 +4,7 @@ import { Check as CheckIcon } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 
 import useStyles from './useStyles';
-import { Maybe, Languages as LanguagesType } from 'generated/types';
+import { Maybe, Languages as LanguagesType } from '@qilin/shared/src/generated/types';
 
 interface Props {
   languages?: Maybe<LanguagesType>;

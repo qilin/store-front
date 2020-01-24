@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { TITLE_GREY, BLACK } from 'styles/colors';
+import { TITLE_GREY, BLACK } from '@qilin/shared/src/styles/colors';
 
 const useStyles = makeStyles({
   title: {

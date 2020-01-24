@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { BACKGROUND_DARK } from 'styles/colors';
+import { BACKGROUND_DARK } from '@qilin/shared/src/styles/colors';
 
 export default makeStyles({
   root: {

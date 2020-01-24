@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { Rating, GameCard } from 'components';
+import { Rating, GameCard } from '@qilin/shared/src/components';
 import { Game } from 'types';
 
 import useStyles from './useStyles';

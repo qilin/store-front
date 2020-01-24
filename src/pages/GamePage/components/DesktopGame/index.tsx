@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { GamePreview, GameInfo } from 'components';
+import { GamePreview, GameInfo } from '@qilin/shared/src/components';
 import { DesktopGame as Game } from 'generated/types';
 
 import { Media, Requirements } from './components';

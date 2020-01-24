@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { TabPanel } from 'components';
-import { SystemRequirements, Platform, Maybe } from 'generated/types';
-import getPlatformIcons from 'helpers/getPlatformIcons';
+import { TabPanel } from '@qilin/shared/src/components';
+import { SystemRequirements, Platform, Maybe } from '@qilin/shared/src/generated/types';
+import getPlatformIcons from '@qilin/shared/src/helpers/getPlatformIcons';
 
 import System from '../System';
 import useStyles from './useStyles';

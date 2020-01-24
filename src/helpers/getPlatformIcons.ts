@@ -1,5 +1,5 @@
 import { FunctionComponent, SVGProps } from 'react';
-import { WindowsIcon, AppleIcon, LinuxIcon, WebIcon } from 'assets/icons';
+import { WindowsIcon, AppleIcon, LinuxIcon, WebIcon } from '@qilin/shared/src/assets/icons';
 import { Platform, Maybe } from 'generated/types';
 
 export default (platforms: Maybe<Platform>[]) => {

@@ -1,4 +1,4 @@
-import { Genre } from 'generated/types';
+import { Genre } from '@qilin/shared/src/generated/types';
 
 /* eslint-disable max-len */
 

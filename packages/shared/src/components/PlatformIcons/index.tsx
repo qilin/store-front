@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import getPlatformIcons from 'helpers/getPlatformIcons';
-import { Platform, Maybe } from 'generated/types';
+import getPlatformIcons from '@qilin/shared/src/helpers/getPlatformIcons';
+import { Platform, Maybe } from '@qilin/shared/src/generated/types';
 
 const useStyles = makeStyles({
   iconWrapper: {

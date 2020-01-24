@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
-import { ramblerAuth } from 'helpers';
+import { ramblerAuth } from '@qilin/shared/src/helpers';
 import { User } from 'types';
 import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';

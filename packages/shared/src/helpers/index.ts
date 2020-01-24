@@ -1,4 +1,5 @@
 export { default as ramblerAuth } from './ramblerAuth';
+export * from './getPlatformIcons';
 
 export const qu = (window as any).qu;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { IconButton } from '@material-ui/core';
 import { HighlightOff, Fullscreen } from '@material-ui/icons';
-import { ErrorMessage, GameInfo, GamePreview } from 'components';
+import { ErrorMessage, GameInfo, GamePreview } from '@qilin/shared/src/components';
 import { Game } from 'types';
 
 import { FlashPopup } from './components';

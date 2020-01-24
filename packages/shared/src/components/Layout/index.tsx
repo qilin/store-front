@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { BACKGROUND_LIGHT } from 'styles/colors';
+import { BACKGROUND_LIGHT } from '@qilin/shared/src/styles/colors';
 
 import Footer from './components/Footer';
 import Header from './components/Header';

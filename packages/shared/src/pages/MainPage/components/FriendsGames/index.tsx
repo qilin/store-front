@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { FriendGame } from 'generated/types';
+import { FriendGame } from '@qilin/shared/src/generated/types';
 
 import { HeaderWithMoreBtn } from '../index';
 import FriendCard from './components/FriendCard';

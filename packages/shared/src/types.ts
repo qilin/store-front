@@ -1,4 +1,4 @@
-import { DesktopGame, WebGame } from 'generated/types';
+import { DesktopGame, WebGame } from '@qilin/shared/src/generated/types';
 
 export type Callback = (args?: any) => void;
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Toolbar, Button } from '@material-ui/core';
-import { PlatformIcons } from 'components';
-import { HeartIcon } from 'assets/icons';
-import { Platform, Maybe } from 'generated/types';
+import { PlatformIcons } from '@qilin/shared/src/components';
+import { HeartIcon } from '@qilin/shared/src/assets/icons';
+import { Platform, Maybe } from '@qilin/shared/src/generated/types';
 
 import useStyles from './useStyles';
 

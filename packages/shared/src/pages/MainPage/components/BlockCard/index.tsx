@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { CircularProgress, makeStyles } from '@material-ui/core';
-import { CARD_GAME } from 'pages/MainPage/query';
+import { CARD_GAME } from '../../query';
 
 const useStyle = makeStyles({
   loaderWrapper: {

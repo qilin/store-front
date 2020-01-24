@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { YouTubeIcon, FacebookIcon, TwitterIcon } from 'assets/icons';
+import { YouTubeIcon, FacebookIcon, TwitterIcon } from '@qilin/shared/src/assets/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { TITLE_GREY, BLACK } from 'styles/colors';
+import { TITLE_GREY, BLACK } from '@qilin/shared/src/styles/colors';
 
 const useStyles = makeStyles({
   descriptionText: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { SystemRequirements, Platform, Maybe, Languages as LanguagesType } from 'generated/types';
+import { SystemRequirements, Platform, Maybe, Languages as LanguagesType } from '@qilin/shared/src/generated/types';
 
 import { Systems, Languages } from '../index';
 import useStyles from './useStyles';

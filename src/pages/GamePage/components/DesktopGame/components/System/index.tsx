@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Table, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { RequirementsSet } from 'generated/types';
-import { megabytesToSize } from 'helpers';
+import { megabytesToSize } from '@qilin/shared/src/helpers';
 
 import useStyles from './useStyles';
 

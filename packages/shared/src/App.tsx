@@ -6,11 +6,11 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-// import 'i18n';
+import '@qilin/shared/src/i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import MainPage from './pages/MainPage';
 import GamePage from './pages/GamePage';
-import { qu } from '@qilin/shared';
+import { qu } from '@qilin/shared/src/helpers';
 import { Layout } from './components';
 import { ApolloProvider } from '@apollo/react-hooks';
 
@@ -27,7 +27,6 @@ const App = () => {
     <ApolloProvider client={client}>
       <Router history={history}>
         <CssBaseline />
-        App
         <Layout>
           <Switch>
             <Route path="/game/:slug" component={GamePage} />
