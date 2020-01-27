@@ -72,10 +72,11 @@
     ]
   },
   "devDependencies": {
-    "react-app-rewired": "^2.1.5",
     "concurrently": "^5.0.2",
     "electron": "7.1.9",
     "electron-builder": "21.2.0",
-    "wait-on": "^4.0.0"
+    "wait-on": "^4.0.0",
+    "customize-cra": "^0.9.1",
+    "react-app-rewired": "^2.1.5"
   }
 }
