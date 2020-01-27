@@ -12,7 +12,8 @@
   "scripts": {
     "start:web": "yarn workspace qilin-web-store start",
     "start:electron": "yarn workspace qilin-launcher electron-dev",
-    "build:web": "yarn workspace qilin-web-store build"
+    "build:web": "yarn workspace qilin-web-store build",
+    "build:electron": "yarn workspace qilin-launcher electron-pack"
   },
   "license": "MIT",
   "workspaces": {
