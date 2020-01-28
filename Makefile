@@ -37,7 +37,7 @@ build: ## build application
 		$(call node_docker,"make build") ;\
     else \
 		. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
-        yarn && yarn build ;\
+        yarn && yarn build:web ;\
     fi;
 .PHONY: build
 
@@ -152,8 +152,7 @@ test: ## test application with race
 .PHONY: publish
 publish: ## publish launcher
 	yarn
-	yarn preelectron-pack
-	yarn electron-builder build -w --config.publish.provider=s3 \
+	yarn build:electron -w --config.publish.provider=s3 \
 	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
 	  --config.publish.bucket=${AWS_S3_BUCKET} \
 	  --config.publish.region=${AWS_S3_REGION} \

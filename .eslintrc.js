@@ -41,6 +41,7 @@ module.exports = {
     "eol-last": ["error", "always"],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "off",
     "max-len": ["error", { "code": 120 }]
   },
 };
