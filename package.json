@@ -13,7 +13,19 @@
     "start:web": "yarn workspace qilin-web-store start",
     "start:electron": "yarn workspace qilin-launcher electron-dev",
     "build:web": "yarn workspace qilin-web-store build",
-    "build:electron": "yarn workspace qilin-launcher electron-pack"
+    "build:electron": "yarn workspace qilin-launcher electron-pack",
+    "lint": "yarn workspaces run lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./**/*.{ts,tsx}": [
+      "yarn lint",
+      "git add"
+    ]
   },
   "license": "MIT",
   "workspaces": {

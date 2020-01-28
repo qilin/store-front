@@ -27,17 +27,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint './**/*.{ts,tsx}'"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "./**/*.{ts,tsx}": [
-      "yarn lint",
-      "git add"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
