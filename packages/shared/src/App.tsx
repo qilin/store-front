@@ -8,12 +8,12 @@ import {
 } from 'react-router-dom';
 import '@qilin/shared/src/i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import MainPage from './pages/MainPage';
-import GamePage from './pages/GamePage';
 import { qu } from '@qilin/shared/src/helpers';
-import { Layout } from './components';
 import { ApolloProvider } from '@apollo/react-hooks';
 
+import MainPage from './pages/MainPage';
+import GamePage from './pages/GamePage';
+import { Layout } from './components';
 import client from './apolloClient';
 
 const history = createBrowserHistory();

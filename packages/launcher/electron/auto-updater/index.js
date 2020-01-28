@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { ipcMain, app } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
 const {
   CHECK_FOR_UPDATE_FAILURE,
   CHECK_FOR_UPDATE_SUCCESS,
@@ -11,7 +11,7 @@ const {
   DOWNLOAD_UPDATE_SUCCESS,
   SET_UPDATE_CHANNEL,
 } = require('../../src/ipc.constants');
-const log = require('electron-log');
+
 const currentAppVersion = app.getVersion();
 
 autoUpdater.logger = log;

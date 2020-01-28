@@ -1,11 +1,10 @@
-
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
-const { APP_INFO } = require('../src/ipc.constants');
+
 require('./auto-updater');
+const { APP_INFO } = require('../src/ipc.constants');
 
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 680;
@@ -14,7 +13,7 @@ let mainWindow;
 
 function createWindow() {
   const startUrl = isDev ? 'http://localhost:3000' : url.format({
-    pathname: path.join(__dirname, '../index.html'),
+    pathname: path.join(__dirname, '..', 'index.html'),
     protocol: 'file:',
     slashes: true,
   });

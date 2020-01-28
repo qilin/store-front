@@ -2,9 +2,9 @@ import React from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { Check as CheckIcon } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
+import { Maybe, Languages as LanguagesType } from '@qilin/shared/src/generated/types';
 
 import useStyles from './useStyles';
-import { Maybe, Languages as LanguagesType } from '@qilin/shared/src/generated/types';
 
 interface Props {
   languages?: Maybe<LanguagesType>;
