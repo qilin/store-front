@@ -1,4 +1,4 @@
 *
 !/deployments/build/docker
-!/build
-!.env
+!packages/web/build
+!packages/web/.env
