@@ -1,6 +1,7 @@
 const { ipcMain, app } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
+
 const {
   CHECK_FOR_UPDATE_FAILURE,
   CHECK_FOR_UPDATE_SUCCESS,
