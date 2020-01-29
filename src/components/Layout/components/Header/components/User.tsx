@@ -21,6 +21,14 @@ const User = (props: Props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
+  const getDisplayName = () => {
+    const { lastname, firstname } = user.profile;
+
+    return [firstname, lastname]
+      .filter(Boolean)
+      .join(' ') || 'Anonymous';
+  };
+
   const handleOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -41,13 +49,14 @@ const User = (props: Props) => {
         onClick={handleOpen}
       >
         <span className={classes.userName}>
-          {user.display.display_name || 'Anonymous'}
+          {getDisplayName()}
         </span>
       </Button>
       <Menu
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={handleClose}
+        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',

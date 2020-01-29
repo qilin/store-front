@@ -25,8 +25,8 @@ history.listen(() => {
 });
 
 const App = () => {
-  const { loading, data, error } = useQuery(GET_USER, { fetchPolicy: 'network-only' });
-  const user = (data && data.auth && data.auth.profile && !error) || null;
+  const { loading, data } = useQuery(GET_USER, { fetchPolicy: 'network-only' });
+  const user = (data && data.auth) || null;
 
   const onLogout = () => {
     logout();
