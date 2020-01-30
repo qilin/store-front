@@ -157,7 +157,7 @@ publish: ## publish launcher
 	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
 	  --config.publish.bucket=${AWS_S3_BUCKET} \
 	  --config.publish.region=${AWS_S3_REGION} \
-	  --config.forceCodeSigning=false \
+	  --config.forceCodeSigning=$${FORSE_CODE_SIGNING:-true} \
 	  --publish always
 
 help:
