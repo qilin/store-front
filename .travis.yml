@@ -22,11 +22,9 @@ jobs:
     install: true
     script:
     - docker run --rm -ti
-      --env-file <(set | grep -iE 'S3_|DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS_TAG|TRAVIS_REPO_|TRAVIS_BUILD_|TRAVIS_BRANCH|TRAVIS_PULL_REQUEST_|APPVEYOR_|CSC_|GH_|GITHUB_|BT_|AWS_|STRIP|BUILD_'|grep -v ' ')
+      --env-file <(set | grep -iE 'REACT_APP_|S3_|DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS_TAG|TRAVIS_REPO_|TRAVIS_BUILD_|TRAVIS_BRANCH|TRAVIS_PULL_REQUEST_|APPVEYOR_|CSC_|GH_|GITHUB_|BT_|AWS_|STRIP|BUILD_'|grep -v ' ')
       --env ELECTRON_CACHE="/root/.cache/electron"
       --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder"
-      --env REACT_APP_API_URL=${REACT_APP_API_URL}
-      --env REACT_APP_QILIN_SDK_INIT_URL=${REACT_APP_QILIN_SDK_INIT_URL}
       -v ${PWD}:/project
       electronuserland/builder:wine
       bash -c "npm install -g n && n 11.10.1 && make publish"
