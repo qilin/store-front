@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { BLACK } from '@qilin/shared/src/styles/colors';
 import { UserContext } from '@qilin/shared/src/App';
 
-import User from '../User';
+import UserMenu from '../UserMenu';
 
 const useStyles = makeStyles({
   root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const UserMenu = () => {
+const UserButton = () => {
   const { user = null, loading = false, onLogin, onLogout } = useContext(UserContext);
   const { t } = useTranslation();
   const classes = useStyles();
@@ -35,7 +35,7 @@ const UserMenu = () => {
       </Button>
     );
 
-    return <User user={user} onLogout={onLogout} />;
+    return <UserMenu user={user} onLogout={onLogout} />;
   };
 
   return (
@@ -45,4 +45,4 @@ const UserMenu = () => {
   );
 };
 
-export default UserMenu;
+export default UserButton;

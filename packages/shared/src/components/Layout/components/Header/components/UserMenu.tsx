@@ -15,7 +15,7 @@ interface Props {
   onLogout: () => void;
 }
 
-const User = (props: Props) => {
+const UserMenu = (props: Props) => {
   const { user, onLogout } = props; 
   const { t } = useTranslation();
   const classes = useStyles();
@@ -75,4 +75,4 @@ const User = (props: Props) => {
   );
 };
 
-export default User;
+export default UserMenu;
