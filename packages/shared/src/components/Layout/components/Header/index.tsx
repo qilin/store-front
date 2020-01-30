@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoginButton, LocaleSwitcher } from './components';
+import { UserMenu, LocaleSwitcher } from './components';
 import useStyles from './useStyle';
 
 const Header = () => {
@@ -11,7 +11,7 @@ const Header = () => {
       <div className={classes.logoContainer}>
         <span className={classes.logoText}>Рамблер/ ИГРЫ</span>
       </div>
-      <LoginButton />
+      <UserMenu />
       <LocaleSwitcher />
     </header>
   );
