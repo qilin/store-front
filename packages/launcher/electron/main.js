@@ -57,5 +57,6 @@ ipcMain.on(APP_INFO, event => {
   event.sender.send(APP_INFO, {
     name: app.getName(),
     version: app.getVersion(),
+    channel: app.getVersion().split('-')[1] || 'latest',
   });
 });
