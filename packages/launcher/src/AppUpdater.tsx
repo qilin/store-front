@@ -28,15 +28,20 @@ const useStyle = makeStyles({
     alignItems: 'center',
   },
   appInfoContainer: {
+    padding: 10,
     position: 'absolute',
     right: 0,
     top: 0,
+  },
+  loader: {
+    marginTop: 15,
+    color: '#fff',
   },
 });
 
 const AppUpdater = () => {
   const [loading, setLoading] = useState(true);
-  const [info, setAppInfo] = useState<{ version: string; channel: string } | null>(null);
+  const [info, setAppInfo] = useState<{ name: string; version: string; channel: string } | null>(null);
   const [status, setUpdateStatus] = useState('Checking update...');
   const [updateError, setUpdateError] = useState<{ code: string; description: string } | null>(null);
   const [redirectToApp, setRedirectToApp] = useState(false);
@@ -48,6 +53,7 @@ const AppUpdater = () => {
     ipcRenderer.send(CHECK_FOR_UPDATE_PENDING);
 
     ipcRenderer.on(APP_INFO, (event: any, appInfo) => {
+      console.log('App Info', appInfo);
       setAppInfo(appInfo);
     });
 
@@ -113,11 +119,12 @@ const AppUpdater = () => {
       )}
       {info && (
         <div className={classes.appInfoContainer}>
-          <div>App Version: {info.version}</div>
-          <div>App Channel: {info.channel}</div>
+          <div>name: {info.name}</div>
+          <div>version: {info.version}</div>
+          <div>channel: {info.channel}</div>
         </div>
       )}
-      {loading && <CircularProgress style={{ marginTop: 15, color: '#fff' }} />}
+      {loading && <CircularProgress className={classes.loader} />}
     </div>
   );
 };

@@ -141,6 +141,8 @@ test: ## test application with race
     fi;
 .PHONY: test
 
+# REACT_APP_API_URL=https://store.tst.qilin.super.com/api
+# REACT_APP_QILIN_SDK_INIT_URL=sdk/v1
 # AWS_ACCESS_KEY_ID=minioadmin
 # AWS_SECRET_ACCESS_KEY=minioadmin
 # AWS_S3_ENDPOINT=http://localgost:9000
@@ -152,7 +154,8 @@ test: ## test application with race
 .PHONY: publish
 publish: ## publish launcher
 	yarn
-	yarn build:electron -w --config.publish.provider=s3 \
+	REACT_APP_API_URL=${REACT_APP_API_URL} REACT_APP_QILIN_SDK_INIT_URL=${REACT_APP_QILIN_SDK_INIT_URL} yarn build:electron -w \
+		--config.publish.provider=s3 \
 	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
 	  --config.publish.bucket=${AWS_S3_BUCKET} \
 	  --config.publish.region=${AWS_S3_REGION} \
