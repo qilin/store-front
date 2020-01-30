@@ -154,12 +154,12 @@ test: ## test application with race
 .PHONY: publish
 publish: ## publish launcher
 	yarn
-	yarn build:electron -w \
+	yarn build:electron -m \
 		--config.publish.provider=s3 \
 	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
 	  --config.publish.bucket=${AWS_S3_BUCKET} \
 	  --config.publish.region=${AWS_S3_REGION} \
-	  --config.forceCodeSigning=$${FORSE_CODE_SIGNING:-true} \
+	  --config.forceCodeSigning=false \
 	  --publish always
 
 help:
