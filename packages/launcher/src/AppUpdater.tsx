@@ -42,7 +42,7 @@ const useStyle = makeStyles({
 const AppUpdater = () => {
   const [loading, setLoading] = useState(true);
   const [info, setAppInfo] = useState<{ name: string; version: string; channel: string } | null>(null);
-  const [status, setUpdateStatus] = useState('Checking update...');
+  const [status, setUpdateStatus] = useState('');
   const [updateError, setUpdateError] = useState<{ code: string; description: string } | null>(null);
   const [redirectToApp, setRedirectToApp] = useState(false);
 
@@ -60,44 +60,34 @@ const AppUpdater = () => {
     ipcRenderer.on(CHECK_FOR_UPDATE_SUCCESS, (event: any, updateInfo: any, currentAppVersion: any) => {
       const version = updateInfo && updateInfo.version;
 
-      // Imitate slow internet
-      setTimeout(() => {
-        if (version && version !== currentAppVersion) {
-          ipcRenderer.send(DOWNLOAD_UPDATE_PENDING);
-          setUpdateStatus(`Found new version ${version}, downloading the update...`);
-          // Update your updateCheckLevel to DOWNLOAD in your state.
-        } else {
-          setLoading(false);
-          setRedirectToApp(true);
-        }
-      }, 2000);
+      if (version && version !== currentAppVersion) {
+        ipcRenderer.send(DOWNLOAD_UPDATE_PENDING);
+        setUpdateStatus(`Found new version ${version}, downloading the update...`);
+        // Update your updateCheckLevel to DOWNLOAD in your state.
+      } else {
+        setLoading(false);
+        setRedirectToApp(true);
+      }
 
     });
 
     ipcRenderer.on(CHECK_FOR_UPDATE_FAILURE, (event: any, error: any) => {
-      // Trigger failure in your state.
-      setTimeout(() => {
-        setLoading(false);
-        setUpdateStatus('Checking for update failure');
-        setUpdateError({ code: error.code, description: error.description || 'no description' });
-      }, 2000);
+      setLoading(false);
+      setUpdateStatus('Checking for update failure');
+      setUpdateError({ code: error.code, description: error.description || 'no description' });
     });
 
     ipcRenderer.on(DOWNLOAD_UPDATE_SUCCESS, () => {
+      setUpdateStatus('Installing updates, application will be restart');
       setTimeout(() => {
-        setUpdateStatus('Installing updates, application will be restart');
-        setTimeout(() => {
-          ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
-        }, 1500);
-      }, 2000);
+        ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
+      }, 1500);
     });
 
     ipcRenderer.on(DOWNLOAD_UPDATE_FAILURE, (event: any, error: any) => {
-      setTimeout(() => {
-        setUpdateStatus('Download update failure');
-        setUpdateError({ code: error.code, description: error.description || 'no description' });
-        setLoading(false);
-      }, 2000);
+      setUpdateStatus('Download update failure');
+      setUpdateError({ code: error.code, description: error.description || 'no description' });
+      setLoading(false);
     });
 
   }, []);

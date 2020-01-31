@@ -1,6 +1,7 @@
 const { ipcMain, app } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
+const isDev = require('electron-is-dev');
 
 const {
   CHECK_FOR_UPDATE_FAILURE,
@@ -26,16 +27,21 @@ ipcMain.on(SET_UPDATE_CHANNEL, (event, channel) => {
 
 ipcMain.on(CHECK_FOR_UPDATE_PENDING, event => {
   const { sender } = event;
-  const result = autoUpdater.checkForUpdates();
 
-  result
-    .then(checkResult => {
-      const { updateInfo } = checkResult;
-      sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, currentAppVersion);
-    })
-    .catch(error => {
-      sender.send(CHECK_FOR_UPDATE_FAILURE, error);
-    });
+  if (isDev) {
+    sender.send(CHECK_FOR_UPDATE_SUCCESS);
+  } else {
+    const result = autoUpdater.checkForUpdates();
+
+    result
+      .then(checkResult => {
+        const { updateInfo } = checkResult;
+        sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, currentAppVersion);
+      })
+      .catch(error => {
+        sender.send(CHECK_FOR_UPDATE_FAILURE, error);
+      });
+  }
 });
 
 ipcMain.on(DOWNLOAD_UPDATE_PENDING, event => {

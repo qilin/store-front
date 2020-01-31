@@ -21,6 +21,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
+    title: 'Qilin Launcher',
+    backgroundColor: '#262626',
     webPreferences: {
       nodeIntegration: true,
       // webSecurity: false,

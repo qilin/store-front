@@ -46,7 +46,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build-electron": "mkdir build/src && cp -r electron/. build/electron && cp src/ipc.constants.js build/src/ipc.constants.js",
     "preelectron-pack": "yarn build && yarn build-electron",
-    "electron-pack": "electron-builder build -c.extraMetadata.main=build/electron/main.js"
+    "electron-pack": "electron-builder build --em.main=build/electron/main.js"
   },
   "browserslist": {
     "production": [
