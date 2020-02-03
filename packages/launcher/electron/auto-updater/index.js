@@ -19,7 +19,6 @@ const currentAppVersion = app.getVersion();
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.autoDownload = false;
-autoUpdater.channel = autoUpdater.channel || currentAppVersion.split('-')[1] || 'latest';
 
 ipcMain.on(SET_UPDATE_CHANNEL, (event, channel) => {
   autoUpdater.channel = channel;

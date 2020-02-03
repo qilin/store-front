@@ -153,6 +153,7 @@ test: ## test application with race
 publish: ## publish launcher
 	yarn
 	yarn build:electron -w \
+		--config.extraMetadata.main=build/electron/main.js \
 		--config.publish.provider=s3 \
 	  --config.publish.endpoint=${AWS_S3_ENDPOINT} \
 	  --config.publish.bucket=${AWS_S3_BUCKET} \

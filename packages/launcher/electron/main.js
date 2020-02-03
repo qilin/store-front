@@ -60,5 +60,6 @@ ipcMain.on(APP_INFO, event => {
     name: app.name,
     version: app.getVersion(),
     channel: app.getVersion().split('-')[1] || 'latest',
+    channels: ['latest', 'alpha', 'beta'],
   });
 });
