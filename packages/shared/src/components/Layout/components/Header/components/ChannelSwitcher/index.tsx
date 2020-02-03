@@ -10,28 +10,28 @@ const useStyles = makeStyles({
 });
 
 const ChannelSwitcher = () => {
-  const { info, status, setUpdateChannel, readyToDownload } = useContext(LauncherContext);
+  const { info, status, changeChannel, readyToDownload, downloadUpdateAndInstall } = useContext(LauncherContext);
   const [channel, setChannel] = useState(info.channel);
   const classes = useStyles();
 
   const handleChangeChannel = (event: any) => {
     const newChannel = event.target.value;
-    setUpdateChannel(newChannel);
     setChannel(newChannel);
+    changeChannel(newChannel);
   };
+
+  const handleDownload = () => downloadUpdateAndInstall();
 
   return (
     <>
-      App Version: {info.version}
       <Select className={classes.root} value={channel} onChange={handleChangeChannel}>
         {info.channels.map((value: string) => (
           <MenuItem key={value} value={value}>{value}</MenuItem>
         ))}
       </Select>
       {status}
-      {readyToDownload && <button>Download and install</button>}
+      {readyToDownload && <button onClick={handleDownload}>Download and install</button>}
     </>
-
   );
 };
 

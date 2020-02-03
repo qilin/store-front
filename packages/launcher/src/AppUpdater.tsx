@@ -15,7 +15,6 @@ import {
   DOWNLOAD_UPDATE_SUCCESS,
   QUIT_AND_INSTALL_UPDATE,
   APP_INFO,
-  SET_UPDATE_CHANNEL,
 } from './ipc.constants';
 
 const useStyle = makeStyles({
@@ -43,10 +42,8 @@ const useStyle = makeStyles({
 const AppUpdater = () => {
   const [loading, setLoading] = useState(true);
   const [readyToDownload, setReadyToDownload] = useState(false);
-  const [autoDownload, setAutoDownload] = useState(true);
-  const [autoInstall, setAutoInstall] = useState(true);
   const [info, setAppInfo] = useState<{ name: string; version: string; channel: string; channels: [] } | null>(null);
-  const [status, setUpdateStatus] = useState('');
+  const [status, setUpdateStatus] = useState('Checking for updates');
   const [updateError, setUpdateError] = useState<{ code: string; description: string } | null>(null);
   const [redirectToApp, setRedirectToApp] = useState(false);
 
@@ -57,38 +54,31 @@ const AppUpdater = () => {
     ipcRenderer.send(DOWNLOAD_UPDATE_PENDING);
   };
 
-  const downloadUpdateAndInstallAfterQuit = () => {
-    setAutoInstall(false);
-    setUpdateStatus('Downloading update');
-    ipcRenderer.send(DOWNLOAD_UPDATE_PENDING);
-  };
-
   useEffect(() => {
     ipcRenderer.send(APP_INFO);
-    ipcRenderer.send(CHECK_FOR_UPDATE_PENDING);
 
     ipcRenderer.on(APP_INFO, (event: any, appInfo) => {
       console.log('App Info', appInfo);
       setAppInfo(appInfo);
+      ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, { channel: appInfo.channel, autoDownload: true });
     });
 
     //TODO если мажорная не изменилась то downloadUpdateAndInstallAfterQuit
-    ipcRenderer.on(CHECK_FOR_UPDATE_SUCCESS, (event: any, updateInfo: any, currentAppVersion: any) => {
+    ipcRenderer.on(CHECK_FOR_UPDATE_SUCCESS, (event: any, { autoDownload, currentAppVersion, updateInfo }) => {
       const version = updateInfo && updateInfo.version;
 
       if (version && version !== currentAppVersion) {
         setReadyToDownload(true);
-        setUpdateStatus(`Found new version ${version}`);
+        setUpdateStatus(`Found version ${version}`);
 
         if (autoDownload) {
           downloadUpdateAndInstall();
         }
       } else {
-        setUpdateStatus('This version is latest');
+        setUpdateStatus(`Current version ${version} is latest`);
         setLoading(false);
         setRedirectToApp(true);
       }
-
     });
 
     ipcRenderer.on(CHECK_FOR_UPDATE_FAILURE, (event: any, error: any) => {
@@ -98,11 +88,9 @@ const AppUpdater = () => {
     });
 
     ipcRenderer.on(DOWNLOAD_UPDATE_SUCCESS, () => {
+      //TODO check autoinsall or install after quit
       setUpdateStatus('Download update success');
-
-      if (autoInstall) {
-        ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
-      }
+      ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
     });
 
     ipcRenderer.on(DOWNLOAD_UPDATE_FAILURE, (event: any, error: any) => {
@@ -119,11 +107,9 @@ const AppUpdater = () => {
     loading,
     updateError,
     downloadUpdateAndInstall,
-    setUpdateChannel: (channel: string) => {
-      setAutoDownload(false);
+    changeChannel: (channel: string) => {
       setLoading(true);
-      ipcRenderer.send(SET_UPDATE_CHANNEL, channel);
-      ipcRenderer.send(CHECK_FOR_UPDATE_PENDING);
+      ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, { channel, autoDownload: false });
     },
   };
 

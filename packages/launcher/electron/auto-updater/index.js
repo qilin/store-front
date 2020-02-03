@@ -11,7 +11,6 @@ const {
   DOWNLOAD_UPDATE_PENDING,
   DOWNLOAD_UPDATE_FAILURE,
   DOWNLOAD_UPDATE_SUCCESS,
-  SET_UPDATE_CHANNEL,
 } = require('../../src/ipc.constants');
 
 const currentAppVersion = app.getVersion();
@@ -19,14 +18,11 @@ const currentAppVersion = app.getVersion();
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.autoDownload = false;
-autoUpdater.channel = currentAppVersion.split('-')[1];
 
-ipcMain.on(SET_UPDATE_CHANNEL, (event, channel) => {
-  autoUpdater.channel = channel;
-});
-
-ipcMain.on(CHECK_FOR_UPDATE_PENDING, event => {
+ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, { channel, autoDownload }) => {
+  log.info(CHECK_FOR_UPDATE_PENDING, { channel, currentAppVersion });
   const { sender } = event;
+  autoUpdater.channel = channel;
 
   if (isDev) {
     sender.send(CHECK_FOR_UPDATE_SUCCESS);
@@ -36,9 +32,11 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, event => {
     result
       .then(checkResult => {
         const { updateInfo } = checkResult;
-        sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, currentAppVersion);
+        log.info(CHECK_FOR_UPDATE_SUCCESS, { channel, checkResult });
+        sender.send(CHECK_FOR_UPDATE_SUCCESS, { updateInfo, currentAppVersion, autoDownload });
       })
       .catch(error => {
+        log.info(CHECK_FOR_UPDATE_FAILURE, { error });
         sender.send(CHECK_FOR_UPDATE_FAILURE, error);
       });
   }
@@ -47,17 +45,21 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, event => {
 ipcMain.on(DOWNLOAD_UPDATE_PENDING, event => {
   const result = autoUpdater.downloadUpdate();
   const { sender } = event;
+  log.info(DOWNLOAD_UPDATE_PENDING);
 
   result
     .then(() => {
+      log.info(DOWNLOAD_UPDATE_SUCCESS);
       sender.send(DOWNLOAD_UPDATE_SUCCESS);
     })
     .catch(error => {
+      log.info(DOWNLOAD_UPDATE_FAILURE, { error });
       sender.send(DOWNLOAD_UPDATE_FAILURE, error);
     });
 });
 
 ipcMain.on(QUIT_AND_INSTALL_UPDATE, () => {
+  log.info(QUIT_AND_INSTALL_UPDATE);
   autoUpdater.quitAndInstall(
     true, // isSilent
     true, // isForceRunAfter, restart app after update is installed
