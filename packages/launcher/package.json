@@ -3,7 +3,7 @@
   "version": "0.1.6-alpha",
   "private": true,
   "homepage": "./",
-  "main": "build/electron/main.js",
+  "main": "electron/main.js",
   "author": {
     "name": "Qilin Team",
     "email": "your.email@domain.com",
