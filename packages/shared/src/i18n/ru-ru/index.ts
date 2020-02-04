@@ -65,7 +65,7 @@ export default {
     update_status: {
       checking: 'Поиск обновления',
       downloading_and_install: 'Загрузка и установка обновления',
-      found_version: 'Найдена версия {{version}}',
+      found_version: 'Найдена версия {{versionToDownload}}',
       current_version_is_latest: 'Версия {{version}} последняя',
       checking_failure: 'Ошибка поиска обновления, нет доступных версий',
       download_success: 'Загрузка обновления завершена',

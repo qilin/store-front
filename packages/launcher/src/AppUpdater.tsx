@@ -136,6 +136,7 @@ const AppUpdater = () => {
     downloadUpdateAndInstall,
     changeChannel: (channel: string) => {
       setLoading(true);
+      setVersionToDownload(null);
       ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, { channel, autoDownload: false });
     },
   };
