@@ -66,7 +66,7 @@ export default {
     update_status: {
       checking: 'Checking for updates',
       downloading_and_install: 'Downloading update and install',
-      found_version: 'Found version {{version}}',
+      found_version: 'Found version {{versionToDownload}}',
       current_version_is_latest: 'Current version {{version}} is latest',
       checking_failure: 'Checking for update failure, no available versions',
       download_success: 'Download update success',

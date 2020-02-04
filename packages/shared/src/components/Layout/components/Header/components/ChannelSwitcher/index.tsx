@@ -15,9 +15,10 @@ const useStyles = makeStyles({
 });
 
 const ChannelSwitcher = () => {
-  const { info, status, changeChannel, readyToDownload, downloadUpdateAndInstall } = useContext(LauncherContext);
   const { t } = useTranslation();
-  const [channel, setChannel] = useState(info.channel);
+  const { info, status, changeChannel, versionToDownload, downloadUpdateAndInstall } = useContext(LauncherContext);
+  const { channel: initialChannel, version } = info;
+  const [channel, setChannel] = useState(initialChannel);
   const classes = useStyles();
 
   const handleChangeChannel = (event: any) => {
@@ -25,8 +26,6 @@ const ChannelSwitcher = () => {
     setChannel(newChannel);
     changeChannel(newChannel);
   };
-
-  const handleDownload = () => downloadUpdateAndInstall();
 
   return (
     <>
@@ -36,9 +35,9 @@ const ChannelSwitcher = () => {
         ))}
       </Select>
       <div className={classes.status}>
-        {status}
+        {t(status, { version, versionToDownload })}
       </div>
-      {readyToDownload && <button onClick={handleDownload}>{t('labels.download_and_install')}</button>}
+      {!!versionToDownload && <button onClick={downloadUpdateAndInstall}>{t('labels.download_and_install')}</button>}
     </>
   );
 };

@@ -8,6 +8,10 @@ const { APP_INFO } = require('../src/ipc.constants');
 
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 680;
+const WINDOW_TITLE = 'Qilin Launcher';
+const BACKGROUND_DARK = '#262626';
+const appVersion = app.getVersion();
+const appChannel = appVersion.split('-')[1] || 'latest';
 
 let mainWindow;
 
@@ -21,8 +25,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
-    title: 'Qilin Launcher',
-    backgroundColor: '#262626',
+    title: WINDOW_TITLE,
+    backgroundColor: BACKGROUND_DARK,
     webPreferences: {
       nodeIntegration: true,
       // webSecurity: false,
@@ -58,8 +62,8 @@ app.on('activate', () => {
 ipcMain.on(APP_INFO, event => {
   event.sender.send(APP_INFO, {
     name: app.name,
-    version: app.getVersion(),
-    channel: app.getVersion().split('-')[1] || 'latest',
+    version: appVersion,
+    channel: appChannel,
     channels: ['latest', 'alpha', 'beta'],
   });
 });

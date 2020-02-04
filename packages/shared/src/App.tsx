@@ -61,16 +61,10 @@ const App = () => {
   );
 };
 
-const AppWithLauncher = (props: any) => (
-  <LauncherContext.Provider value={props.launcherContextValue}>
-    <App />
-  </LauncherContext.Provider>
-);
-
-const AppWithApollo = (props: any) => {
+const AppWithApollo = () => {
   return (
     <ApolloProvider client={client}>
-      <AppWithLauncher {...props} />
+      <App />
     </ApolloProvider>
   );
 };

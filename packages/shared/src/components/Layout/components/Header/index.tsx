@@ -6,7 +6,7 @@ import { LauncherContext } from '../../../../App';
 
 const Header = () => {
   const classes = useStyles();
-  const isLauncher = useContext(LauncherContext);
+  const isLauncher = !!useContext(LauncherContext);
 
   return (
     <header className={classes.root}>
