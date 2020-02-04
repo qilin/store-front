@@ -62,6 +62,15 @@ export default {
       additional_language: 'Дополнительный язык',
       len_char_over: 'Количество символов более',
     },
+    update_status: {
+      checking: 'Поиск обновления',
+      downloading_and_install: 'Загрузка и установка обновления',
+      found_version: 'Найдена версия {{version}}',
+      current_version_is_latest: 'Версия {{version}} последняя',
+      checking_failure: 'Ошибка поиска обновления, нет доступных версий',
+      download_success: 'Загрузка обновления завершена',
+      download_failure: 'Ошибка загрузки обновления',
+    },
     paragraphs: {
       accounts_data_successfully_updated: 'Данные аккаунта успешно обновлены',
     },

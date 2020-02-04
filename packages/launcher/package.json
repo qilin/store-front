@@ -1,6 +1,6 @@
 {
   "name": "qilin-launcher",
-  "version": "0.1.4-alpha",
+  "version": "0.1.6-alpha",
   "private": true,
   "homepage": "./",
   "main": "electron/main.js",
@@ -37,16 +37,17 @@
     "typescript": "3.6.3"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "concurrently \"yarn start-renderer\" \"wait-on http://localhost:3000 && yarn start-main\"",
+    "start-renderer": "BROWSER=none react-app-rewired start",
+    "start-main": "yarn electron .",
     "build": "react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint './**/*.{ts,tsx}'",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "build-electron": "mkdir build/src && cp -r electron/. build/electron && cp src/ipc.constants.js build/src/ipc.constants.js",
     "preelectron-pack": "yarn build && yarn build-electron",
-    "electron-pack": "electron-builder build -c.extraMetadata.main=build/electron/main.js"
+    "electron-pack": "electron-builder build"
   },
   "browserslist": {
     "production": [

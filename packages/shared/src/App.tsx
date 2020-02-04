@@ -19,6 +19,7 @@ import { GET_USER } from './query';
 import { logout, login } from './auth';
 
 export const UserContext = React.createContext<any>({});
+export const LauncherContext = React.createContext<any>({});
 
 const history = createBrowserHistory();
 
@@ -60,10 +61,12 @@ const App = () => {
   );
 };
 
-const AppWithApollo = () => (
-  <ApolloProvider client={client}>
-    <App />    
-  </ApolloProvider>
-);
+const AppWithApollo = () => {
+  return (
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
+};
 
 export default AppWithApollo;
