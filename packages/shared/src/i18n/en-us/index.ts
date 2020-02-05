@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/camelcase */
 export default {
   translation: {
@@ -61,16 +62,17 @@ export default {
       primary_language: 'Primary language',
       additional_language: 'Additional language',
       len_char_over: 'Number of characters over',
-      download_and_install: 'Download and install',
+      download: 'Download',
+      install: 'Install',
+      download_and_install: 'Download and Install',
     },
     update_status: {
-      checking: 'Checking for updates',
-      downloading_and_install: 'Downloading update and install',
-      found_version: 'Found version {{versionToDownload}}',
-      current_version_is_latest: 'Current version {{version}} is latest',
-      checking_failure: 'Checking for update failure, no available versions',
-      download_success: 'Download update success',
-      download_failure: 'Download update failure',
+      CHECK_FOR_UPDATE_PENDING: 'Downloading update',
+      UPDATE_AVAILABLE: 'Available update {{versionToDownload}}',
+      UPDATE_NOT_AVAILABLE: 'Update for version {{currentVersion}} is not available (latest version: {{versionToDownload}})',
+      CHECK_FOR_UPDATE_FAILURE: 'Checking for update failure, update not available',
+      DOWNLOAD_UPDATE_SUCCESS: 'Download update success',
+      DOWNLOAD_UPDATE_FAILURE: 'Download update failure',
     },
     paragraphs: {
       accounts_data_successfully_updated: 'Account details successfully updated',

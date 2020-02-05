@@ -16,8 +16,14 @@ const useStyles = makeStyles({
 
 const ChannelSwitcher = () => {
   const { t } = useTranslation();
-  const { info, status, changeChannel, versionToDownload, downloadUpdateAndInstall } = useContext(LauncherContext);
-  const { channel: initialChannel, version } = info;
+  const {
+    info,
+    status,
+    changeChannel,
+    versionToDownload,
+    downloadUpdateAndInstall,
+  } = useContext(LauncherContext);
+  const { channel: initialChannel, version, channels } = info;
   const [channel, setChannel] = useState(initialChannel);
   const classes = useStyles();
 
@@ -30,12 +36,12 @@ const ChannelSwitcher = () => {
   return (
     <>
       <Select className={classes.root} value={channel} onChange={handleChangeChannel}>
-        {info.channels.map((value: string) => (
+        {channels.map((value: string) => (
           <MenuItem key={value} value={value}>{value}</MenuItem>
         ))}
       </Select>
       <div className={classes.status}>
-        {t(status, { version, versionToDownload })}
+        {t(`update_status.${status}`, { currentVersion: version, versionToDownload })}
       </div>
       {!!versionToDownload && <button onClick={downloadUpdateAndInstall}>{t('labels.download_and_install')}</button>}
     </>

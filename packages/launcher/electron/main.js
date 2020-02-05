@@ -64,6 +64,6 @@ ipcMain.on(APP_INFO, event => {
     name: app.name,
     version: appVersion,
     channel: appChannel,
-    channels: ['latest', 'alpha', 'beta'],
+    channels: ['latest', 'beta', 'alpha'],
   });
 });
