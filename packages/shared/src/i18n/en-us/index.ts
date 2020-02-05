@@ -67,6 +67,7 @@ export default {
       download_and_install: 'Download and Install',
     },
     update_status: {
+      CHECK_FOR_UPDATE_PENDING: 'Looking for update',
       DOWNLOAD_UPDATE_PENDING: 'Downloading update (version: {{versionToDownload}})',
       UPDATE_AVAILABLE: 'Available update {{versionToDownload}}',
       UPDATE_NOT_AVAILABLE: 'Update for version {{currentVersion}} is not available (latest version: {{versionToDownload}})',
