@@ -67,7 +67,7 @@ export default {
       download_and_install: 'Скачать и Установить',
     },
     update_status: {
-      DOWNLOAD_UPDATE_PENDING: 'Загрузка обновления',
+      DOWNLOAD_UPDATE_PENDING: 'Загрузка обновления (версия: {{versionToDownload}})',
       UPDATE_AVAILABLE: 'Доступно обновление {{versionToDownload}}',
       UPDATE_NOT_AVAILABLE: 'Обновление для {{currentVersion}} не доступно (Последняя версия: {{versionToDownload}})',
       CHECK_FOR_UPDATE_FAILURE: 'Ошибка поиска обновления, нет доступного обновления',
