@@ -186,6 +186,7 @@ const AppUpdater = () => {
     checking,
     updateError,
     downloadUpdateAndInstall,
+    updateAvailable: status === UPDATE_AVAILABLE,
     changeChannel: (channel: string) => {
       checkUpdate({ channel, autoDownload: false });
     },

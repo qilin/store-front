@@ -19,6 +19,7 @@ const ChannelSwitcher = () => {
   const {
     info,
     status,
+    updateAvailable,
     changeChannel,
     versionToDownload,
     downloadUpdateAndInstall,
@@ -43,7 +44,7 @@ const ChannelSwitcher = () => {
       <div className={classes.status}>
         {t(`update_status.${status}`, { currentVersion: version, versionToDownload })}
       </div>
-      {!!versionToDownload && <button onClick={downloadUpdateAndInstall}>{t('labels.download_and_install')}</button>}
+      {updateAvailable && <button onClick={downloadUpdateAndInstall}>{t('labels.download_and_install')}</button>}
     </>
   );
 };
