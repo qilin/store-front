@@ -6,6 +6,7 @@ import App, { LauncherContext } from '@qilin/shared/src/App';
 import { BACKGROUND_DARK } from '@qilin/shared/src/styles/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useTranslation } from 'react-i18next';
+import { qu } from '@qilin/shared/src/helpers';
 
 import {
   CHECK_FOR_UPDATE_PENDING,
@@ -94,6 +95,7 @@ const AppUpdater = () => {
   const classes = useStyle();
 
   const checkUpdate = (params: CheckUpdateParams) => {
+    qu('myevent', { key: CHECK_FOR_UPDATE_PENDING, data: { params } });
     setChecking(true);
     setDownloading(false);
     setDownloadProgress(null);
@@ -104,6 +106,7 @@ const AppUpdater = () => {
   };
 
   const downloadUpdate = (autoInstall: boolean) => {
+    qu('myevent', { key: DOWNLOAD_UPDATE_PENDING, data: { autoInstall } });
     ipcRenderer.send(DOWNLOAD_UPDATE_PENDING, autoInstall);
     setDownloading(true);
     setUpdateStatus(DOWNLOAD_UPDATE_PENDING);
@@ -114,6 +117,7 @@ const AppUpdater = () => {
   };
 
   const handleAppInfo = (event: any, appInfo: AppInfo) => {
+    qu('myevent', { key: APP_INFO, data: { appInfo } });
     setAppInfo(appInfo);
     checkUpdate({ channel: appInfo.channel, autoDownload: true });
   };
@@ -125,11 +129,11 @@ const AppUpdater = () => {
     currentAppVersion: string,
   ) => {
     const version = updateInfo && updateInfo.version;
-
     setChecking(false);
     setVersionToDownload(version);
 
     if (version && currentAppVersion && version !== currentAppVersion) {
+      qu('myevent', { key: UPDATE_AVAILABLE, data: { updateInfo, checkUpdateParams, currentAppVersion } });
       setUpdateStatus(UPDATE_AVAILABLE);
 
       if (checkUpdateParams.autoDownload) {
@@ -137,18 +141,21 @@ const AppUpdater = () => {
         downloadUpdateAndInstall();
       }
     } else {
+      qu('myevent', { key: UPDATE_NOT_AVAILABLE, data: { updateInfo, checkUpdateParams, currentAppVersion } });
       setUpdateStatus(UPDATE_NOT_AVAILABLE);
       setRedirectToApp(true);
     }
   };
 
   const handleCheckUpdateFailure = (event: any, error: any) => {
+    qu('myevent', { key: CHECK_FOR_UPDATE_FAILURE, data: { error } });
     setChecking(false);
     setUpdateStatus(CHECK_FOR_UPDATE_FAILURE);
     setUpdateError({ code: error.code, description: error.description });
   };
 
   const handleDownloadUpdateSuccess = (event: any, autoInstall = true) => {
+    qu('myevent', { key: DOWNLOAD_UPDATE_SUCCESS, data: { autoInstall } });
     setUpdateStatus(DOWNLOAD_UPDATE_SUCCESS);
     setDownloading(false);
     if (autoInstall) {
@@ -157,6 +164,7 @@ const AppUpdater = () => {
   };
 
   const handleDownloadUpdateFailure = (event: any, error: any) => {
+    qu('myevent', { key: DOWNLOAD_UPDATE_FAILURE, data: { error } });
     setUpdateStatus(DOWNLOAD_UPDATE_FAILURE);
     setUpdateError({ code: error.code, description: error.description });
     setChecking(false);
@@ -164,6 +172,7 @@ const AppUpdater = () => {
   };
 
   const handleDownloadProgress = (event: any, progressInfo: ProgressInfo) => {
+    qu('myevent', { key: DOWNLOAD_PROGRESS, data: { progressInfo } });
     setDownloadProgress(progressInfo);
   };
 
@@ -188,6 +197,7 @@ const AppUpdater = () => {
     downloadUpdateAndInstall,
     updateAvailable: status === UPDATE_AVAILABLE,
     changeChannel: (channel: string) => {
+      qu('myevent', { key: 'CHECK_CHANNEL_UPDATE', data: { channel } });
       checkUpdate({ channel, autoDownload: false });
     },
   };
