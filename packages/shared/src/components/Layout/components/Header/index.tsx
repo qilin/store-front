@@ -2,6 +2,7 @@ import React from 'react';
 
 import { UserButton, LocaleSwitcher, ChannelSwitcher } from './components';
 import useStyles from './useStyle';
+import { isLauncher } from '../../../../helpers';
 
 const Header = () => {
   const classes = useStyles();
@@ -11,7 +12,7 @@ const Header = () => {
       <div className={classes.logoContainer}>
         <span className={classes.logoText}>Рамблер/ ИГРЫ</span>
       </div>
-      {process.env.REACT_APP_MODE === 'electron' && <ChannelSwitcher />}
+      {isLauncher && <ChannelSwitcher />}
       <UserButton />
       <LocaleSwitcher />
     </header>

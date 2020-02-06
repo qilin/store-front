@@ -51,12 +51,12 @@ interface AppInfo {
   name: string;
   version: string;
   channel: string;
-  channels: [];
+  channels: string[];
 }
 
 interface UpdateInfo {
   version: string;
-  files: [];
+  files: { url: string }[];
   releaseName: string;
   releaseNotes: string;
   releaseDate: string;
