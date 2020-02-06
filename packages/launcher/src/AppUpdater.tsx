@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Box, CircularProgress } from '@material-ui/core';
+import { Typography, Box, CircularProgress, LinearProgress } from '@material-ui/core';
 import { ipcRenderer } from 'electron';
 import App, { LauncherContext } from '@qilin/shared/src/App';
 import { BACKGROUND_DARK } from '@qilin/shared/src/styles/colors';
@@ -11,9 +11,12 @@ import {
   CHECK_FOR_UPDATE_PENDING,
   CHECK_FOR_UPDATE_SUCCESS,
   CHECK_FOR_UPDATE_FAILURE,
+  UPDATE_AVAILABLE,
+  UPDATE_NOT_AVAILABLE,
   DOWNLOAD_UPDATE_FAILURE,
   DOWNLOAD_UPDATE_PENDING,
   DOWNLOAD_UPDATE_SUCCESS,
+  DOWNLOAD_PROGRESS,
   QUIT_AND_INSTALL_UPDATE,
   APP_INFO,
 } from './ipc.constants';
@@ -38,13 +41,26 @@ const useStyle = makeStyles({
     marginTop: 15,
     color: 'white',
   },
+  progressWrapper: {
+    width: 500,
+    margin: '10px 0',
+  },
 });
 
 interface AppInfo {
   name: string;
   version: string;
   channel: string;
-  channels: [];
+  channels: string[];
+}
+
+interface UpdateInfo {
+  version: string;
+  files: { url: string }[];
+  releaseName: string;
+  releaseNotes: string;
+  releaseDate: string;
+  stagingPercentage: number;
 }
 
 interface UpdateError {
@@ -52,92 +68,127 @@ interface UpdateError {
   description?: string;
 }
 
-interface UpdateParams {
-  currentAppVersion: string;
+interface CheckUpdateParams {
+  channel: string;
   autoDownload: boolean;
-  updateInfo: any;
+}
+
+interface ProgressInfo {
+  bytesPerSecond: any;
+  percent: any;
+  total: any;
+  transferred: any;
 }
 
 const AppUpdater = () => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(true);
-  const [versionToDownload, setVersionToDownload] = useState(null);
-  const [info, setAppInfo] = useState<AppInfo | null>(null);
-  const [status, setUpdateStatus] = useState(t('update_status.checking'));
-  const [updateError, setUpdateError] = useState<UpdateError | null>(null);
+  const [checking, setChecking] = useState(true);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState<ProgressInfo | null>();
+  const [versionToDownload, setVersionToDownload] = useState();
+  const [info, setAppInfo] = useState<AppInfo>();
+  const [status, setUpdateStatus] = useState();
+  const [updateError, setUpdateError] = useState<UpdateError | null>();
   const [redirectToApp, setRedirectToApp] = useState(false);
 
   const classes = useStyle();
 
-  const handleAppInfo = (event: any, appInfo: AppInfo) => {
-    setAppInfo(appInfo);
-    ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, { channel: appInfo.channel, autoDownload: true });
+  const checkUpdate = (params: CheckUpdateParams) => {
+    setChecking(true);
+    setDownloading(false);
+    setDownloadProgress(null);
+    setVersionToDownload(null);
+    setUpdateError(null);
+    setUpdateStatus(CHECK_FOR_UPDATE_PENDING);
+    ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, params);
+  };
+
+  const downloadUpdate = (autoInstall: boolean) => {
+    ipcRenderer.send(DOWNLOAD_UPDATE_PENDING, autoInstall);
+    setDownloading(true);
+    setUpdateStatus(DOWNLOAD_UPDATE_PENDING);
   };
 
   const downloadUpdateAndInstall = () => {
-    setUpdateStatus('update_status.downloading_and_install');
-    ipcRenderer.send(DOWNLOAD_UPDATE_PENDING);
+    downloadUpdate(true);
   };
 
-  const handleCheckUpdateSuccess = (event: any, params: UpdateParams) => {
-    const { autoDownload, currentAppVersion, updateInfo } = params;
+  const handleAppInfo = (event: any, appInfo: AppInfo) => {
+    setAppInfo(appInfo);
+    checkUpdate({ channel: appInfo.channel, autoDownload: true });
+  };
+
+  const handleCheckUpdateSuccess = (
+    event: any,
+    updateInfo: UpdateInfo,
+    checkUpdateParams: CheckUpdateParams,
+    currentAppVersion: string,
+  ) => {
     const version = updateInfo && updateInfo.version;
 
-    //TODO если мажорная не изменилась то downloadUpdateAndInstallAfterQuit
-    if (version && version !== currentAppVersion) {
-      setVersionToDownload(version);
-      setUpdateStatus('update_status.found_version');
+    setChecking(false);
+    setVersionToDownload(version);
 
-      if (autoDownload) {
-        setUpdateStatus('update_status.downloading_and_install');
-        ipcRenderer.send(DOWNLOAD_UPDATE_PENDING);
+    if (version && currentAppVersion && version !== currentAppVersion) {
+      setUpdateStatus(UPDATE_AVAILABLE);
+
+      if (checkUpdateParams.autoDownload) {
+        //TODO если мажорная не изменилась то downloadUpdateAndInstallAfterQuit
+        downloadUpdateAndInstall();
       }
     } else {
-      setUpdateStatus('update_status.current_version_is_latest');
-      setLoading(false);
+      setUpdateStatus(UPDATE_NOT_AVAILABLE);
       setRedirectToApp(true);
     }
   };
 
   const handleCheckUpdateFailure = (event: any, error: any) => {
-    setLoading(false);
-    setUpdateStatus('update_status.checking_failure');
+    setChecking(false);
+    setUpdateStatus(CHECK_FOR_UPDATE_FAILURE);
     setUpdateError({ code: error.code, description: error.description });
   };
 
-  const handleDownloadUpdateSuccess = () => {
-    //TODO check autoinsall or install after quit
-    setUpdateStatus('update_status.download_success');
+  const handleDownloadUpdateSuccess = (event: any, autoInstall = true) => {
     setUpdateStatus(DOWNLOAD_UPDATE_SUCCESS);
-    ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
+    setDownloading(false);
+    if (autoInstall) {
+      ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
+    }
   };
 
   const handleDownloadUpdateFailure = (event: any, error: any) => {
-    setUpdateStatus('update_status.download_failure');
+    setUpdateStatus(DOWNLOAD_UPDATE_FAILURE);
     setUpdateError({ code: error.code, description: error.description });
-    setLoading(false);
+    setChecking(false);
+    setDownloading(false);
+  };
+
+  const handleDownloadProgress = (event: any, progressInfo: ProgressInfo) => {
+    setDownloadProgress(progressInfo);
   };
 
   useEffect(() => {
     ipcRenderer.send(APP_INFO);
+    ipcRenderer.send(DOWNLOAD_PROGRESS);
     ipcRenderer.on(APP_INFO, handleAppInfo);
     ipcRenderer.on(CHECK_FOR_UPDATE_SUCCESS, handleCheckUpdateSuccess);
     ipcRenderer.on(CHECK_FOR_UPDATE_FAILURE, handleCheckUpdateFailure);
     ipcRenderer.on(DOWNLOAD_UPDATE_SUCCESS, handleDownloadUpdateSuccess);
     ipcRenderer.on(DOWNLOAD_UPDATE_FAILURE, handleDownloadUpdateFailure);
+    ipcRenderer.on(DOWNLOAD_PROGRESS, handleDownloadProgress);
+    // eslint-disable-next-line
   }, []);
 
   const appUpdaterContext = {
     info,
     versionToDownload,
     status,
-    loading,
+    checking,
     updateError,
     downloadUpdateAndInstall,
+    updateAvailable: status === UPDATE_AVAILABLE,
     changeChannel: (channel: string) => {
-      setLoading(true);
-      setVersionToDownload(null);
-      ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, { channel, autoDownload: false });
+      checkUpdate({ channel, autoDownload: false });
     },
   };
 
@@ -152,7 +203,11 @@ const AppUpdater = () => {
   return (
     <div className={classes.root} >
       <CssBaseline />
-      <Typography variant="h6">{status}</Typography>
+      {!checking && (
+        <Typography variant="h6">
+          {t(`update_status.${status}`, { currentVersion: info && info.version, versionToDownload })}
+        </Typography>
+      )}
       {updateError && (
         <Box textAlign="center">
           <Typography variant="subtitle1">Error</Typography>
@@ -167,7 +222,12 @@ const AppUpdater = () => {
           <div>channel: {info.channel}</div>
         </div>
       )}
-      {loading && <CircularProgress className={classes.loader} />}
+      {checking && <CircularProgress className={classes.loader} />}
+      {downloading &&
+        <div className={classes.progressWrapper}>
+          <LinearProgress variant="determinate" value={(downloadProgress && downloadProgress.percent) || 0} />
+        </div>}
+      {downloading && <div>Speed: {downloadProgress && downloadProgress.bytesPerSecond} bytesPerSecond</div>}
     </div>
   );
 };

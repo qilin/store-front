@@ -11,6 +11,7 @@ const {
   DOWNLOAD_UPDATE_PENDING,
   DOWNLOAD_UPDATE_FAILURE,
   DOWNLOAD_UPDATE_SUCCESS,
+  DOWNLOAD_PROGRESS,
 } = require('../../src/ipc.constants');
 
 const currentAppVersion = app.getVersion();
@@ -19,47 +20,55 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.autoDownload = false;
 
-ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, { channel, autoDownload }) => {
+ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
   const { sender } = event;
-  autoUpdater.channel = channel;
+  autoUpdater.channel = checkParams.channel;
+  log.info(CHECK_FOR_UPDATE_PENDING, { checkParams });
 
   if (isDev) {
-    sender.send(CHECK_FOR_UPDATE_SUCCESS, {
-      channel,
-      autoDownload,
-      currentAppVersion,
-      updateInfo: {
-        version: currentAppVersion,
-      },
-    });
+    const updateInfo = { version: currentAppVersion };
+    sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
   } else {
     const result = autoUpdater.checkForUpdates();
 
     result
       .then(checkResult => {
         const { updateInfo } = checkResult;
-        sender.send(CHECK_FOR_UPDATE_SUCCESS, { updateInfo, currentAppVersion, autoDownload });
+        log.info(CHECK_FOR_UPDATE_SUCCESS, { updateInfo, checkParams, currentAppVersion });
+        sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
       })
       .catch(error => {
+        log.error(CHECK_FOR_UPDATE_FAILURE, error);
         sender.send(CHECK_FOR_UPDATE_FAILURE, error);
       });
   }
 });
 
-ipcMain.on(DOWNLOAD_UPDATE_PENDING, event => {
+ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
   const result = autoUpdater.downloadUpdate();
   const { sender } = event;
+  log.info(DOWNLOAD_UPDATE_PENDING, { autoInstall });
 
   result
     .then(() => {
-      sender.send(DOWNLOAD_UPDATE_SUCCESS);
+      log.info(DOWNLOAD_UPDATE_SUCCESS, { autoInstall });
+      sender.send(DOWNLOAD_UPDATE_SUCCESS, autoInstall);
     })
     .catch(error => {
+      log.error(DOWNLOAD_UPDATE_FAILURE, error);
       sender.send(DOWNLOAD_UPDATE_FAILURE, error);
     });
 });
 
+ipcMain.once(DOWNLOAD_PROGRESS, event => {
+  autoUpdater.signals.progress(info => {
+    log.info(DOWNLOAD_PROGRESS, { info });
+    event.sender.send(DOWNLOAD_PROGRESS, info);
+  });
+});
+
 ipcMain.on(QUIT_AND_INSTALL_UPDATE, () => {
+  log.info(QUIT_AND_INSTALL_UPDATE);
   autoUpdater.quitAndInstall(
     true, // isSilent
     true, // isForceRunAfter, restart app after update is installed

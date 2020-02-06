@@ -3,6 +3,8 @@ export * from './getPlatformIcons';
 
 export const qu = (window as any).qu;
 
+export const isLauncher = process.env.REACT_APP_MODE === 'electron';
+
 export const getUrlParameter = (name: string, search: string) => {
   const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
   const results = regex.exec(search);

@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { UserButton, LocaleSwitcher, ChannelSwitcher } from './components';
 import useStyles from './useStyle';
-import { LauncherContext } from '../../../../App';
+import { isLauncher } from '../../../../helpers';
 
 const Header = () => {
   const classes = useStyles();
-  const isLauncher = !!useContext(LauncherContext);
 
   return (
     <header className={classes.root}>

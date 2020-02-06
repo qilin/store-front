@@ -6,7 +6,7 @@ files:
       - build/**/*
       - node_modules/**/*
 appId: com.qilin-launcher.app
-productName: Qilin Launcher
+productName: QilinLauncher
 copyright: 'Copyright © 2020 ${author}'
 generateUpdatesFilesForAllChannels: true
 compression: store
