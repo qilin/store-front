@@ -39,7 +39,7 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
       })
       .catch(error => {
         log.error(CHECK_FOR_UPDATE_FAILURE, error);
-        sender.send(CHECK_FOR_UPDATE_FAILURE, error);
+        sender.send(CHECK_FOR_UPDATE_FAILURE, { name: error.name, message: error.message, stack: error.stack });
       });
   }
 });
@@ -56,7 +56,7 @@ ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
     })
     .catch(error => {
       log.error(DOWNLOAD_UPDATE_FAILURE, error);
-      sender.send(DOWNLOAD_UPDATE_FAILURE, error);
+      sender.send(DOWNLOAD_UPDATE_FAILURE, { name: error.name, message: error.message, stack: error.stack });
     });
 });
 
