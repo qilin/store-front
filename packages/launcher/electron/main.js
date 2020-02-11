@@ -2,9 +2,10 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+const log = require('electron-log');
 
 require('./auto-updater');
-const { APP_INFO } = require('../src/ipc.constants');
+const { APP_INFO, APP_READY, APP_QUIT } = require('../src/ipc.constants');
 
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 680;
@@ -44,10 +45,13 @@ function createWindow() {
 }
 
 app.on('ready', () => {
+  log.info(APP_READY);
   createWindow();
 });
 
 app.on('window-all-closed', () => {
+  log.info(APP_QUIT);
+
   if (process.platform !== 'darwin') {
     app.quit();
   }

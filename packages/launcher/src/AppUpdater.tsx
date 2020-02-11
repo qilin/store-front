@@ -65,8 +65,9 @@ interface UpdateInfo {
 }
 
 interface UpdateError {
-  code: string;
-  description?: string;
+  name: string;
+  message: string;
+  stack: string;
 }
 
 interface CheckUpdateParams {
@@ -147,11 +148,11 @@ const AppUpdater = () => {
     }
   };
 
-  const handleCheckUpdateFailure = (event: any, error: any) => {
+  const handleCheckUpdateFailure = (event: any, error: UpdateError) => {
     qu('myevent', { key: CHECK_FOR_UPDATE_FAILURE, data: { error } });
     setChecking(false);
     setUpdateStatus(CHECK_FOR_UPDATE_FAILURE);
-    setUpdateError({ code: error.code, description: error.description });
+    setUpdateError(error);
   };
 
   const handleDownloadUpdateSuccess = (event: any, autoInstall = true) => {
@@ -163,10 +164,10 @@ const AppUpdater = () => {
     }
   };
 
-  const handleDownloadUpdateFailure = (event: any, error: any) => {
+  const handleDownloadUpdateFailure = (event: any, error: UpdateError) => {
     qu('myevent', { key: DOWNLOAD_UPDATE_FAILURE, data: { error } });
     setUpdateStatus(DOWNLOAD_UPDATE_FAILURE);
-    setUpdateError({ code: error.code, description: error.description });
+    setUpdateError(error);
     setChecking(false);
     setDownloading(false);
   };
@@ -220,9 +221,7 @@ const AppUpdater = () => {
       )}
       {updateError && (
         <Box textAlign="center">
-          <Typography variant="subtitle1">Error</Typography>
-          <Typography>code: {updateError.code}</Typography>
-          <Typography>description: {updateError.description}</Typography>
+          <Typography variant="subtitle1">{updateError.message}</Typography>
         </Box>
       )}
       {info && (
