@@ -38,8 +38,10 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
         sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
       })
       .catch(error => {
+        const { name, message, stack } = error;
+
         log.error(CHECK_FOR_UPDATE_FAILURE, error);
-        sender.send(CHECK_FOR_UPDATE_FAILURE, { name: error.name, message: error.message, stack: error.stack });
+        sender.send(CHECK_FOR_UPDATE_FAILURE, { name, message, stack });
       });
   }
 });
@@ -55,8 +57,10 @@ ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
       sender.send(DOWNLOAD_UPDATE_SUCCESS, autoInstall);
     })
     .catch(error => {
+      const { name, message, stack } = error;
+
       log.error(DOWNLOAD_UPDATE_FAILURE, error);
-      sender.send(DOWNLOAD_UPDATE_FAILURE, { name: error.name, message: error.message, stack: error.stack });
+      sender.send(DOWNLOAD_UPDATE_FAILURE, { name, message, stack });
     });
 });
 
