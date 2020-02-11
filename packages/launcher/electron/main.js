@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+const log = require('electron-log');
 
 require('./auto-updater');
 const { APP_INFO } = require('../src/ipc.constants');
@@ -44,10 +45,13 @@ function createWindow() {
 }
 
 app.on('ready', () => {
+  log.info('App Ready');
   createWindow();
 });
 
 app.on('window-all-closed', () => {
+  log.info('App Quit');
+
   if (process.platform !== 'darwin') {
     app.quit();
   }
