@@ -4,6 +4,7 @@ const url = require('url');
 const isDev = require('electron-is-dev');
 const log = require('electron-log');
 
+require('./sentry');
 require('./auto-updater');
 const { APP_INFO, APP_READY, APP_QUIT } = require('../src/ipc.constants');
 
@@ -30,8 +31,6 @@ function createWindow() {
     backgroundColor: BACKGROUND_DARK,
     webPreferences: {
       nodeIntegration: true,
-      // webSecurity: false,
-      // devTools: isDev
     },
   });
 
