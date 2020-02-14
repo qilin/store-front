@@ -1,4 +1,6 @@
 const { ipcMain, app } = require('electron');
+const fs = require('fs');
+const path = require('path');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
@@ -29,39 +31,42 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
     const updateInfo = { version: currentAppVersion };
     sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
   } else {
-    const result = autoUpdater.checkForUpdates();
-
-    result
+    autoUpdater.checkForUpdates()
       .then(checkResult => {
         const { updateInfo } = checkResult;
         log.info(CHECK_FOR_UPDATE_SUCCESS, { updateInfo, checkParams, currentAppVersion });
         sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
       })
       .catch(error => {
-        const { name, message, stack } = error;
-
         log.error(CHECK_FOR_UPDATE_FAILURE, error);
-        sender.send(CHECK_FOR_UPDATE_FAILURE, { name, message, stack });
+        sender.send(CHECK_FOR_UPDATE_FAILURE, { ...error });
       });
   }
 });
 
 ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
-  const result = autoUpdater.downloadUpdate();
   const { sender } = event;
+  const downloadPendingFilePath = path.join(app.getPath('exe'), '..', 'download_pending');
   log.info(DOWNLOAD_UPDATE_PENDING, { autoInstall });
 
-  result
-    .then(() => {
-      log.info(DOWNLOAD_UPDATE_SUCCESS, { autoInstall });
-      sender.send(DOWNLOAD_UPDATE_SUCCESS, autoInstall);
-    })
-    .catch(error => {
-      const { name, message, stack } = error;
+  fs.writeFile(downloadPendingFilePath, '', error => {
+    if (error) {
+      log.info(DOWNLOAD_UPDATE_FAILURE, error);
+      sender.send(DOWNLOAD_UPDATE_FAILURE, { ...error });
+    } else {
+      autoUpdater.downloadUpdate()
+        .then(() => {
+          log.info(DOWNLOAD_UPDATE_SUCCESS, { autoInstall });
+          sender.send(DOWNLOAD_UPDATE_SUCCESS, autoInstall);
+        })
+        .catch(error => {
+          log.error(DOWNLOAD_UPDATE_FAILURE, error);
+          sender.send(DOWNLOAD_UPDATE_FAILURE, { ...error });
+        });
 
-      log.error(DOWNLOAD_UPDATE_FAILURE, error);
-      sender.send(DOWNLOAD_UPDATE_FAILURE, { name, message, stack });
-    });
+      fs.unlink(downloadPendingFilePath);
+    }
+  });
 });
 
 ipcMain.once(DOWNLOAD_PROGRESS, event => {
