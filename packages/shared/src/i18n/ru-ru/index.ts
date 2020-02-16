@@ -76,6 +76,7 @@ export default {
       DOWNLOAD_UPDATE_FAILURE: 'Не удалосось загрузить обновление',
     },
     error_message: {
+      ERR_NETWORK_CHANGED: 'Вы отключены или подключены к новой сети',
       ERR_INTERNET_DISCONNECTED: 'Нет подключения к Интернету',
       ERR_CONNECTION_REFUSED: 'Нет соединения, это может быть вызвано неправильными настройками брандмауэра или недоступностью сервера',
       ERR_CONNECTION_RESET: 'Что-то случилось, что прервало вашу связь',

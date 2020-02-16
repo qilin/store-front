@@ -4,6 +4,7 @@ const netMessages = [
   'net::ERR_CONNECTION_RESET',
   'net::ERR_CONNECTION_TIMED_OUT',
   'net::ERR_TIMED_OUT',
+  'net::ERR_NETWORK_CHANGED',
 ];
 
 const getError = error => {

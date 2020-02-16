@@ -76,6 +76,7 @@ export default {
       DOWNLOAD_UPDATE_FAILURE: 'Download update failure',
     },
     error_message: {
+      ERR_NETWORK_CHANGED: 'You are disconnected or connected to a new network',
       ERR_INTERNET_DISCONNECTED: 'No Internet connection',
       ERR_CONNECTION_REFUSED: 'It can be caused by incorrect firewall settings or server isn\'t available',
       ERR_CONNECTION_RESET: 'Something happened that interrupted your connection',
