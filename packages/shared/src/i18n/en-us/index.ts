@@ -84,6 +84,7 @@ export default {
       ERR_TIMED_OUT: 'The connection took too long. Your internet connection might be too slow, or the server might be too busy',
       UNKNOWN_CODE: 'Unknow error, please contact support',
       EPERM: 'Operation not permited, check the access permissions to the app folder',
+      ENOSPC: 'No space left on device',
       ERR_UPDATER_CHANNEL_FILE_NOT_FOUND: 'Update channel file not found on server',
     },
     paragraphs: {
