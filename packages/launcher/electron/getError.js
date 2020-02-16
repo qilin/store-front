@@ -19,4 +19,4 @@ const getError = error => {
   };
 };
 
-export default getError;
+module.exports = getError;
