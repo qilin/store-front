@@ -15,7 +15,7 @@ const getError = error => {
 
   return {
     stack,
-    code: netMessages.includes(message) ? message : code,
+    code: netMessages.includes(message) ? message.slice(5) : code,
   };
 };
 

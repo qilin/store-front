@@ -45,7 +45,7 @@ const ChannelSwitcher = () => {
       <div className={classes.status}>
         {t(`update_status.${status}`, { currentVersion: version, versionToDownload })}
         <br />
-        {updateError && t(`error_message.${updateError.code}`)}
+        {updateError && t(`error_message.${updateError.code}`, updateError.code)}
       </div>
       {updateAvailable && <button onClick={downloadUpdateAndInstall}>{t('labels.download_and_install')}</button>}
     </>
