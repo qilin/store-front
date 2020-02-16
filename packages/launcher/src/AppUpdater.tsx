@@ -65,8 +65,7 @@ interface UpdateInfo {
 }
 
 interface UpdateError {
-  name: string;
-  message: string;
+  code: string;
   stack: string;
 }
 
@@ -219,11 +218,7 @@ const AppUpdater = () => {
           {t(`update_status.${status}`, { currentVersion: info && info.version, versionToDownload })}
         </Typography>
       )}
-      {updateError && (
-        <Box textAlign="center">
-          <Typography variant="subtitle1">{updateError.message}</Typography>
-        </Box>
-      )}
+      {updateError && <Typography variant="h6">{t(`error_message.${updateError.code}`)}</Typography>}
       {info && (
         <div className={classes.appInfoContainer}>
           <div>name: {info.name}</div>
