@@ -5,6 +5,8 @@ const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 
+const getUpdateError = require('./getUpdateError');
+
 const {
   CHECK_FOR_UPDATE_FAILURE,
   CHECK_FOR_UPDATE_SUCCESS,
@@ -39,7 +41,7 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
       })
       .catch(error => {
         log.error(CHECK_FOR_UPDATE_FAILURE, error);
-        sender.send(CHECK_FOR_UPDATE_FAILURE, { ...error });
+        sender.send(CHECK_FOR_UPDATE_FAILURE, getUpdateError(error), checkParams);
       });
   }
 });
@@ -52,7 +54,7 @@ ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
   fs.writeFile(downloadPendingFilePath, '', error => {
     if (error) {
       log.info(DOWNLOAD_UPDATE_FAILURE, error);
-      sender.send(DOWNLOAD_UPDATE_FAILURE, { ...error });
+      sender.send(DOWNLOAD_UPDATE_FAILURE, getUpdateError(error));
     } else {
       autoUpdater.downloadUpdate()
         .then(() => {
@@ -61,10 +63,12 @@ ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
         })
         .catch(error => {
           log.error(DOWNLOAD_UPDATE_FAILURE, error);
-          sender.send(DOWNLOAD_UPDATE_FAILURE, { ...error });
+          sender.send(DOWNLOAD_UPDATE_FAILURE, getUpdateError(error));
         });
 
-      fs.unlink(downloadPendingFilePath);
+      fs.unlink(downloadPendingFilePath, error => {
+        log.error(error);
+      });
     }
   });
 });
