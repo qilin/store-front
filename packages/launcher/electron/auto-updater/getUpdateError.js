@@ -7,7 +7,7 @@ const netMessages = [
   'net::ERR_NETWORK_CHANGED',
 ];
 
-const getError = error => {
+const getUpdateError = error => {
   const {
     stack = new Error().stack,
     code = 'UNKNOWN_CODE',
@@ -20,4 +20,4 @@ const getError = error => {
   };
 };
 
-module.exports = getError;
+module.exports = getUpdateError;
