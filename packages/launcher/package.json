@@ -1,6 +1,6 @@
 {
   "name": "qilin-launcher",
-  "version": "0.1.12-alpha",
+  "version": "0.1.12",
   "private": true,
   "homepage": "./",
   "main": "electron/main.js",
