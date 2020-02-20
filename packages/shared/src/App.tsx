@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import '@qilin/shared/src/i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { qu } from '@qilin/shared/src/helpers';
+import { qu, isLauncher, getUrlParameter } from '@qilin/shared/src/helpers';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 
 import MainPage from './pages/MainPage';
@@ -45,6 +45,11 @@ const App = () => {
     onLogin,
     onLogout,
   };
+
+  if (isLauncher && !user && !loading && !getUrlParameter('skip_auth')) {
+    login();
+    return null;
+  }
 
   return (
     <UserContext.Provider value={userContextValue}>

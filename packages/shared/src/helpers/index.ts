@@ -5,7 +5,8 @@ export const qu = (window as any).qu;
 
 export const isLauncher = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1;
 
-export const getUrlParameter = (name: string, search: string) => {
+export const getUrlParameter = (name: string) => {
+  const search = window.location.search;
   const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
   const results = regex.exec(search);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));

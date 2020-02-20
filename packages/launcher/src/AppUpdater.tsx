@@ -216,8 +216,6 @@ const AppUpdater = () => {
     );
   }
 
-  console.log('render');
-
   return (
     <div className={classes.root}>
       <CssBaseline />
