@@ -1,6 +1,6 @@
+require('dotenv').config();
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const url = require('url');
 const isDev = require('electron-is-dev');
 const log = require('electron-log');
 
@@ -18,23 +18,18 @@ const appChannel = appVersion.split('-')[1] || 'latest';
 let mainWindow;
 
 function createWindow() {
-  const startUrl = isDev ? 'http://localhost:3000' : url.format({
-    pathname: path.join(__dirname, '..', 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  });
-
   mainWindow = new BrowserWindow({
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
     title: WINDOW_TITLE,
     backgroundColor: BACKGROUND_DARK,
     webPreferences: {
-      nodeIntegration: true,
+      enableRemoteModule: false,
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
-  mainWindow.loadURL(startUrl);
+  mainWindow.loadURL(process.env.REACT_APP_BASE_URL);
 
   if (isDev) {
     mainWindow.webContents.openDevTools();

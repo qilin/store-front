@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Box, CircularProgress, LinearProgress } from '@material-ui/core';
-import { ipcRenderer } from 'electron';
+import { Typography, CircularProgress, LinearProgress } from '@material-ui/core';
 import App, { LauncherContext } from '@qilin/shared/src/App';
 import { BACKGROUND_DARK } from '@qilin/shared/src/styles/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useTranslation } from 'react-i18next';
-import { qu } from '@qilin/shared/src/helpers';
+import { qu, isLauncher } from '@qilin/shared/src/helpers';
 
 import {
   CHECK_FOR_UPDATE_PENDING,
@@ -21,6 +20,8 @@ import {
   QUIT_AND_INSTALL_UPDATE,
   APP_INFO,
 } from './ipc.constants';
+
+const { ipcRenderer = {} } = (window as any).interop || {};
 
 const useStyle = makeStyles({
   root: {
@@ -177,6 +178,11 @@ const AppUpdater = () => {
   };
 
   useEffect(() => {
+    if (!isLauncher) {
+      setRedirectToApp(true);
+      return;
+    }
+
     ipcRenderer.send(APP_INFO);
     ipcRenderer.send(DOWNLOAD_PROGRESS);
     ipcRenderer.on(APP_INFO, handleAppInfo);
@@ -210,8 +216,10 @@ const AppUpdater = () => {
     );
   }
 
+  console.log('render');
+
   return (
-    <div className={classes.root} >
+    <div className={classes.root}>
       <CssBaseline />
       {!checking && (
         <Typography variant="h6">
