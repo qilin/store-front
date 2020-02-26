@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Select, MenuItem, makeStyles } from '@material-ui/core';
-import { LauncherContext } from 'App';
+import { LauncherContext } from 'Launcher';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({

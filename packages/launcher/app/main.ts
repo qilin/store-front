@@ -3,6 +3,7 @@ import path from 'path';
 import isDev from 'electron-is-dev';
 import log from 'electron-log';
 
+import './auto-updater';
 import { APP_INFO, APP_READY, APP_QUIT } from './constants/ipc';
 
 const WINDOW_WIDTH = 900;

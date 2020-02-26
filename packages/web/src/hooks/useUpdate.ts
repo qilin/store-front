@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, CircularProgress, LinearProgress } from '@material-ui/core';
-import App, { LauncherContext } from 'App';
-import { BACKGROUND_DARK } from 'styles/colors';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { useTranslation } from 'react-i18next';
-import { qu, isLauncher } from 'helpers';
+import { useState, useEffect } from 'react';
+import { qu } from 'helpers';
+import { AppInfo, ProgressInfo, UpdateError, CheckUpdateParams, UpdateInfo } from 'types';
 
-const { ipcRenderer = {}, IPCConstants } = (window as any).interop || {};
+const { ipcRenderer = {}, IPCConstants = {} } = (window as any).interop || {};
 const {
   CHECK_FOR_UPDATE_PENDING,
   CHECK_FOR_UPDATE_SUCCESS,
@@ -22,67 +17,7 @@ const {
   APP_INFO,
 } = IPCConstants;
 
-const useStyle = makeStyles({
-  root: {
-    backgroundColor: BACKGROUND_DARK,
-    height: '100vh',
-    color: 'white',
-    flexDirection: 'column',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  appInfoContainer: {
-    padding: 10,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-  },
-  loader: {
-    marginTop: 15,
-    color: 'white',
-  },
-  progressWrapper: {
-    width: 500,
-    margin: '10px 0',
-  },
-});
-
-interface AppInfo {
-  name: string;
-  version: string;
-  channel: string;
-  channels: string[];
-}
-
-interface UpdateInfo {
-  version: string;
-  files: { url: string }[];
-  releaseName: string;
-  releaseNotes: string;
-  releaseDate: string;
-  stagingPercentage: number;
-}
-
-interface UpdateError {
-  code: string;
-  stack: string;
-}
-
-interface CheckUpdateParams {
-  channel: string;
-  autoDownload: boolean;
-}
-
-interface ProgressInfo {
-  bytesPerSecond: any;
-  percent: any;
-  total: any;
-  transferred: any;
-}
-
-const AppUpdater = () => {
-  const { t } = useTranslation();
+export default () => {
   const [checking, setChecking] = useState(true);
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<ProgressInfo | null>();
@@ -91,8 +26,6 @@ const AppUpdater = () => {
   const [status, setUpdateStatus] = useState();
   const [updateError, setUpdateError] = useState<UpdateError | null>();
   const [redirectToApp, setRedirectToApp] = useState(false);
-
-  const classes = useStyle();
 
   const checkUpdate = (params: CheckUpdateParams) => {
     qu('myevent', { key: CHECK_FOR_UPDATE_PENDING, data: { params } });
@@ -137,7 +70,6 @@ const AppUpdater = () => {
       setUpdateStatus(UPDATE_AVAILABLE);
 
       if (checkUpdateParams.autoDownload) {
-        //TODO если мажорная не изменилась то downloadUpdateAndInstallAfterQuit
         downloadUpdateAndInstall();
       }
     } else {
@@ -176,12 +108,12 @@ const AppUpdater = () => {
     setDownloadProgress(progressInfo);
   };
 
-  useEffect(() => {
-    if (!isLauncher) {
-      setRedirectToApp(true);
-      return;
-    }
+  const changeChannel = (channel: string) => {
+    qu('myevent', { key: 'CHECK_CHANNEL_UPDATE', data: { channel } });
+    checkUpdate({ channel, autoDownload: false });
+  };
 
+  useEffect(() => {
     ipcRenderer.send(APP_INFO);
     ipcRenderer.send(DOWNLOAD_PROGRESS);
     ipcRenderer.on(APP_INFO, handleAppInfo);
@@ -193,52 +125,17 @@ const AppUpdater = () => {
     // eslint-disable-next-line
   }, []);
 
-  const appUpdaterContext = {
+  return {
     info,
+    downloading,
+    downloadProgress,
     versionToDownload,
+    redirectToApp,
     status,
     checking,
     updateError,
     downloadUpdateAndInstall,
     updateAvailable: status === UPDATE_AVAILABLE,
-    changeChannel: (channel: string) => {
-      qu('myevent', { key: 'CHECK_CHANNEL_UPDATE', data: { channel } });
-      checkUpdate({ channel, autoDownload: false });
-    },
+    changeChannel,
   };
-
-  if (redirectToApp) {
-    return (
-      <LauncherContext.Provider value={appUpdaterContext}>
-        <App />
-      </LauncherContext.Provider>
-    );
-  }
-
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      {!checking && (
-        <Typography variant="h6">
-          {t(`update_status.${status}`, { currentVersion: info && info.version, versionToDownload })}
-        </Typography>
-      )}
-      {updateError && <Typography variant="h6">{t(`error_message.${updateError.code}`, updateError.code)}</Typography>}
-      {info && (
-        <div className={classes.appInfoContainer}>
-          <div>name: {info.name}</div>
-          <div>version: {info.version}</div>
-          <div>channel: {info.channel}</div>
-        </div>
-      )}
-      {checking && <CircularProgress className={classes.loader} />}
-      {downloading &&
-        <div className={classes.progressWrapper}>
-          <LinearProgress variant="determinate" value={(downloadProgress && downloadProgress.percent) || 0} />
-        </div>}
-      {downloading && <div>Speed: {downloadProgress && downloadProgress.bytesPerSecond} bytesPerSecond</div>}
-    </div>
-  );
 };
-
-export default AppUpdater;

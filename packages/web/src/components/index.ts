@@ -6,3 +6,5 @@ export { default as PlatformIcons } from './PlatformIcons';
 export { default as TabPanel } from './TabPanel';
 export { default as GameInfo } from './GameInfo';
 export { default as GamePreview } from './GamePreview';
+export { default as LauncherUpdater } from './LauncherUpdater';
+export { default as LauncherLoader } from './LauncherLoader';
