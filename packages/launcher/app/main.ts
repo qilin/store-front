@@ -1,12 +1,9 @@
-require('dotenv').config();
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-const isDev = require('electron-is-dev');
-const log = require('electron-log');
+import { app, BrowserWindow, ipcMain } from 'electron';
+import path from 'path';
+import isDev from 'electron-is-dev';
+import log from 'electron-log';
 
-require('./sentry');
-require('./auto-updater');
-const { APP_INFO, APP_READY, APP_QUIT } = require('../src/ipc.constants');
+import { APP_INFO, APP_READY, APP_QUIT } from './constants/ipc';
 
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 680;
@@ -15,7 +12,7 @@ const BACKGROUND_DARK = '#262626';
 const appVersion = app.getVersion();
 const appChannel = appVersion.split('-')[1] || 'latest';
 
-let mainWindow;
+let mainWindow: BrowserWindow | null = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -29,7 +26,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL(process.env.REACT_APP_BASE_URL);
+  mainWindow.loadURL(process.env.REACT_APP_BASE_URL || '');
 
   if (isDev) {
     mainWindow.webContents.openDevTools();
@@ -57,7 +54,7 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on(APP_INFO, event => {
+ipcMain.on(APP_INFO, (event: any) => {
   event.sender.send(APP_INFO, {
     name: app.name,
     version: appVersion,

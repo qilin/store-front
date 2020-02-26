@@ -1,4 +1,4 @@
-const { init } = require('@sentry/electron');
+import { init } from '@sentry/electron/dist/main';
 
 if (process.env.NODE_ENV !== 'development') {
   init({

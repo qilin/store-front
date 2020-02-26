@@ -4,7 +4,6 @@ directories:
 files:
   - filter:
       - build/**/*
-      - node_modules/**/*
 appId: com.qilin-launcher.app
 productName: QilinLauncher
 copyright: 'Copyright © 2020 ${author}'

@@ -1,13 +1,13 @@
-const { ipcMain, app } = require('electron');
-const fs = require('fs');
-const path = require('path');
-const { autoUpdater } = require('electron-updater');
-const log = require('electron-log');
-const isDev = require('electron-is-dev');
+import { ipcMain, app } from 'electron';
+import fs from 'fs';
+import path from 'path';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
+import isDev from 'electron-is-dev';
 
-const getUpdateError = require('./getUpdateError');
+import getUpdateError from './getUpdateError';
 
-const {
+import {
   CHECK_FOR_UPDATE_FAILURE,
   CHECK_FOR_UPDATE_SUCCESS,
   CHECK_FOR_UPDATE_PENDING,
@@ -16,15 +16,15 @@ const {
   DOWNLOAD_UPDATE_FAILURE,
   DOWNLOAD_UPDATE_SUCCESS,
   DOWNLOAD_PROGRESS,
-} = require('../../src/ipc.constants');
+} from '../constants/ipc';
 
 const currentAppVersion = app.getVersion();
 
+log.transports.file.level = 'info';
 autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.autoDownload = false;
 
-ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
+ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event: any, checkParams: any) => {
   const { sender } = event;
   autoUpdater.channel = checkParams.channel;
   log.info(CHECK_FOR_UPDATE_PENDING, { checkParams });
@@ -34,24 +34,24 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event, checkParams) => {
     sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
   } else {
     autoUpdater.checkForUpdates()
-      .then(checkResult => {
+      .then((checkResult: any) => {
         const { updateInfo } = checkResult;
         log.info(CHECK_FOR_UPDATE_SUCCESS, { updateInfo, checkParams, currentAppVersion });
         sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
       })
-      .catch(error => {
+      .catch((error: any) => {
         log.error(CHECK_FOR_UPDATE_FAILURE, error);
         sender.send(CHECK_FOR_UPDATE_FAILURE, getUpdateError(error), checkParams);
       });
   }
 });
 
-ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
+ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event: any, autoInstall: any) => {
   const { sender } = event;
   const downloadPendingFilePath = path.join(app.getPath('exe'), '..', 'download_pending');
   log.info(DOWNLOAD_UPDATE_PENDING, { autoInstall });
 
-  fs.writeFile(downloadPendingFilePath, '', error => {
+  fs.writeFile(downloadPendingFilePath, '', (error: any) => {
     if (error) {
       log.info(DOWNLOAD_UPDATE_FAILURE, error);
       sender.send(DOWNLOAD_UPDATE_FAILURE, getUpdateError(error));
@@ -61,20 +61,20 @@ ipcMain.on(DOWNLOAD_UPDATE_PENDING, (event, autoInstall) => {
           log.info(DOWNLOAD_UPDATE_SUCCESS, { autoInstall });
           sender.send(DOWNLOAD_UPDATE_SUCCESS, autoInstall);
         })
-        .catch(error => {
+        .catch((error: any) => {
           log.error(DOWNLOAD_UPDATE_FAILURE, error);
           sender.send(DOWNLOAD_UPDATE_FAILURE, getUpdateError(error));
         });
 
-      fs.unlink(downloadPendingFilePath, error => {
+      fs.unlink(downloadPendingFilePath, (error: any) => {
         log.error(error);
       });
     }
   });
 });
 
-ipcMain.once(DOWNLOAD_PROGRESS, event => {
-  autoUpdater.signals.progress(info => {
+ipcMain.once(DOWNLOAD_PROGRESS, (event: any) => {
+  autoUpdater.signals.progress((info: any) => {
     log.info(DOWNLOAD_PROGRESS, { info });
     event.sender.send(DOWNLOAD_PROGRESS, info);
   });
