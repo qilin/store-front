@@ -18,7 +18,7 @@ const Launcher = () => {
   }
 
   if (downloading || updateError) {
-    return <LauncherUpdater />;
+    return <LauncherUpdater {...updateState} />;
   }
 
   if (redirectToAuth) {

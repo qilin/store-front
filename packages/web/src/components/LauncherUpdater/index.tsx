@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, LinearProgress } from '@material-ui/core';
-import { LauncherContext } from 'Launcher';
 import { BACKGROUND_DARK } from 'styles/colors';
 import { useTranslation } from 'react-i18next';
+import { AppInfo, UpdateError, ProgressInfo } from 'types';
 
 const useStyle = makeStyles({
   root: {
@@ -31,7 +31,16 @@ const useStyle = makeStyles({
   },
 });
 
-const LauncherUpdater = () => {
+interface UpdateProps {
+  status: string | null;
+  info: AppInfo | null;
+  versionToDownload: string | null;
+  updateError: UpdateError | null;
+  downloading: boolean;
+  downloadProgress: ProgressInfo | null;
+}
+
+const LauncherUpdater = (props: UpdateProps) => {
   const {
     status,
     info,
@@ -39,8 +48,7 @@ const LauncherUpdater = () => {
     updateError,
     downloading,
     downloadProgress,
-  } = useContext(LauncherContext);
-
+  } = props;
   const { t } = useTranslation();
   const classes = useStyle();
 

@@ -20,11 +20,11 @@ const {
 export default () => {
   const [checking, setChecking] = useState(true);
   const [downloading, setDownloading] = useState(false);
-  const [downloadProgress, setDownloadProgress] = useState<ProgressInfo | null>();
-  const [versionToDownload, setVersionToDownload] = useState();
-  const [info, setAppInfo] = useState<AppInfo>();
+  const [downloadProgress, setDownloadProgress] = useState<ProgressInfo | null>(null);
+  const [versionToDownload, setVersionToDownload] = useState<string | null>(null);
+  const [info, setAppInfo] = useState<AppInfo | null>(null);
   const [status, setUpdateStatus] = useState();
-  const [updateError, setUpdateError] = useState<UpdateError | null>();
+  const [updateError, setUpdateError] = useState<UpdateError | null>(null);
   const [redirectToApp, setRedirectToApp] = useState(false);
 
   const checkUpdate = (params: CheckUpdateParams) => {
@@ -74,8 +74,8 @@ export default () => {
       }
     } else {
       qu('myevent', { key: UPDATE_NOT_AVAILABLE, data: { updateInfo, checkUpdateParams, currentAppVersion } });
-      setUpdateStatus(UPDATE_NOT_AVAILABLE);
       setRedirectToApp(true);
+      setUpdateStatus(UPDATE_NOT_AVAILABLE);
     }
   };
 

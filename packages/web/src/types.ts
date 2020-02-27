@@ -43,8 +43,9 @@ export interface CheckUpdateParams {
 }
 
 export interface ProgressInfo {
-  bytesPerSecond: any;
-  percent: any;
-  total: any;
-  transferred: any;
+  total: number;
+  delta: number;
+  transferred: number;
+  percent: number;
+  bytesPerSecond: number;
 }
