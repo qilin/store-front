@@ -8,8 +8,8 @@ import { getUrlParameter } from 'helpers';
 export const LauncherContext = React.createContext<any>({});
 
 const Launcher = () => {
-  const { checking, redirectToApp, downloading, updateError } = useContext(LauncherContext);
-  const appUpdateState = useUpdate();
+  const updateState = useUpdate();
+  const { redirectToApp, checking, downloading, updateError } = updateState;
   const { user, loading, onLogin } = useContext(UserContext);
   const redirectToAuth = redirectToApp && !user && !getUrlParameter('skip_auth');
 
@@ -27,7 +27,7 @@ const Launcher = () => {
   }
 
   return (
-    <LauncherContext.Provider value={appUpdateState}>
+    <LauncherContext.Provider value={updateState}>
       <Routes />
     </LauncherContext.Provider>
   );

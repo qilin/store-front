@@ -1,11 +1,11 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import isDev from 'electron-is-dev';
 import log from 'electron-log';
 
 import './auto-updater';
 import { APP_INFO, APP_READY, APP_QUIT } from './constants/ipc';
 
+const isDev = process.env.NODE_ENV === 'development';
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 680;
 const WINDOW_TITLE = 'Qilin Launcher';

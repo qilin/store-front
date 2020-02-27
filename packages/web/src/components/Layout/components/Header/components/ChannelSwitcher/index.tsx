@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Select, MenuItem, makeStyles } from '@material-ui/core';
 import { LauncherContext } from 'Launcher';
 import { useTranslation } from 'react-i18next';
@@ -25,9 +25,14 @@ const ChannelSwitcher = () => {
     versionToDownload,
     downloadUpdateAndInstall,
   } = useContext(LauncherContext);
-  const { channel: initialChannel, version, channels } = info;
+
+  const { channel: initialChannel, version, channels = [] } = info || {};
   const [channel, setChannel] = useState(initialChannel);
   const classes = useStyles();
+
+  useEffect(() => {
+    setChannel(info.channel);
+  }, info);
 
   const handleChangeChannel = (event: any) => {
     const newChannel = event.target.value;

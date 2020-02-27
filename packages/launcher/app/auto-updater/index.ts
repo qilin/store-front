@@ -3,10 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import isDev from 'electron-is-dev';
 
 import getUpdateError from './getUpdateError';
-
 import {
   CHECK_FOR_UPDATE_FAILURE,
   CHECK_FOR_UPDATE_SUCCESS,
@@ -29,7 +27,7 @@ ipcMain.on(CHECK_FOR_UPDATE_PENDING, (event: any, checkParams: any) => {
   autoUpdater.channel = checkParams.channel;
   log.info(CHECK_FOR_UPDATE_PENDING, { checkParams });
 
-  if (isDev) {
+  if (process.env.NODE_ENV === 'development' || process.platform === 'darwin') {
     const updateInfo = { version: currentAppVersion };
     sender.send(CHECK_FOR_UPDATE_SUCCESS, updateInfo, checkParams, currentAppVersion);
   } else {
