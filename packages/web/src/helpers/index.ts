@@ -3,7 +3,7 @@ export * from './getPlatformIcons';
 
 export const qu = (window as any).qu;
 
-export const isLauncher = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1;
+export const isLauncher = process.env.REACT_APP_MODE === 'electron';
 
 export const getUrlParameter = (name: string) => {
   const search = window.location.search;
