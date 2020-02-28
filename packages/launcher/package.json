@@ -1,6 +1,6 @@
 {
   "name": "qilin-launcher",
-  "version": "1.0.2",
+  "version": "0.3.0-alpha",
   "main": "./build/main.js",
   "author": {
     "name": "Qilin Team",
