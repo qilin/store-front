@@ -1,7 +1,7 @@
 {
   "name": "qilin-launcher",
   "version": "0.3.0-alpha",
-  "main": "./build/main.js",
+  "main": "./app/dist/main.js",
   "author": {
     "name": "Qilin Team",
     "email": "your.email@domain.com",
@@ -18,9 +18,9 @@
   "scripts": {
     "prestart": "yarn build",
     "dev": "yarn start-main-dev",
-    "start": "cross-env NODE_ENV=production yarn electron ./build/main.js",
+    "start": "cross-env NODE_ENV=production yarn electron ./app/dist/main.js",
     "build": "cross-env NODE_ENV=production yarn build-main",
-    "start-main-dev": "cross-env NODE_ENV=development concurrently \"webpack --watch --colors\" \"yarn electron ./build/main.js\"",
+    "start-main-dev": "cross-env NODE_ENV=development concurrently \"webpack --watch --colors\" \"yarn electron ./app/dist/main.js\"",
     "build-main": "webpack --colors",
     "electron-pack": "yarn build && electron-builder build",
     "lint": "eslint './**/*.{ts,tsx}'"

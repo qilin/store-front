@@ -1,9 +1,11 @@
 directories:
-  output: dist
+  output: release
   buildResources: assets
 files:
   - filter:
-      - build/**/*
+      - app/app.html
+      - app/sdk-qilin.js
+      - app/dist/*
 appId: com.qilin-launcher.app
 productName: QilinLauncher
 copyright: 'Copyright © 2020 ${author}'
