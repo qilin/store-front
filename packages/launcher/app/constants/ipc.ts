@@ -12,6 +12,6 @@ export const DOWNLOAD_PROGRESS = 'DOWNLOAD_PROGRESS';
 
 export const QUIT_AND_INSTALL_UPDATE = 'QUIT_AND_INSTALL_UPDATE';
 
-export const APP_INFO = 'APP_INFO';
+export const APP_INIT = 'APP_INIT';
 
-export const AUTH_SKIP = 'AUTH_SKIP';
+export const AUTH_GUEST = 'AUTH_GUEST';

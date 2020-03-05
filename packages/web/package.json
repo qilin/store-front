@@ -34,6 +34,7 @@
     "codegen:typescript": "graphql-codegen --config codegen.yml",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:renderer": "REACT_APP_MODE=electron BROWSER=none yarn start",
     "build:renderer": "REACT_APP_MODE=electron rescripts build && yarn cp:static",
     "cp:static": "yarn cp:css && yarn cp:js && yarn cp:media",
     "cp:css": "cp build/static/css/*.css ./../launcher/app/dist/style.css",
