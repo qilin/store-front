@@ -1,5 +1,4 @@
 module.exports = (config) => {
-  console.log('CONFIG', config);
   config.output.publicPath = './';
   config.optimization.splitChunks = {
     cacheGroups: {

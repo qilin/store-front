@@ -11,9 +11,11 @@
   },
   "scripts": {
     "start:web": "yarn workspace qilin-web-store start",
-    "start:electron": "yarn workspace qilin-launcher dev",
+    "start:renderer": "yarn workspace qilin-web-store start:renderer",
+    "start:electron": "yarn build:renderer && yarn workspace qilin-launcher start",
     "build:web": "yarn workspace qilin-web-store build",
-    "build:electron": "yarn workspace qilin-launcher electron-pack",
+    "build:renderer": "yarn workspace qilin-web-store build:renderer",
+    "build:electron": "yarn build:renderer && yarn workspace qilin-launcher electron-pack",
     "lint": "yarn workspaces run lint"
   },
   "husky": {
