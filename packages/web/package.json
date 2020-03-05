@@ -39,7 +39,7 @@
     "cp:static": "yarn cp:css && yarn cp:js && yarn cp:media",
     "cp:css": "cp build/static/css/*.css ./../launcher/app/dist/style.css",
     "cp:js": "cp build/static/js/*.js ./../launcher/app/dist/renderer.js",
-    "cp:media": "cp -r build/static/media ./../launcher/app/dist/static/media",
+    "cp:media": "cp -r build/static/media ./../launcher/app/dist/static",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint './**/*.{ts,tsx}'"
