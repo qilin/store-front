@@ -1,62 +1,41 @@
 import { useState, useEffect } from 'react';
+import { IpcRendererEvent } from 'electron';
 import { qu } from 'helpers';
-import { AppInfo, ProgressInfo, UpdateError, CheckUpdateParams, UpdateInfo } from 'types';
+import { ProgressInfo, UpdateError, CheckUpdateParams, UpdateInfo } from 'types';
 
-const { ipcRenderer = {}, IPCConstants = {} } = (window as any).interop || {};
-const {
-  CHECK_FOR_UPDATE_PENDING,
-  CHECK_FOR_UPDATE_SUCCESS,
-  CHECK_FOR_UPDATE_FAILURE,
-  UPDATE_AVAILABLE,
-  UPDATE_NOT_AVAILABLE,
-  DOWNLOAD_UPDATE_FAILURE,
-  DOWNLOAD_UPDATE_PENDING,
-  DOWNLOAD_UPDATE_SUCCESS,
-  DOWNLOAD_PROGRESS,
-  QUIT_AND_INSTALL_UPDATE,
-  APP_INFO,
-} = IPCConstants;
-
-export default () => {
+export default (IPCConstants: any, ipcRenderer: any) => {
   const [checking, setChecking] = useState(true);
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<ProgressInfo | null>(null);
   const [versionToDownload, setVersionToDownload] = useState<string | null>(null);
-  const [info, setAppInfo] = useState<AppInfo | null>(null);
   const [status, setUpdateStatus] = useState();
   const [updateError, setUpdateError] = useState<UpdateError | null>(null);
-  const [redirectToApp, setRedirectToApp] = useState(false);
+  const [updateChecked, setUpdateChecked] = useState();
 
   const checkUpdate = (params: CheckUpdateParams) => {
-    qu('myevent', { key: CHECK_FOR_UPDATE_PENDING, data: { params } });
+    qu('myevent', { key: IPCConstants.CHECK_FOR_UPDATE_PENDING, data: { params } });
     setChecking(true);
     setDownloading(false);
     setDownloadProgress(null);
     setVersionToDownload(null);
     setUpdateError(null);
-    setUpdateStatus(CHECK_FOR_UPDATE_PENDING);
-    ipcRenderer.send(CHECK_FOR_UPDATE_PENDING, params);
+    setUpdateStatus(IPCConstants.CHECK_FOR_UPDATE_PENDING);
+    ipcRenderer.send(IPCConstants.CHECK_FOR_UPDATE_PENDING, params);
   };
 
   const downloadUpdate = (autoInstall: boolean) => {
-    qu('myevent', { key: DOWNLOAD_UPDATE_PENDING, data: { autoInstall } });
-    ipcRenderer.send(DOWNLOAD_UPDATE_PENDING, autoInstall);
+    qu('myevent', { key: IPCConstants.DOWNLOAD_UPDATE_PENDING, data: { autoInstall } });
+    ipcRenderer.send(IPCConstants.DOWNLOAD_UPDATE_PENDING, autoInstall);
     setDownloading(true);
-    setUpdateStatus(DOWNLOAD_UPDATE_PENDING);
+    setUpdateStatus(IPCConstants.DOWNLOAD_UPDATE_PENDING);
   };
 
   const downloadUpdateAndInstall = () => {
     downloadUpdate(true);
   };
 
-  const handleAppInfo = (event: any, appInfo: AppInfo) => {
-    qu('myevent', { key: APP_INFO, data: { appInfo } });
-    setAppInfo(appInfo);
-    checkUpdate({ channel: appInfo.channel, autoDownload: true });
-  };
-
   const handleCheckUpdateSuccess = (
-    event: any,
+    _event: IpcRendererEvent,
     updateInfo: UpdateInfo,
     checkUpdateParams: CheckUpdateParams,
     currentAppVersion: string,
@@ -66,45 +45,51 @@ export default () => {
     setVersionToDownload(version);
 
     if (version && currentAppVersion && version !== currentAppVersion) {
-      qu('myevent', { key: UPDATE_AVAILABLE, data: { updateInfo, checkUpdateParams, currentAppVersion } });
-      setUpdateStatus(UPDATE_AVAILABLE);
+      qu('myevent', {
+        key: IPCConstants.UPDATE_AVAILABLE,
+        data: { updateInfo, checkUpdateParams, currentAppVersion },
+      });
+      setUpdateStatus(IPCConstants.UPDATE_AVAILABLE);
 
       if (checkUpdateParams.autoDownload) {
         downloadUpdateAndInstall();
       }
     } else {
-      qu('myevent', { key: UPDATE_NOT_AVAILABLE, data: { updateInfo, checkUpdateParams, currentAppVersion } });
-      setRedirectToApp(true);
-      setUpdateStatus(UPDATE_NOT_AVAILABLE);
+      qu('myevent', {
+        key: IPCConstants.UPDATE_NOT_AVAILABLE,
+        data: { updateInfo, checkUpdateParams, currentAppVersion },
+      });
+      setUpdateChecked(true);
+      setUpdateStatus(IPCConstants.UPDATE_NOT_AVAILABLE);
     }
   };
 
-  const handleCheckUpdateFailure = (event: any, error: UpdateError) => {
-    qu('myevent', { key: CHECK_FOR_UPDATE_FAILURE, data: { error } });
+  const handleCheckUpdateFailure = (_event: IpcRendererEvent, error: UpdateError) => {
+    qu('myevent', { key: IPCConstants.CHECK_FOR_UPDATE_FAILURE, data: { error } });
     setChecking(false);
-    setUpdateStatus(CHECK_FOR_UPDATE_FAILURE);
+    setUpdateStatus(IPCConstants.CHECK_FOR_UPDATE_FAILURE);
     setUpdateError(error);
   };
 
-  const handleDownloadUpdateSuccess = (event: any, autoInstall = true) => {
-    qu('myevent', { key: DOWNLOAD_UPDATE_SUCCESS, data: { autoInstall } });
-    setUpdateStatus(DOWNLOAD_UPDATE_SUCCESS);
+  const handleDownloadUpdateSuccess = (_event: IpcRendererEvent, autoInstall = true) => {
+    qu('myevent', { key: IPCConstants.DOWNLOAD_UPDATE_SUCCESS, data: { autoInstall } });
+    setUpdateStatus(IPCConstants.DOWNLOAD_UPDATE_SUCCESS);
     setDownloading(false);
     if (autoInstall) {
-      ipcRenderer.send(QUIT_AND_INSTALL_UPDATE);
+      ipcRenderer.send(IPCConstants.QUIT_AND_INSTALL_UPDATE);
     }
   };
 
-  const handleDownloadUpdateFailure = (event: any, error: UpdateError) => {
-    qu('myevent', { key: DOWNLOAD_UPDATE_FAILURE, data: { error } });
-    setUpdateStatus(DOWNLOAD_UPDATE_FAILURE);
+  const handleDownloadUpdateFailure = (_event: IpcRendererEvent, error: UpdateError) => {
+    qu('myevent', { key: IPCConstants.DOWNLOAD_UPDATE_FAILURE, data: { error } });
+    setUpdateStatus(IPCConstants.DOWNLOAD_UPDATE_FAILURE);
     setUpdateError(error);
     setChecking(false);
     setDownloading(false);
   };
 
-  const handleDownloadProgress = (event: any, progressInfo: ProgressInfo) => {
-    qu('myevent', { key: DOWNLOAD_PROGRESS, data: { progressInfo } });
+  const handleDownloadProgress = (_event: IpcRendererEvent, progressInfo: ProgressInfo) => {
+    qu('myevent', { key: IPCConstants.DOWNLOAD_PROGRESS, data: { progressInfo } });
     setDownloadProgress(progressInfo);
   };
 
@@ -114,28 +99,25 @@ export default () => {
   };
 
   useEffect(() => {
-    ipcRenderer.send(APP_INFO);
-    ipcRenderer.send(DOWNLOAD_PROGRESS);
-    ipcRenderer.on(APP_INFO, handleAppInfo);
-    ipcRenderer.on(CHECK_FOR_UPDATE_SUCCESS, handleCheckUpdateSuccess);
-    ipcRenderer.on(CHECK_FOR_UPDATE_FAILURE, handleCheckUpdateFailure);
-    ipcRenderer.on(DOWNLOAD_UPDATE_SUCCESS, handleDownloadUpdateSuccess);
-    ipcRenderer.on(DOWNLOAD_UPDATE_FAILURE, handleDownloadUpdateFailure);
-    ipcRenderer.on(DOWNLOAD_PROGRESS, handleDownloadProgress);
+    ipcRenderer.on(IPCConstants.CHECK_FOR_UPDATE_SUCCESS, handleCheckUpdateSuccess);
+    ipcRenderer.on(IPCConstants.CHECK_FOR_UPDATE_FAILURE, handleCheckUpdateFailure);
+    ipcRenderer.on(IPCConstants.DOWNLOAD_UPDATE_SUCCESS, handleDownloadUpdateSuccess);
+    ipcRenderer.on(IPCConstants.DOWNLOAD_UPDATE_FAILURE, handleDownloadUpdateFailure);
+    ipcRenderer.on(IPCConstants.DOWNLOAD_PROGRESS, handleDownloadProgress);
     // eslint-disable-next-line
   }, []);
 
   return {
-    info,
+    checkUpdate,
     downloading,
     downloadProgress,
     versionToDownload,
-    redirectToApp,
+    updateChecked,
     status,
     checking,
     updateError,
     downloadUpdateAndInstall,
-    updateAvailable: status === UPDATE_AVAILABLE,
+    updateAvailable: status === IPCConstants.UPDATE_AVAILABLE,
     changeChannel,
   };
 };

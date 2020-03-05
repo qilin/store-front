@@ -4,6 +4,7 @@ import { Typography, LinearProgress } from '@material-ui/core';
 import { BACKGROUND_DARK } from 'styles/colors';
 import { useTranslation } from 'react-i18next';
 import { AppInfo, UpdateError, ProgressInfo } from 'types';
+import { LauncherLoader } from 'components';
 
 const useStyle = makeStyles({
   root: {
@@ -32,8 +33,9 @@ const useStyle = makeStyles({
 });
 
 interface UpdateProps {
+  checking: boolean;
   status: string | null;
-  info: AppInfo | null;
+  appInfo: AppInfo | null;
   versionToDownload: string | null;
   updateError: UpdateError | null;
   downloading: boolean;
@@ -42,8 +44,9 @@ interface UpdateProps {
 
 const LauncherUpdater = (props: UpdateProps) => {
   const {
+    checking,
     status,
-    info,
+    appInfo,
     versionToDownload,
     updateError,
     downloading,
@@ -52,19 +55,27 @@ const LauncherUpdater = (props: UpdateProps) => {
   const { t } = useTranslation();
   const classes = useStyle();
 
+  if (checking) {
+    return <LauncherLoader />;
+  }
+
+  if (!appInfo) return null;
+
+  const { version: currentVersion, name, channel } = appInfo;
+
   return (
     <div className={classes.root}>
-      <Typography variant="h6">
-        {t(`update_status.${status}`, { currentVersion: info && info.version, versionToDownload })}
-      </Typography>
-      {updateError && <Typography variant="h6">{t(`error_message.${updateError.code}`, updateError.code)}</Typography>}
-      {info && (
-        <div className={classes.appInfoContainer}>
-          <div>name: {info.name}</div>
-          <div>version: {info.version}</div>
-          <div>channel: {info.channel}</div>
-        </div>
+      {status && (
+        <Typography variant="h6">
+          {t(`update_status.${status}`, { currentVersion, versionToDownload })}
+        </Typography>
       )}
+      {updateError && <Typography variant="h6">{t(`error_message.${updateError.code}`, updateError.code)}</Typography>}
+      <div className={classes.appInfoContainer}>
+        <div>name: {name}</div>
+        <div>version: {currentVersion}</div>
+        <div>channel: {channel}</div>
+      </div>
       {downloading &&
         <div className={classes.progressWrapper}>
           <LinearProgress variant="determinate" value={(downloadProgress && downloadProgress.percent) || 0} />

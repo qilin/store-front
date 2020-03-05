@@ -20,7 +20,7 @@ const baseConfig = {
     ],
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'app', 'dist'),
     libraryTarget: 'commonjs2',
   },
   resolve: {
@@ -28,20 +28,15 @@ const baseConfig = {
     modules: [path.join(__dirname, 'app'), 'node_modules'],
   },
   optimization: {
-    minimizer: [
-      new TerserPlugin({
-        parallel: true,
-        sourceMap: true,
-        cache: true,
-      }),
-    ],
+    minimizer: [new TerserPlugin({ extractComments: false })],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: process.env.NODE_ENV,
-      REACT_APP_BASE_URL: process.env.REACT_APP_BASE_URL,
-      SENTRY_DSN: process.env.SENTRY_DSN,
-    }),
+    new webpack.EnvironmentPlugin([
+      'NODE_ENV',
+      'REACT_APP_API_URL',
+      'REACT_APP_BASE_URL',
+      'SENTRY_DSN',
+    ]),
   ],
   node: {
     __dirname: false,

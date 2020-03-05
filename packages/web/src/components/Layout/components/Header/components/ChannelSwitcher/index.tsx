@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 const ChannelSwitcher = () => {
   const { t } = useTranslation();
   const {
-    info,
+    appInfo,
     status,
     updateError,
     updateAvailable,
@@ -26,19 +26,18 @@ const ChannelSwitcher = () => {
     downloadUpdateAndInstall,
   } = useContext(LauncherContext);
 
-  const { channel: initialChannel, version, channels = [] } = info || {};
-  const [channel, setChannel] = useState(initialChannel);
+  const [channel, setChannel] = useState(appInfo && appInfo.channel);
   const classes = useStyles();
-
-  useEffect(() => {
-    setChannel(info.channel);
-  }, info);
 
   const handleChangeChannel = (event: any) => {
     const newChannel = event.target.value;
     setChannel(newChannel);
     changeChannel(newChannel);
   };
+
+  if (!appInfo) return null;
+
+  const { version, channels } = appInfo;
 
   return (
     <>

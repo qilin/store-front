@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+    content="script-src 'self' 'unsafe-inline' https://*.super.com/ https://*.rambler.ru/">
+  <script src="./sdk-qilin.js"></script>
+  <script src="https://payment.rambler.ru/dev2/paygate2/widget/sdk.js"></script>
+  <script type="text/javascript">
+    if (!window.qu) {
+      window.qu = function () { qu.q.push(arguments) }; qu.q = qu.q || [];
+      script = document.createElement('script'); script.async = 1;
+      script.src = 'https://uttu.tst.qilin.super.com/qilin-uttu.js';
+      firstScript = document.scripts[0]; firstScript.parentNode.insertBefore(script, firstScript);
+    }
+
+    qu('init', {
+      collectorUrl: 'https://uttu.tst.qilin.super.com/track',
+      siteId: 'QilinLauncher',
+    });
+
+    qu('pageview');
+  </script>
+  <link href="./dist/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="./dist/renderer.js"></script>
+</body>
+
+</html>

@@ -7,10 +7,10 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import { qu } from 'helpers';
+import { createBrowserHistory, createHashHistory } from 'history';
+import { qu, isLauncher } from 'helpers';
 
-const history = createBrowserHistory();
+const history = isLauncher ? createHashHistory() : createBrowserHistory();
 
 history.listen(() => {
   qu('pageview');
@@ -29,4 +29,4 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export default React.memo(Routes);
