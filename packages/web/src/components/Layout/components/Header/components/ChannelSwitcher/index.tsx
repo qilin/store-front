@@ -26,8 +26,7 @@ const ChannelSwitcher = () => {
     downloadUpdateAndInstall,
   } = useContext(LauncherContext);
 
-  const { version, channels } = appInfo;
-  const [channel, setChannel] = useState(appInfo.channel);
+  const [channel, setChannel] = useState();
   const classes = useStyles();
 
   const handleChangeChannel = (event: any) => {
@@ -36,9 +35,13 @@ const ChannelSwitcher = () => {
     changeChannel(newChannel);
   };
 
+  if (!appInfo) return null;
+
+  const { version, channels } = appInfo;
+
   return (
     <>
-      <Select className={classes.root} value={channel} onChange={handleChangeChannel}>
+      <Select className={classes.root} defaultValue={appInfo.channel} value={channel} onChange={handleChangeChannel}>
         {channels.map((value: string) => (
           <MenuItem key={value} value={value}>{value}</MenuItem>
         ))}
