@@ -26,7 +26,7 @@ jobs:
       --env ELECTRON_CACHE="/root/.cache/electron"
       --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder"
       -v ${PWD}:/project
-      electronuserland/builder:wine
+      electronuserland/builder:wine-mono-01.19
       bash -c "npm install -g n && n 11.10.1 && make publish"
 
   - stage: deploy
