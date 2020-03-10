@@ -8,7 +8,7 @@ export default (IPCConstants: any, ipcRenderer: any) => {
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<ProgressInfo | null>(null);
   const [versionToDownload, setVersionToDownload] = useState<string | null>(null);
-  const [status, setUpdateStatus] = useState();
+  const [status, setUpdateStatus] = useState<string | null>(null);
   const [updateError, setUpdateError] = useState<UpdateError | null>(null);
   const [updateChecked, setUpdateChecked] = useState();
 

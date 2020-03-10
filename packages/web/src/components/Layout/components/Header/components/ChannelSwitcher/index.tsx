@@ -26,8 +26,7 @@ const ChannelSwitcher = () => {
     downloadUpdateAndInstall,
   } = useContext(LauncherContext);
 
-  const { version, channels } = appInfo;
-  const [channel, setChannel] = useState(appInfo.channel);
+  const [channel, setChannel] = useState(appInfo && appInfo.channel);
   const classes = useStyles();
 
   const handleChangeChannel = (event: any) => {
@@ -35,6 +34,10 @@ const ChannelSwitcher = () => {
     setChannel(newChannel);
     changeChannel(newChannel);
   };
+
+  if (!appInfo) return null;
+
+  const { version, channels } = appInfo;
 
   return (
     <>
