@@ -15,3 +15,5 @@ export const QUIT_AND_INSTALL_UPDATE = 'QUIT_AND_INSTALL_UPDATE';
 export const APP_INIT = 'APP_INIT';
 
 export const AUTH_GUEST = 'AUTH_GUEST';
+
+export const OPEN_LINK = 'OPEN_LINK';
