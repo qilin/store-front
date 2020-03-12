@@ -1,9 +1,9 @@
-import { app, BrowserWindow, ipcMain, Cookie } from 'electron';
+import { app, BrowserWindow, ipcMain, Cookie, shell } from 'electron';
 import path from 'path';
 import log from 'electron-log';
 
 import './auto-updater';
-import { AUTH_GUEST, APP_INIT } from './constants/ipc';
+import { AUTH_GUEST, APP_INIT, OPEN_LINK } from './constants/ipc';
 
 const isDev = process.env.NODE_ENV === 'development';
 const WINDOW_WIDTH = 900;
@@ -82,6 +82,12 @@ function createWindow() {
 
   ipcMain.on(AUTH_GUEST, () => {
     mainWindow && mainWindow.loadURL(`${APP_URL}?initial_update_checked=true&auth_guest=true`);
+  });
+
+  ipcMain.on(OPEN_LINK, (_event, url: string) => {
+    if (url.startsWith('http:') || url.startsWith('https:')) {
+      shell.openExternal(url);
+    }
   });
 
   if (isDev) {
