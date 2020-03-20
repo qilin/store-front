@@ -5,6 +5,7 @@ import {
   QueryHookOptions,
   MutationHookOptions,
   MutationTuple,
+  SubscriptionHookOptions,
 } from '@apollo/react-hooks';
 import { OperationVariables, QueryResult } from '@apollo/react-common';
 import { DocumentNode } from 'graphql';

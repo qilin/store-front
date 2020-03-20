@@ -29,3 +29,11 @@ export const megabytesToSize = (megabytes: number) => {
   const bytes = megabytes * 1024 * 1024;
   return humanStorageSize(bytes);
 };
+
+export const getCookie = (name: string) => {
+  const matches = document.cookie.match(new RegExp(
+    // eslint-disable-next-line
+    `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};

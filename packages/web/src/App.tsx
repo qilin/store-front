@@ -8,36 +8,20 @@ import Launcher from 'Launcher';
 import Routes from 'Routes';
 import client from 'apolloClient';
 import { GET_USER } from 'query';
-import { logout, login, AUTH_PASSED } from 'auth';
+import { logout, login, isAuthPassed } from 'auth';
 import { useQuery } from 'api';
 
 export const UserContext = React.createContext<any>({});
 
 const App = () => {
-  const { loading, ...rest } = useQuery(GET_USER, { fetchPolicy: 'network-only' });
-  const user = (rest.data && rest.data.auth) || null;
-
-  console.log(rest, 123);
-
-  const initPage = () => {
-    if (loading) return;
-
-    if (user) {
-      localStorage.removeItem(AUTH_PASSED);
-      return;
-    }
-
-    const isAuthPassed = localStorage.getItem(AUTH_PASSED);
-
-    if (isAuthPassed) return;
-
-    localStorage.setItem(AUTH_PASSED, new Date().toString());
-    login(false);
-  };
+  const { loading, data } = useQuery(GET_USER, { fetchPolicy: 'network-only' });
+  const user = (data && data.auth) || null;
 
   useEffect(() => {
-    initPage();
-  }, [loading]);
+    if (isAuthPassed) return;
+
+    login(false);
+  }, []);
 
   const onLogout = () => {
     logout();
