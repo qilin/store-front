@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Grid, CircularProgress } from '@material-ui/core';
 import { RouteComponentProps } from 'react-router';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from 'api';
 
 import { PopularRecomendedBlock, UpdatesExpansions, FriendsGames } from './components';
 import useStyles from './useStyles';

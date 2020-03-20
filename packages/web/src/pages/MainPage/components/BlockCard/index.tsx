@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from 'api';
 import { CircularProgress, makeStyles } from '@material-ui/core';
 
 import { CARD_GAME } from '../../query';
