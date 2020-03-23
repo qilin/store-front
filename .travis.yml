@@ -5,30 +5,11 @@ language: node_js
 node_js:
 - 11
 
-sudo: required
-
-#dist: bionic
-
 stages:
-- name: build_app
-  if:  tag IS present OR type = cron
 - name: deploy
   if: branch IN (master, develop) AND type != pull_request
 jobs:
   include:
-
-  - stage: build_app
-    services: docker
-    install: true
-    script:
-    - docker run --rm -ti
-      --env-file <(set | grep -iE 'REACT_APP_|S3_|DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS_TAG|TRAVIS_REPO_|TRAVIS_BUILD_|TRAVIS_BRANCH|TRAVIS_PULL_REQUEST_|APPVEYOR_|CSC_|GH_|GITHUB_|BT_|AWS_|STRIP|BUILD_'|grep -v ' ')
-      --env ELECTRON_CACHE="/root/.cache/electron"
-      --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder"
-      -v ${PWD}:/project
-      electronuserland/builder:wine-mono-01.19
-      bash -c "npm install -g n && n 11.10.1 && make publish"
-
   - stage: deploy
     services: docker
     install: true
