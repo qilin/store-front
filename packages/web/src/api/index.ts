@@ -12,13 +12,18 @@ import { DocumentNode } from 'graphql';
 import { ApolloError } from 'apollo-client';
 import { login } from 'auth';
 
+const checkSessionInvalid = (error: any) => {
+  return error?.networkError?.result?.error.includes('invalid_session');
+};
+
 export function useQuery<TData = any, TVariables = OperationVariables>(
   query: DocumentNode, options?: QueryHookOptions<TData, TVariables>,
 ): QueryResult<TData, TVariables> {
   const { error, ...rest } = _useQuery<TData, TVariables>(query, options);
 
-  if (error && error.message === 'Session Expired') {
-    login(false);
+  if (checkSessionInvalid(error)) {
+    // login(false);
+    return { ...rest, loading: true };
   }
 
   return { ...rest, error };
@@ -29,8 +34,9 @@ export function useMutation<TData = any, TVariables = OperationVariables>(
 ): MutationTuple<TData, TVariables> {
     const [mutate, { error, ...rest }] = _useMutation<TData, TVariables>(mutation, options);
 
-    if (error && error.message === 'Session Expired') {
+    if (checkSessionInvalid(error)) {
       login(false);
+      return [mutate, { ...rest, loading: true }];
     }
 
     return [mutate, { ...rest, error }];
@@ -46,8 +52,9 @@ export  function useSubscription<TData = any, TVariables = OperationVariables>(
 } {
   const { error, ...rest } = _useSubscription<TData, TVariables>(subscription, options);
 
-  if (error && error.message === 'Session Expired') {
+  if (checkSessionInvalid(error)) {
     login(false);
+    return { ...rest, loading: true };
   }
 
   return { ...rest, error };

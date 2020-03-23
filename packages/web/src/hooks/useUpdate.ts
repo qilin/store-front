@@ -10,7 +10,7 @@ export default (IPCConstants: any, ipcRenderer: any) => {
   const [versionToDownload, setVersionToDownload] = useState<string | null>(null);
   const [status, setUpdateStatus] = useState<string | null>(null);
   const [updateError, setUpdateError] = useState<UpdateError | null>(null);
-  const [updateChecked, setUpdateChecked] = useState();
+  const [updateChecked, setUpdateChecked] = useState(false);
 
   const checkUpdate = (params: CheckUpdateParams) => {
     qu('myevent', { key: IPCConstants.CHECK_FOR_UPDATE_PENDING, data: { params } });
