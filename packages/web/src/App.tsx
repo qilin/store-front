@@ -9,7 +9,6 @@ import Routes from 'Routes';
 import client from 'apolloClient';
 import { GET_USER } from 'query';
 import { logout, login, isAuthPassed } from 'auth';
-// import { useQuery } from 'api';
 
 export const UserContext = React.createContext<any>({});
 
@@ -17,11 +16,11 @@ const App = () => {
   const { loading, data } = useQuery(GET_USER, { fetchPolicy: 'network-only' });
   const user = (data && data.auth) || null;
 
-  // useEffect(() => {
-  //   if (isAuthPassed) return;
+  useEffect(() => {
+    if (isAuthPassed) return;
 
-  //   login(false);
-  // }, []);
+    login(false);
+  }, []);
 
   const onLogout = () => {
     logout();

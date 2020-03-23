@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { useQuery } from 'api';
+import { useQuery } from '@apollo/react-hooks';
 import { CircularProgress, makeStyles } from '@material-ui/core';
 
 import { WebGame, DesktopGame } from './components';

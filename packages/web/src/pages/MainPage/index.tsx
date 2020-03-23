@@ -1,16 +1,20 @@
 import React from 'react';
 import { Container, Grid, CircularProgress, Button } from '@material-ui/core';
 import { RouteComponentProps } from 'react-router';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
 import { PopularRecomendedBlock, UpdatesExpansions, FriendsGames } from './components';
 import useStyles from './useStyles';
 import { MAIN_PAGE } from './query';
+import { GET_USER } from 'query';
 
 const MainPage = (props: RouteComponentProps) => {
   const classes = useStyles();
   const openGame = (slug: string) => props.history.push(`game/${slug}`);
-  const { loading, error, data, refetch } = useQuery(MAIN_PAGE);
+  const { loading, error, data } = useQuery(MAIN_PAGE);
+  const [loadUser, userData] = useLazyQuery(GET_USER, { fetchPolicy: 'network-only' });
+
+  console.log(userData);
 
   if (loading) {
     return (
@@ -29,7 +33,7 @@ const MainPage = (props: RouteComponentProps) => {
 
   return (
     <div className={classes.root}>
-      <Button onClick={() => refetch()}>
+      <Button onClick={() => loadUser()}>
         Refetch
       </Button>
       <PopularRecomendedBlock

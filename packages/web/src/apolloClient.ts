@@ -1,8 +1,9 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
 import { login } from 'auth';
+
+const INVALID_SESSION_STATUS_CODE = 474;
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: {
@@ -12,14 +13,10 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   },
 });
 
-// const checkSessionInvalid = (error: any) => {
-//   return error.result?.error.includes('invalid_session');
-// };
-
 const customFetch = async (uri: string, options: any) => {
   const response = await fetch(uri, options);
 
-  if (response.status === 401) {
+  if (response.status === INVALID_SESSION_STATUS_CODE) {
     login(false);
   }
 
@@ -32,13 +29,6 @@ const httpLink = new HttpLink({
   credentials: 'include', // only develop mode,
   fetch: customFetch,
 });
-
-// const errorLink = onError(({ networkError }) => {
-//   // if (checkSessionInvalid(networkError)) login(false);
-//   if (networkError && networkError.statusCode &&  networkError.statusCode === 401) {
-//     login(false);
-//   }
-// });
 
 const client = new ApolloClient({
   cache: cache,
