@@ -8,7 +8,7 @@ import Launcher from 'Launcher';
 import Routes from 'Routes';
 import client from 'apolloClient';
 import { GET_USER } from 'query';
-import { logout, login, isAuthPassed } from 'auth';
+import { logout, login, isAuthPassed, restoreAuthSession } from 'auth';
 
 export const UserContext = React.createContext<any>({});
 
@@ -19,7 +19,7 @@ const App = () => {
   useEffect(() => {
     if (isAuthPassed) return;
 
-    login(false);
+    restoreAuthSession();
   }, []);
 
   const onLogout = () => {

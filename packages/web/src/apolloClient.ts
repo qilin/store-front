@@ -1,7 +1,7 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { login } from 'auth';
+import { restoreAuthSession } from 'auth';
 
 const INVALID_SESSION_STATUS_CODE = 474;
 
@@ -17,7 +17,7 @@ const customFetch = async (uri: string, options: any) => {
   const response = await fetch(uri, options);
 
   if (response.status === INVALID_SESSION_STATUS_CODE) {
-    login(false);
+    restoreAuthSession();
   }
 
   return response;
