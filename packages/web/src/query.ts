@@ -6,7 +6,8 @@ query User {
     profile{
       firstName,
       lastName,
-      phone
+      phone,
+      email
     }
   }
 }

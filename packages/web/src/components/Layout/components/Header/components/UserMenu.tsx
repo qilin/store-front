@@ -22,11 +22,11 @@ const UserMenu = (props: Props) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const getDisplayName = () => {
-    const { lastname, firstname } = user.profile;
+    const { lastname, firstname, email } = user.profile;
 
     return [firstname, lastname]
       .filter(Boolean)
-      .join(' ') || 'Anonymous';
+      .join(' ') || email;
   };
 
   const handleOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

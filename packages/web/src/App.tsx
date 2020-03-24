@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'i18n';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -8,13 +8,19 @@ import Launcher from 'Launcher';
 import Routes from 'Routes';
 import client from 'apolloClient';
 import { GET_USER } from 'query';
-import { logout, login } from 'auth';
+import { logout, login, isAuthPassed, restoreAuthSession } from 'auth';
 
 export const UserContext = React.createContext<any>({});
 
 const App = () => {
   const { loading, data } = useQuery(GET_USER, { fetchPolicy: 'network-only' });
   const user = (data && data.auth) || null;
+
+  useEffect(() => {
+    if (isAuthPassed) return;
+
+    restoreAuthSession();
+  }, []);
 
   const onLogout = () => {
     logout();
