@@ -24,15 +24,12 @@ const customFetch = async (uri: string, options: any) => {
 };
 
 const cache = new InMemoryCache({ fragmentMatcher });
-const httpLink = new HttpLink({
+const link = new HttpLink({
   uri: `${process.env.REACT_APP_API_URL}/v1/graphql`,
-  credentials: 'include', // only develop mode,
+  credentials: 'include',
   fetch: customFetch,
 });
 
-const client = new ApolloClient({
-  cache: cache,
-  link: httpLink,
-});
+const client = new ApolloClient({ cache, link });
 
 export default client;

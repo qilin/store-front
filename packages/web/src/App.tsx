@@ -37,8 +37,6 @@ const App = () => {
     onLogout,
   };
 
-  console.log(user);
-
   return (
     <UserContext.Provider value={userContextValue}>
       <CssBaseline />
